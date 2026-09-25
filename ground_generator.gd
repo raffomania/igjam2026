@@ -1,7 +1,9 @@
 extends Node
 
-var resolution = 2 # vertex per meter per directions
-var size = 100 # meters
+var height_scale = 10 # meters
+
+var resolution = 1 # vertex per meter per directions
+var size = 400 # meters
 var vertices_per_dimension = resolution * size 
 var grid_vertex_distance = 1.0 / (vertices_per_dimension - 1) #meters
 
@@ -37,7 +39,7 @@ func _ready():
     mesh_instace.scale = Vector3.ONE * size 
     mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
-    mesh_instace.position.y = 0
+    mesh_instace.position.y = -10
 
     # set collider
     $CollisionShape3D.shape = array_mesh.create_trimesh_shape()
@@ -77,7 +79,7 @@ func create_grid_indices():
     return indices
 
 func create_normals():
-    #TODO: need to depend on sin functions
+    #TODO: needs to depend on sin functions
     var normals = PackedVector3Array()
     for n in range((vertices_per_dimension)*(vertices_per_dimension)):
         normals.push_back(Vector3.UP)
@@ -85,11 +87,16 @@ func create_normals():
 
 
 func calculate_ground_height(x,z):
-    var y = sin(x*5) * 2
-    y = y * sin(z*5) * 2
-    #layer 2, more coarse
-    y = y + sin(x*2) * 2
-    y = y + sin(z*2) * 2
-    # idea: save coefficients to array? and loop over layers
+    var coefficients = [[3.1,9],[3,2],[7, 1],[10,2.5],[2,2],[16.1,3],[3,4],[2, 1],[0,2.5],[2,2],[3.1,3],[3,4],[2, 1],[0,2.5],[2,2],[3.1,3],[3,4],[2, 1],[0,2.5],[2,2]]
+    var levels = range(len(coefficients))
+
+    var y = 0
+    for i in levels:
+        y = y + sin(x*i*5) * coefficients[i][0] 
+        y = y + sin(z*i*5) * coefficients[i][1]
+
+    y = y/len(coefficients)
+    y = y * height_scale
+        
     return y
 
