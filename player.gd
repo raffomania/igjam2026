@@ -33,4 +33,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
     # TODO: Find out whether we are on ground
+    get_input_direction()
     process_air(delta)
+    process_ground(delta)
