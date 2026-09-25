@@ -9,6 +9,7 @@
 script = ExtResource("1_ig7tw")
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.926212, 12.844038)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=991819736]
 transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.17269033, 0.86455554, -0.16952258, -0.9445552, 0.28120708, -3.4488335, 2.774324, 0)
