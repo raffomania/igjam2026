@@ -3,6 +3,9 @@ extends Node
 var height_scale = 5 # meters
 var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
 var texture_size = 5 # repetitions per meter
+var texture_path = "res://assets/Sand_02_basecolor.png"
+# var texture_path = "res://assets/Grass_01_basecolor.png"
+# TODO: import height and normal map as well?
 
 var resolution = 0.5 # vertex per meter per directions
 var size = 500 # meters
@@ -90,7 +93,7 @@ func create_normals():
 
 func get_material():
     var material = StandardMaterial3D.new()
-    var texture = load("res://assets/Grass_01_basecolor.png")
+    var texture = load(texture_path)
     material.albedo_texture = texture
     material.uv1_triplanar = true
     material.uv1_world_triplanar = true
