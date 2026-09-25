@@ -1,3 +1,8 @@
 [gd_scene format=3 uid="uid://uhnk3rsnxxiq"]
 
-[node name="Node3D" type="Node3D" unique_id=1584255760]
+[ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
+
+[node name="Main" type="Node3D" unique_id=1584255760]
+
+[node name="GroundGenerator" type="Node" parent="." unique_id=1976281025]
+script = ExtResource("1_ig7tw")
