@@ -19,10 +19,10 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 current = true
 fov = 69.7
 
-[node name="mesh" parent="." unique_id=1708085934 instance=ExtResource("1_4flbx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26000983, 0)
-
 [node name="body" type="RigidBody3D" parent="." unique_id=349543309]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="body" unique_id=1745340869]
 shape = SubResource("SphereShape3D_sh265")
+
+[node name="mesh" parent="body" unique_id=1708085934 instance=ExtResource("1_4flbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26000983, 0)

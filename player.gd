@@ -3,7 +3,7 @@ extends Node3D
 var input_direction = Vector3.ZERO
 
 @onready var body := $body
-@onready var mesh := $mesh
+@onready var mesh := $"body/mesh"
 var ground_speed = 10
 @onready var camera_pivot := $CameraPivot
 
