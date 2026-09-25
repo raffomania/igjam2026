@@ -2,6 +2,8 @@ extends Node
 
 var resolution = 20 # vertex per meter in all directions
 var size = 10 # meters
+var vertices_per_dimension = resolution * size
+var grid_vertex_distance = 1.0 / vertices_per_dimension #meters
 
 func _ready():
     var surface_array = []
@@ -9,35 +11,27 @@ func _ready():
 
     # PackedVector**Arrays for mesh construction.
     var verts = PackedVector3Array()
-    var uvs = PackedVector2Array()
+    # var uvs = PackedVector2Array()
     var normals = PackedVector3Array()
     var indices = PackedInt32Array()
 
-    verts = PackedVector3Array([
-        Vector3(0, 0, 0),
-        Vector3(0, 0, 1),
-        Vector3(1, 0, 0),
-        Vector3(1, 0, 1),
-    ])
-    uvs = PackedVector2Array([
-        Vector2(0, 0),
-        Vector2(1, 0),
-        Vector2(0, 1),
-        Vector2(1, 1),
-    ])
+    verts = create_grid_vertices()
+    indices = create_grid_indices()
     normals = PackedVector3Array([
         Vector3.UP,
         Vector3.UP,
         Vector3.UP,
         Vector3.UP,
     ])
-    indices = PackedInt32Array([
-        0, 2, 1, # Draw the first triangle.
-        2, 3, 1, # Draw the second triangle.
-    ])
+    # uvs = PackedVector2Array([
+    #     Vector2(0, 0),
+    #     Vector2(1, 0),
+    #     Vector2(0, 1),
+    #     Vector2(1, 1),
+    # ])
     # Assign arrays to surface array.
     surface_array[Mesh.ARRAY_VERTEX] = verts
-    surface_array[Mesh.ARRAY_TEX_UV] = uvs
+    # surface_array[Mesh.ARRAY_TEX_UV] = uvs
     surface_array[Mesh.ARRAY_NORMAL] = normals
     surface_array[Mesh.ARRAY_INDEX] = indices
 
@@ -49,6 +43,21 @@ func _ready():
     m.mesh = array_mesh
     add_child(m)
 
+func create_grid_vertices():
+    var verts = PackedVector3Array([
+        Vector3(0, 0, 0),
+        Vector3(0, 0, 1),
+        Vector3(1, 0, 0),
+        Vector3(1, 0, 1),
+    ])
+    return verts
+
+func create_grid_indices():
+    var indices = PackedInt32Array([
+        0, 2, 1, # Draw the first triangle.
+        2, 3, 1, # Draw the second triangle.
+    ])
+    return indices
 # var ground_vertices = PackedVector3Array()
 #
 # func _init() -> void:
@@ -72,5 +81,3 @@ func _ready():
 # 	var m = MeshInstance3D.new()
 # 	m.mesh = arr_mesh
 # 	add_child(m)
-#
-#
