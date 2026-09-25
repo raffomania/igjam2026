@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://uhnk3rsnxxiq"]
 
 [ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Node3D" unique_id=1584255760]
 
 [node name="GroundGenerator" type="Node" parent="." unique_id=1976281025]
 script = ExtResource("1_ig7tw")
+
+[node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
