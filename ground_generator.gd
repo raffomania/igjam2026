@@ -4,7 +4,7 @@ var height_scale = 5 # meters
 var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
 
 var resolution = 0.5 # vertex per meter per directions
-var size = 1000 # meters
+var size = 500 # meters
 var vertices_per_dimension = resolution * size # number of vertices for the whole chunk
 var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
 
@@ -88,7 +88,10 @@ func create_normals():
 
 
 func calculate_ground_height(x,z):
-    var coefficients = [[1,2],[3,1],[2,8],[6,1],[8,6],[1,5],[6,1],[3,1],[2,12],[8,1],[10,1],[1,1],[1,20],[1,8],[1,1],[2,12]]
+    var coefficients = [[1,25],[30,1],[2,80],[60,1],[8,6],[1,5],
+    [6,1],[3,1],[2,8],[8,1],[5,1],[8,1],[1,8],[1,8],[20,1],[2,22],
+    [2,8],[8,1],[5,1],[8,1],[1,8],[1,8],[20,1],[2,22]]
+
     var levels = range(len(coefficients))
 
     var y = 0
