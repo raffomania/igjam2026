@@ -1,7 +1,7 @@
 extends Node
 
 var resolution = 4 # vertex per meter per directions
-var size = 2 # meters
+var size = 200 # meters
 var vertices_per_dimension = resolution * size 
 var grid_vertex_distance = 1.0 / (vertices_per_dimension - 1) #meters
 
@@ -31,20 +31,25 @@ func _ready():
 
     var array_mesh = ArrayMesh.new()
     array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
-    var m = MeshInstance3D.new()
-    m.mesh = array_mesh
-    m.scale = Vector3.ONE * size 
-    add_child(m)
+
+    var mesh_instace = MeshInstance3D.new()
+    mesh_instace.mesh = array_mesh
+    mesh_instace.scale = Vector3.ONE * size 
+    mesh_instace.position = Vector3.ONE * -0.5 * size
+    mesh_instace.position.y = 0
+
+    add_child(mesh_instace)
 
 func create_grid_vertices():
     var grid_vertices = PackedVector3Array()
     for x in range(vertices_per_dimension):
         for z in range(vertices_per_dimension):
             #TODO: calculate y based on sin functions
-            var y = 0 + randf() * 0.1
+            var y = 0 + randf() * 0.1 / size
             var vertex_position = Vector3(x*grid_vertex_distance,y,z*grid_vertex_distance)
             grid_vertices.push_back(vertex_position)
-    # print("grid_vertices", grid_vertices, len(grid_vertices))
+    # print("grid_vertices", len(grid_vertices))
+    assert(len(grid_vertices) == (resolution * size)**2)
     return grid_vertices
 
 func create_grid_indices():
@@ -60,7 +65,7 @@ func create_grid_indices():
             indices.push_back(i+1)
             i += 1
         i += 1
-    # print("indices", indices, len(indices))
+    # print("indices", len(indices))
     return indices
 
 func create_normals():
