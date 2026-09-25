@@ -19,7 +19,7 @@ func process_air(delta: float) -> void:
 func process_ground(_delta: float) -> void:
     print(input_direction.y)
     var movement = input_direction * ground_speed
-    body.apply_central_force(Vector3(movement.x, movement.y, 0))
+    body.apply_central_force(Vector3(movement.x, 0, movement.y))
     return
 
 
