@@ -2,10 +2,9 @@ extends Node3D
 
 var input_direction = Vector3.ZERO
 
-@onready
-var body := $RigidBody3D
-@onready
-var shrimp := $"RigidBody3D/shrimp"
+@onready var body := $RigidBody3D
+@onready var shrimp := $"RigidBody3D/shrimp"
+var ground_speed = 10
 
 
 func process_air(delta: float) -> void:
@@ -18,18 +17,14 @@ func process_air(delta: float) -> void:
 
 
 func process_ground(_delta: float) -> void:
+    print(input_direction.y)
+    var movement = input_direction * ground_speed
+    body.apply_central_force(Vector3(movement.x, movement.y, 0))
     return
 
 
 func get_input_direction() -> void:
-    if Input.is_action_pressed("move_right"):
-        input_direction.x += 1
-    if Input.is_action_pressed("move_left"):
-        input_direction.x -= 1
-    if Input.is_action_pressed("move_back"):
-        input_direction.z += 1
-    if Input.is_action_pressed("move_forward"):
-        input_direction.z -= 1
+    input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 
 
 func _physics_process(delta: float) -> void:
