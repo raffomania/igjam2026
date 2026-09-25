@@ -2,6 +2,7 @@ extends Node
 
 var height_scale = 5 # meters
 var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
+var texture_size = 5 # repetitions per meter
 
 var resolution = 0.5 # vertex per meter per directions
 var size = 500 # meters
@@ -41,6 +42,7 @@ func _ready():
     # mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = -10
+    mesh_instace.material_override = get_material()
 
     # set collider
     $CollisionShape3D.shape = array_mesh.create_trimesh_shape()
@@ -85,6 +87,16 @@ func create_normals():
     for n in range((vertices_per_dimension)*(vertices_per_dimension)):
         normals.push_back(Vector3.UP)
     return normals
+
+func get_material():
+    var material = StandardMaterial3D.new()
+    var texture = load("res://assets/Grass_01_basecolor.png")
+    material.albedo_texture = texture
+    material.uv1_triplanar = true
+    material.uv1_world_triplanar = true
+    material.uv1_scale = Vector3.ONE * 1.0/float(texture_size)
+    material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+    return material
 
 
 func calculate_ground_height(x,z):
