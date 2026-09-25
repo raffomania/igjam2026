@@ -1,7 +1,7 @@
 extends Node
 
-var resolution = 4 # vertex per meter per directions
-var size = 200 # meters
+var resolution = 2 # vertex per meter per directions
+var size = 100 # meters
 var vertices_per_dimension = resolution * size 
 var grid_vertex_distance = 1.0 / (vertices_per_dimension - 1) #meters
 
@@ -35,8 +35,14 @@ func _ready():
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = array_mesh
     mesh_instace.scale = Vector3.ONE * size 
+    mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = 0
+
+    # set collider
+    $CollisionShape3D.shape = array_mesh.create_trimesh_shape()
+    $CollisionShape3D.scale = mesh_instace.scale
+    $CollisionShape3D.position = mesh_instace.position
 
     add_child(mesh_instace)
 
@@ -45,8 +51,10 @@ func create_grid_vertices():
     for x in range(vertices_per_dimension):
         for z in range(vertices_per_dimension):
             #TODO: calculate y based on sin functions
-            var y = 0 + randf() * 0.1 / size
-            var vertex_position = Vector3(x*grid_vertex_distance,y,z*grid_vertex_distance)
+            var x_pos = x*grid_vertex_distance
+            var z_pos = z*grid_vertex_distance
+            var y = calculate_ground_height(x_pos,z_pos)
+            var vertex_position = Vector3(x_pos,y,z_pos)
             grid_vertices.push_back(vertex_position)
     # print("grid_vertices", len(grid_vertices))
     assert(len(grid_vertices) == (resolution * size)**2)
@@ -74,3 +82,14 @@ func create_normals():
     for n in range((vertices_per_dimension)*(vertices_per_dimension)):
         normals.push_back(Vector3.UP)
     return normals
+
+
+func calculate_ground_height(x,z):
+    var y = sin(x*5) * 2
+    y = y * sin(z*5) * 2
+    #layer 2, more coarse
+    y = y + sin(x*2) * 2
+    y = y + sin(z*2) * 2
+    # idea: save coefficients to array? and loop over layers
+    return y
+
