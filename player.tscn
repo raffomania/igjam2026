@@ -1,23 +1,15 @@
 [gd_scene format=3 uid="uid://ci1luabgo8dgb"]
 
+[ext_resource type="PackedScene" uid="uid://ctbakbdw4i6qb" path="res://assets/shrimp.glb" id="1_4flbx"]
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6g87"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(1, 0.47843137, 0.53333336, 1)
-roughness = 0.17
-
-[sub_resource type="SphereMesh" id="SphereMesh_sotct"]
-material = SubResource("StandardMaterial3D_w6g87")
 
 [node name="Player" type="RigidBody3D" unique_id=349543309]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1745340869]
 shape = SubResource("SphereShape3D_sh265")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1054963490]
-mesh = SubResource("SphereMesh_sotct")
+[node name="shrimp" parent="." unique_id=1708085934 instance=ExtResource("1_4flbx")]
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=851674011]
 transform = Transform3D(1, 0, 0, 0, 0.9187467, 0.39484745, 0, -0.39484745, 0.9187467, 0, 0, 0)
