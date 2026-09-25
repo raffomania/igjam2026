@@ -5,19 +5,24 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
 
-[node name="Player" type="RigidBody3D" unique_id=349543309]
+[node name="Node3D" type="Node3D" unique_id=1322808159]
 script = ExtResource("1_onrkg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1745340869]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21488947, 0)
-shape = SubResource("SphereShape3D_sh265")
-
-[node name="shrimp" parent="." unique_id=1708085934 instance=ExtResource("1_4flbx")]
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=851674011]
 transform = Transform3D(1, 0, 0, 0, 0.9705556, 0.24087705, 0, -0.24087705, 0.9705556, 0, 0.78368187, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=116337552]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.3250804)
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=55196400]
+spring_length = 8.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=116337552]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 current = true
 fov = 69.7
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=349543309]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1745340869]
+shape = SubResource("SphereShape3D_sh265")
+
+[node name="shrimp" parent="RigidBody3D" unique_id=1708085934 instance=ExtResource("1_4flbx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.26000983, 0)

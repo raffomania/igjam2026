@@ -6,6 +6,9 @@
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m1hyp"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_sotct"]
+size = Vector2(2000, 2000)
+
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hqtel"]
 panorama = ExtResource("3_h2yge")
 
@@ -31,6 +34,9 @@ transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.172690
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DummyGround" unique_id=239420905]
 shape = SubResource("WorldBoundaryShape3D_m1hyp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DummyGround" unique_id=1354818516]
+mesh = SubResource("PlaneMesh_sotct")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=834092271]
 environment = SubResource("Environment_onrkg")
