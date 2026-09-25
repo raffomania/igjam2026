@@ -1,6 +1,6 @@
 extends Node
 
-var height_scale = 10 # meters
+var height_scale = 5 # meters
 var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
 
 var resolution = 0.5 # vertex per meter per directions
@@ -88,7 +88,7 @@ func create_normals():
 
 
 func calculate_ground_height(x,z):
-    var coefficients = [[1,2],[3,1],[1,8],[16,1],[1,6],[1,5],[1,1],[3,1],[2,12],[8,1],[10,1],[1,1],[1,1]]
+    var coefficients = [[1,2],[3,1],[2,8],[6,1],[8,6],[1,5],[6,1],[3,1],[2,12],[8,1],[10,1],[1,1],[1,20],[1,8],[1,1],[2,12]]
     var levels = range(len(coefficients))
 
     var y = 0
