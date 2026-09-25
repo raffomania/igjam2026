@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctbakbdw4i6qb" path="res://assets/shrimp.glb" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://bg4t54x0lc0kg" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://5yws7v4055v2" path="res://player_body.gd" id="2_i3pqv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
 
@@ -20,6 +21,7 @@ current = true
 fov = 69.7
 
 [node name="body" type="RigidBody3D" parent="." unique_id=349543309]
+script = ExtResource("2_i3pqv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="body" unique_id=1745340869]
 shape = SubResource("SphereShape3D_sh265")
