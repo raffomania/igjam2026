@@ -1,5 +1,20 @@
 [gd_scene format=3 uid="uid://ci1luabgo8dgb"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6g87"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.47843137, 0.53333336, 1)
+roughness = 0.17
+
+[sub_resource type="SphereMesh" id="SphereMesh_sotct"]
+material = SubResource("StandardMaterial3D_w6g87")
+
 [node name="Player" type="RigidBody3D" unique_id=349543309]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1745340869]
+shape = SubResource("SphereShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1054963490]
+mesh = SubResource("SphereMesh_sotct")
