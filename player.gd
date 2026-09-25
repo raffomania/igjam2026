@@ -4,12 +4,12 @@ var input_direction = Vector3.ZERO
 
 
 func process_air(delta: float) -> void:
-    var next_position = self.position - transform.basis.z
+    var next_position = self.global_position - transform.basis.z
     $shrimp.look_at(next_position)
     # glide forward
     self.apply_central_force(-transform.basis.z * delta * 200)
     # reduce gravity
-    self.apply_central_force(transform.basis.y * delta * 400)
+    self.apply_central_force(transform.basis.y * delta * 300)
 
 
 func process_ground(_delta: float) -> void:

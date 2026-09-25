@@ -2,8 +2,19 @@
 
 [ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="3_h2yge"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m1hyp"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hqtel"]
+panorama = ExtResource("3_h2yge")
+
+[sub_resource type="Sky" id="Sky_i3pqv"]
+sky_material = SubResource("PanoramaSkyMaterial_hqtel")
+
+[sub_resource type="Environment" id="Environment_onrkg"]
+background_mode = 2
+sky = SubResource("Sky_i3pqv")
 
 [node name="Main" type="Node3D" unique_id=1584255760]
 
@@ -20,3 +31,6 @@ transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.172690
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DummyGround" unique_id=239420905]
 shape = SubResource("WorldBoundaryShape3D_m1hyp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=834092271]
+environment = SubResource("Environment_onrkg")
