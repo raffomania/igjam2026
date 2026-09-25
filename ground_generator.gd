@@ -1,11 +1,12 @@
 extends Node
 
 var height_scale = 10 # meters
+var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
 
-var resolution = 1 # vertex per meter per directions
-var size = 400 # meters
-var vertices_per_dimension = resolution * size 
-var grid_vertex_distance = 1.0 / (vertices_per_dimension - 1) #meters
+var resolution = 0.5 # vertex per meter per directions
+var size = 1000 # meters
+var vertices_per_dimension = resolution * size # number of vertices for the whole chunk
+var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
 
 func _ready():
     var surface_array = []
@@ -36,14 +37,14 @@ func _ready():
 
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = array_mesh
-    mesh_instace.scale = Vector3.ONE * size 
-    mesh_instace.scale.y = 1.0
+    # mesh_instace.scale = Vector3.ONE * size 
+    # mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = -10
 
     # set collider
     $CollisionShape3D.shape = array_mesh.create_trimesh_shape()
-    $CollisionShape3D.scale = mesh_instace.scale
+    # $CollisionShape3D.scale = mesh_instace.scale
     $CollisionShape3D.position = mesh_instace.position
 
     add_child(mesh_instace)
@@ -87,13 +88,13 @@ func create_normals():
 
 
 func calculate_ground_height(x,z):
-    var coefficients = [[3.1,9],[3,2],[7, 1],[10,2.5],[2,2],[16.1,3],[3,4],[2, 1],[0,2.5],[2,2],[3.1,3],[3,4],[2, 1],[0,2.5],[2,2],[3.1,3],[3,4],[2, 1],[0,2.5],[2,2]]
+    var coefficients = [[1,2],[3,1],[1,8],[16,1],[1,6],[1,5],[1,1],[3,1],[2,12],[8,1],[10,1],[1,1],[1,1]]
     var levels = range(len(coefficients))
 
     var y = 0
     for i in levels:
-        y = y + sin(x*i*5) * coefficients[i][0] 
-        y = y + sin(z*i*5) * coefficients[i][1]
+        y = y + sin(x*i*lowest_ground_frequency) * coefficients[i][0] 
+        y = y + sin(z*i*lowest_ground_frequency) * coefficients[i][1]
 
     y = y/len(coefficients)
     y = y * height_scale
