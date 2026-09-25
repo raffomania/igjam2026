@@ -8,11 +8,6 @@ var ground_speed = 10
 @onready var camera_pivot := $CameraPivot
 var flying := false
 
-var fly_thrust := 200.0
-var fly_lift_coefficient := 0.3
-var fly_drag_coefficient = 0.02
-
-
 func process_air(delta: float) -> void:
     pass
 
@@ -41,8 +36,8 @@ func _unhandled_input(event: InputEvent) -> void:
         flying = !flying
         if flying:
             body.apply_central_force(-body.transform.basis.z * 100)
-            # body.angular_damp = 2.0
+            body.gravity_scale = 0.5
             mesh.scale.x = 2
         else:
-            # body.angular_damp = 0.0
+            body.gravity_scale = 1.0
             mesh.scale.x = 1

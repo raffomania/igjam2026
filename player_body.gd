@@ -1,14 +1,13 @@
 extends RigidBody3D
 
-var pitch_speed := 3.0
-var roll_speed := 4.0
-var thrust_power := 30.0
+var pitch_speed := 1.0
+var roll_speed := 2.0
 var angular_stop_speed := 10.0  # how fast rotation stops when no input
 var alignment_speed := 3.0        # how fast velocity aligns to facing
 var min_speed := 0.0              # base glide speed, even flying level
-var max_speed := 60.0             # terminal velocity cap
-var drag := 0.5                   # bleeds off excess speed over time
-var dive_gain := 15.0             # how fast diving builds speed
+var max_speed := 200.0             # terminal velocity cap
+var drag := 0.0                   # bleeds off excess speed over time
+var dive_gain := 55.0             # how fast diving builds speed
 
 var speed := 20.0
 
