@@ -5,7 +5,7 @@ const roll_speed := 2.0
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
 const alignment_speed := 3.0 # how fast velocity aligns to facing
 const min_speed := 0.0 # base glide speed, even flying level
-const max_speed := 200.0 # terminal velocity cap
+const max_speed := 80.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
 const dive_gain := 55.0 # how fast diving builds speed
 
@@ -17,6 +17,10 @@ var lerp_to_forward_rotation := false
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
+    if state.linear_velocity.length() > max_speed:
+        var capped_velocity = state.linear_velocity.normalized() * max_speed
+        state.linear_velocity = state.linear_velocity.lerp(capped_velocity, state.step * 20)
+
     if !flying:
         return
 
