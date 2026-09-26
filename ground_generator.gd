@@ -6,6 +6,7 @@ var texture_size = 20 # repetitions per meter
 var sand_texture_path = "res://assets/sand.png"
 # var sand_texture_path = "res://assets/Grass_01_basecolor.png"
 # TODO: import height and normal map as well?
+var island_center_height = 100
 
 var water_height = -50
 
@@ -199,4 +200,17 @@ func calculate_ground_height(x, z):
     #lerp with water
     y = y * water_param + water_height * (1-water_param)
 
+    y = y + _mexican_hat(x,z)
+
+    return y
+
+
+func _mexican_hat(x, z):
+    var sigma = size * 0.25 - 40
+    var height = island_center_height
+    
+    var r2 = x * x + z * z
+    var s2 = sigma * sigma
+    
+    var y = height * (1.0 - r2 / (2.0 * s2)) * exp(-r2 / (2.0 * s2))
     return y
