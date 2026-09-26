@@ -2,11 +2,13 @@ extends Node3D
 
 var input_direction = Vector3.ZERO
 
-@onready var body := $body
-@onready var mesh := $"body/mesh"
-var ground_speed = 10
+@onready var body: RigidBody3D = $body
+@onready var mesh: Node3D = $"body/mesh"
+var ground_speed := 4.0
 @onready var camera_pivot := $CameraPivot
-@onready var camera := $"CameraPivot/SpringArm3D/Camera3D"
+@onready var camera: Camera3D = $"CameraPivot/SpringArm3D/Camera3D"
+@onready var camera_spring_arm: SpringArm3D = $"CameraPivot/SpringArm3D"
+
 @onready var animation = mesh.get_node('AnimationPlayer')
 
 var state: State = NotFlying.new():
@@ -56,12 +58,7 @@ func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
     if not_flying.increase_gravity:
         movement.y = 0
 
-    body.apply_central_force(camera_pivot.basis.z * movement.y * 2)
-    body.apply_central_force(camera_pivot.basis.x * movement.x * 2)
-
-    # if mesh.global_position != camera.global_position:
-    # mesh.look_at(camera.global_position)
-    # mesh.rotate_x(PI)
+    body.apply_central_force(camera_pivot.basis.z * movement.y)
 
 
 func get_input_direction() -> void:
@@ -80,7 +77,25 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
-    camera_pivot.rotate(Vector3.UP, -input_direction.x * delta)
+    var direction := body.linear_velocity
+    direction.y = 0.0
+
+    if direction.length_squared() > 0.0:
+        var target_quat = Basis \
+                .looking_at(direction.normalized(), Vector3.UP) \
+                .get_rotation_quaternion()
+
+        var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
+            target_quat,
+            delta * 5.0,
+        )
+
+        camera_pivot.rotation.y = slerped_rotation.get_euler().y
+
+    var speed = body.linear_velocity.length()
+    var speed_factor = speed / (body.max_speed / 2)
+    camera.fov = lerp(60.0, 110.0, speed_factor)
+    camera_spring_arm.spring_length = lerp(4, 12, speed_factor)
 
 
 func _unhandled_input(event: InputEvent) -> void:

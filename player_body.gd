@@ -5,13 +5,13 @@ const roll_speed := 2.0
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
 const alignment_speed := 3.0 # how fast velocity aligns to facing
 const min_speed := 0.0 # base glide speed, even flying level
-const max_speed := 80.0 # increasing this can cause clipping through ground
+const max_speed := 200.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
 const dive_gain := 55.0 # how fast diving builds speed
 @onready var reset_pos = global_position
 @onready var camera := $"../CameraPivot/SpringArm3D/Camera3D"
 
-var speed := 20.0
+var speed := 0.0
 var flying := false
 var reset = false
 
@@ -33,9 +33,19 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
         var capped_velocity = state.linear_velocity.normalized() * max_speed
         state.linear_velocity = state.linear_velocity.lerp(capped_velocity, state.step * 20)
 
-    if !flying:
-        return
+    if flying:
+        integrate_forces_flying(state)
+    else:
+        integrate_forces_not_flying(state)
 
+
+func integrate_forces_not_flying(state: PhysicsDirectBodyState3D):
+    var turn_input = Input.get_axis("move_left", "move_right")
+    var target_velocity = state.linear_velocity.rotated(Vector3.UP, -turn_input * PI / 4)
+    state.linear_velocity = state.linear_velocity.slerp(target_velocity, state.step * 2)
+
+
+func integrate_forces_flying(state: PhysicsDirectBodyState3D):
     if lerp_to_forward_rotation:
         state.angular_velocity = Vector3.ZERO
         var current_rotation = global_transform.basis.get_rotation_quaternion()
@@ -89,5 +99,6 @@ func set_flying(new_val: bool):
     if flying:
         lerp_to_forward_rotation = true
         physics_material_override.friction = 0.5
+        speed = linear_velocity.length() * 1.1
     else:
         physics_material_override.friction = 0.1
