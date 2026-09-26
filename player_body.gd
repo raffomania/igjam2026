@@ -24,7 +24,7 @@ func do_reset_pos() -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
     if state.get_contact_count() > 0:
-        speed = 0.0
+        speed *= 0.8
 
     if reset:
         state.transform.origin = reset_pos
@@ -84,6 +84,8 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
     # --- Speed evolves based on pitch relative to gravity ---
     var forward = -global_transform.basis.z
     var dive_factor = -forward.y # positive when diving, negative when climbing
+    if state.get_contact_count() > 0:
+        dive_factor = 0.0
     speed += dive_factor * dive_gain * state.step
     speed -= drag * state.step # constant bleed, stronger dives needed to keep speed up
     speed = clampf(speed, min_speed, max_speed)
