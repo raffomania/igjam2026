@@ -23,7 +23,8 @@ transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 current = true
 fov = 69.7
 
-[node name="body" type="RigidBody3D" parent="." unique_id=349543309]
+[node name="body" type="RigidBody3D" parent="." unique_id=349543309 groups=["player"]]
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_shbfg")
 continuous_cd = true
 contact_monitor = true

@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://77qve3522u7l" path="res://assets/separated/Moewe.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://d1e0edskkbirj" path="res://scoring/score_goal.tscn" id="7_272bh"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
@@ -56,3 +57,14 @@ transform = Transform3D(0, 1, 5.9604645e-08, -5.9604645e-08, 0, -1, -1, 5.960464
 
 [node name="ShovelGreen" parent="." unique_id=1905288107 instance=ExtResource("6_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
+
+[node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("7_272bh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.838709, 4.4979134, -66.74148)
+
+[node name="ScoreUI" type="Control" parent="." unique_id=1469445148]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
