@@ -110,7 +110,7 @@ func _process(delta: float) -> void:
         look_into_nose_direction(delta)
 
     var speed = body.linear_velocity.length()
-    var speed_factor = speed / (body.max_speed / 2)
+    var speed_factor = clamp(speed / (body.max_speed / 2), 0.0, 1.0)
     camera.fov = lerp(60.0, 110.0, speed_factor)
     camera_spring_arm.spring_length = lerp(6, 12, speed_factor)
 
@@ -184,3 +184,7 @@ func _unhandled_input(event: InputEvent) -> void:
                 level = max(0, level)
                 level_increased.emit(level)
                 print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+
+    if event.is_action_pressed("cheat_add_gravity_boost"):
+        level += 10
+        level_increased.emit(level)

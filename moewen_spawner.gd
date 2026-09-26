@@ -7,8 +7,8 @@ const spawn_count = 10
 
 func _ready() -> void:
     for i in range(0, spawn_count):
-        var distance = randi_range(700, 1300)
-        var height = randi_range(50, 300)
+        var distance = randi_range(600, 1000)
+        var height = randi_range(10, 100)
         var pos = Vector3(0, height, distance).rotated(Vector3.UP, PI * 2 * i / spawn_count)
         spawn_object(pos, moewe_scene)
 
