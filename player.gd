@@ -10,6 +10,7 @@ var input_direction = Vector3.ZERO
 @onready var camera: Camera3D = $"CameraPivot/SpringArm3D/Camera3D"
 @onready var camera_spring_arm: SpringArm3D = $"CameraPivot/SpringArm3D"
 @onready var ground_generator := get_node("../GroundGenerator")
+@onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
 
 @onready var animation = mesh.get_node('AnimationPlayer')
 
@@ -23,6 +24,7 @@ const trick_threshold_speed = 40
 const trick_threshold_up_speed = 30
 const trick_height_threshold = 1
 var level = 1
+var trick_allowed = true
 
 var state: State = NotFlying.new():
     set(val):
@@ -59,6 +61,12 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
+    trick_cooldown_timer.timeout.connect(_on_trick_timer_timeout)
+
+
+func _on_trick_timer_timeout() -> void:
+    print('allowing trick')
+    trick_allowed = true
 
 
 func get_height_above_ground() -> float:
@@ -74,6 +82,8 @@ func process_flying(_delta: float) -> void:
 
 
 func random_trick() -> void:
+    if !trick_allowed:
+        return
     body.do_reset_angular_velocity()
     animation.play('RollOut')
     var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
@@ -82,6 +92,8 @@ func random_trick() -> void:
     animation.queue('RollUp')
     level += 1
     level_increased.emit(level)
+    trick_allowed = false
+    trick_cooldown_timer.start()
 
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:

@@ -36,3 +36,6 @@ shape = SubResource("SphereShape3D_sh265")
 
 [node name="mesh" parent="body" unique_id=1708085934 instance=ExtResource("1_4flbx")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.26000983, 0)
+
+[node name="TrickCooldownTimer" type="Timer" parent="." unique_id=338776916]
+wait_time = 0.222
