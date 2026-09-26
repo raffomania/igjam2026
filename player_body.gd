@@ -12,10 +12,27 @@ const dive_gain := 55.0 # how fast diving builds speed
 var speed := 20.0
 var flying := false
 
+var forward_rotation = Quaternion.IDENTITY
+var lerp_to_forward_rotation := false
+
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
     if !flying:
         return
+
+    if lerp_to_forward_rotation:
+        state.angular_velocity = Vector3.ZERO
+        var current_rotation = global_transform.basis.get_rotation_quaternion()
+        global_transform.basis = Basis(
+            current_rotation.slerp(Quaternion.IDENTITY, state.step * 10.0)
+        )
+        var dot = abs(current_rotation.dot(forward_rotation))
+        # 1.0: both quaternions point in the same direction
+        if dot > 0.999:
+            # lerp to forward complete
+            lerp_to_forward_rotation = false
+        else:
+            return
 
     var pitch_input = Input.get_axis("move_forward", "move_back")
     var roll_input = Input.get_axis("move_left", "move_right")
@@ -46,3 +63,6 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
 
 func set_flying(new_val: bool):
     flying = new_val
+
+    if flying:
+        lerp_to_forward_rotation = true
