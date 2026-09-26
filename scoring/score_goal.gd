@@ -13,4 +13,5 @@ func _process(delta: float) -> void:
 
 func body_entered(body: Node3D) -> void:
     if body.is_in_group("player"):
+        body.add_score.emit(10)
         queue_free()

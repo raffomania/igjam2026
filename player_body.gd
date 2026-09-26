@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+signal add_score(val: int)
+
 const pitch_speed := 1.5
 const yaw_speed := 2.5
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
@@ -107,6 +109,3 @@ func set_flying(new_val: bool):
         speed = linear_velocity.length() * 1.1
     else:
         physics_material_override.friction = 0.1
-
-
-

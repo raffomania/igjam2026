@@ -50,6 +50,7 @@ class NotFlying:
 func _ready() -> void:
     animation.play('RollUp')
     GlobalManager.player_body = $body
+    GlobalManager.player = self
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
