@@ -13,103 +13,81 @@ const dive_gain := 45.0 # how fast diving builds speed
 @onready var reset_pos = global_position
 @onready var camera := $"../CameraPivot/SpringArm3D/Camera3D"
 
-var max_height : float = 0.0
+var in_air: bool = false
+var falling: bool = false
+var first_land: bool = false
+var max_distance = 0.0
+var last_distance: float
+var max_height: float = 0.0
+var last_height: float = 0.0
+var last_contact_point: Vector3
+
 var speed := 0.0
 var flying := false
 var reset = false
 var reset_angular_velocity = false
 
 var lerp_to_forward_rotation := false
-var last_contact_point : Vector3
-var first_land : bool = false
-var max_distance = 0.0
-var last_distance : float
+
 
 func _ready() -> void:
 	self.body_exited.connect(_in_air)
 	self.body_entered.connect(_landed)
+
 
 func _landed(_body):
 	if first_land:
 		in_air = false
 		last_height = 0.0
 		last_distance = 0.0
-		print("landed")
 	else:
-		print("first land")
 		in_air = false
 		first_land = true
 		max_height = 0.0
 		max_distance = 0.0
 
 
-
-
-
 func _in_air(_body):
 	if first_land:
-		in_air = true 
+		in_air = true
 		last_contact_point = position
-		print("in_air")
 
 
-func _process(_delta: float) -> void:
-	if in_air:
-		var current_dist = calculate_distance(position)
-		var current_height = calculate_height(position[1])
-		if current_height > last_height:
-			last_height = current_height 
-			falling = false
-		else:
-			falling = true
-			# print(last_height, "maximum   ", max_height)
-			if last_height > max_height:
-				max_height = calculate_height(position[1])
-				print("New maximus height")
-
-		if current_dist > last_distance: 
-			last_distance = current_dist 
-		else:
-			# print(last_distance, "	 max distance ",  max_distance)
-			if last_distance > max_distance:
-				max_distance = last_distance 
-				print("New maximus distance") 
-
-
-func calculate_distance(current_pos : Vector3) -> float: 
+func calculate_distance(current_pos: Vector3) -> float:
 	return current_pos.distance_to(last_contact_point)
 
-func calculate_height(height_of_body : float):
-	var height = height_of_body - last_contact_point[1] 
+
+func calculate_height(height_of_body: float):
+	var height = height_of_body - last_contact_point[1]
 	return height
-	
+
 
 func do_reset_pos() -> void:
 	reset = true
 
 
 func do_reset_angular_velocity() -> void:
-    reset_angular_velocity = true
+	reset_angular_velocity = true
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
 	if state.get_contact_count() > 0:
 		speed *= 0.8
 
-    if reset_angular_velocity:
-        state.angular_velocity = [
-            Vector3.ZERO,
-            Vector3(1, 0, 0),
-            Vector3(0, 1, 0),
-            Vector3(0, 0, 1),
-        ].pick_random()
-        reset_angular_velocity = false
+	if reset_angular_velocity:
+		state.angular_velocity = [
+			Vector3.ZERO,
+			Vector3(1, 0, 0),
+			Vector3(0, 1, 0),
+			Vector3(0, 0, 1),
+		].pick_random()
+		reset_angular_velocity = false
 
-    if reset:
-        state.transform.origin = reset_pos
-        # Call reset_physics_interpolation() at the end of the frame once the physics engine has been updated
-        reset_physics_interpolation.call_deferred()
-        reset = false
+	if reset:
+		state.transform.origin = reset_pos
+		# Call reset_physics_interpolation() at the end of the frame once the physics engine has been updated
+		reset_physics_interpolation.call_deferred()
+		reset = false
 
 	if state.linear_velocity.length() > max_speed:
 		var capped_velocity = state.linear_velocity.normalized() * max_speed
@@ -180,9 +158,9 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
 func set_flying(new_val: bool):
 	flying = new_val
 
-    if flying:
-        lerp_to_forward_rotation = true
-        physics_material_override.friction = 0.5
-        speed = linear_velocity.length() * 1.1
-    else:
-        physics_material_override.friction = 0.1
+	if flying:
+		lerp_to_forward_rotation = true
+		physics_material_override.friction = 0.5
+		speed = linear_velocity.length() * 1.1
+	else:
+		physics_material_override.friction = 0.1
