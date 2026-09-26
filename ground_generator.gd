@@ -54,7 +54,7 @@ func generate_sand():
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = array_mesh
     mesh_instace.position = Vector3.ONE * -0.5 * size
-    mesh_instace.position.y = -10
+    mesh_instace.position.y = 0
     mesh_instace.material_override = get_sand_material()
     # print("position", mesh_instace.position)
 
@@ -85,7 +85,12 @@ func create_grid_vertices():
             #TODO: calculate y based on sin functions
             var x_pos = x * grid_vertex_distance
             var z_pos = z * grid_vertex_distance
-            var y = calculate_ground_height(x_pos, z_pos)
+
+            var clean_x = x_pos - 0.5 * size
+            var clean_z = z_pos - 0.5 * size
+
+            var y = calculate_ground_height(clean_x, clean_z)
+
             var vertex_position = Vector3(x_pos, y, z_pos)
             grid_vertices.push_back(vertex_position)
     # print("grid_vertices", len(grid_vertices))
@@ -147,9 +152,6 @@ func get_lerp_water_param(x,z):
     return 1 - ((Vector2(x,z).distance_to(center_point) - (float(size)/2 - 20))/20)
 
 func calculate_ground_height(x, z):
-    # move coordinates, as the whole mesh is moved as well so player spawns in the middle
-    x = x - 0.5 * size
-    z = z - 0.5 * size
     if (is_water(x,z)):
         return water_height-1
     var water_param = 1
@@ -202,6 +204,9 @@ func calculate_ground_height(x, z):
 
     y = y + _mexican_hat(x,z)
 
+    # extra ring ramp
+    y = y + _ring_ramp(x,z)
+
     return y
 
 
@@ -214,3 +219,6 @@ func _mexican_hat(x, z):
     
     var y = height * (1.0 - r2 / (2.0 * s2)) * exp(-r2 / (2.0 * s2))
     return y
+
+func _ring_ramp(x,z):
+    return 0
