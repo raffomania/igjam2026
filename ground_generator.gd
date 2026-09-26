@@ -7,6 +7,7 @@ var sand_texture_path = "res://assets/sand.png"
 # var sand_texture_path = "res://assets/Grass_01_basecolor.png"
 # TODO: import height and normal map as well?
 var island_center_height = 100
+var island_water_lerp_width = 20
 
 var water_height = -50
 
@@ -68,7 +69,7 @@ func generate_sand():
 func generate_water():
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = PlaneMesh.new()
-    mesh_instace.scale = Vector3.ONE * size * 20
+    mesh_instace.scale = Vector3.ONE * size * 40
     mesh_instace.position.y = water_height
     mesh_instace.material_override = get_water_material()
 
@@ -146,10 +147,10 @@ func is_water(x,z):
     return Vector2(x,z).distance_to(center_point)>(float(size)/2)
 
 func is_near_water(x,z):
-    return Vector2(x,z).distance_to(center_point)> (float(size)/2 - 20)
+    return Vector2(x,z).distance_to(center_point)> (float(size)/2 - island_water_lerp_width)
 
 func get_lerp_water_param(x,z):
-    return 1 - ((Vector2(x,z).distance_to(center_point) - (float(size)/2 - 20))/20)
+    return 1 - ((Vector2(x,z).distance_to(center_point) - (float(size)/2 - island_water_lerp_width))/island_water_lerp_width)
 
 func calculate_ground_height(x, z):
     if (is_water(x,z)):
