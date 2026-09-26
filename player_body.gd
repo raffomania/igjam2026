@@ -40,6 +40,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
             Vector3(0, 1, 0),
             Vector3(0, 0, 1),
         ].pick_random()
+        reset_angular_velocity = false
 
     if reset:
         state.transform.origin = reset_pos
