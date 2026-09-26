@@ -17,7 +17,7 @@ var state: State = NotFlying.new():
             body.set_flying(false)
             animation.play('RollUp')
         elif state is Flying:
-            mesh.scale.x = 3
+            # mesh.scale.x = 3
             body.set_flying(true)
             animation.play('RollOut')
             animation.queue('Glide')
