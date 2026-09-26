@@ -6,6 +6,7 @@ var input_direction = Vector3.ZERO
 @onready var mesh := $"body/mesh"
 var ground_speed = 10
 @onready var camera_pivot := $CameraPivot
+@onready var camera := $"CameraPivot/SpringArm3D/Camera3D"
 
 var state: State = NotFlying.new():
     set(val):
@@ -49,6 +50,10 @@ func process_ground(_delta: float, state: NotFlying) -> void:
 
     body.apply_central_force(Vector3(movement.x, 0, movement.y))
 
+    if mesh.global_position != camera.global_position:
+        mesh.look_at(camera.global_position)
+        mesh.rotate_x(PI)
+
 
 func get_input_direction() -> void:
     input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -66,11 +71,14 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+    var animation = mesh.get_node('AnimationPlayer')
     if event.is_action_released("toggle_flying"):
         if state is Flying:
             state = NotFlying.new()
+            animation.play('RollUp')
         else:
             state = Flying.new()
+            animation.play('Glide')
 
     if event.is_action_pressed("increase_gravity"):
         if state is not NotFlying:
