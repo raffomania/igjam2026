@@ -8,15 +8,27 @@ const min_speed := 0.0 # base glide speed, even flying level
 const max_speed := 80.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
 const dive_gain := 55.0 # how fast diving builds speed
+@onready var reset_pos = global_position
 
 var speed := 20.0
 var flying := false
+var reset = false
 
 var forward_rotation = Quaternion.IDENTITY
 var lerp_to_forward_rotation := false
 
 
+func do_reset_pos() -> void:
+    reset = true
+
+
 func _integrate_forces(state: PhysicsDirectBodyState3D):
+    if reset:
+        state.transform.origin = reset_pos
+        # Call reset_physics_interpolation() at the end of the frame once the physics engine has been updated
+        reset_physics_interpolation.call_deferred()
+        reset = false
+
     if state.linear_velocity.length() > max_speed:
         var capped_velocity = state.linear_velocity.normalized() * max_speed
         state.linear_velocity = state.linear_velocity.lerp(capped_velocity, state.step * 20)

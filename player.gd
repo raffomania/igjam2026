@@ -84,6 +84,8 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+    if event.is_action_pressed("reset"):
+        body.do_reset_pos()
     if event.is_action_released("toggle_flying"):
         if state is Flying:
             state = NotFlying.new()
