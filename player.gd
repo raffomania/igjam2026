@@ -17,19 +17,24 @@ var state: State = NotFlying.new():
             mesh.scale.x = 3
             body.set_flying(true)
 
+
 class State:
     pass
 
+
 class Flying:
     extends State
+
 
 class NotFlying:
     extends State
 
     var increase_gravity := false
 
+
 func process_air(_delta: float) -> void:
     body.gravity_scale = 0.5
+
 
 func process_ground(_delta: float, not_flying: NotFlying) -> void:
     if not_flying.increase_gravity:
@@ -55,9 +60,10 @@ func _physics_process(delta: float) -> void:
     elif state is NotFlying:
         process_ground(delta, state)
 
+
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_released("toggle_flying"):
-        if state is  Flying:
+        if state is Flying:
             state = NotFlying.new()
         else:
             state = Flying.new()
