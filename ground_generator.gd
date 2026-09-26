@@ -1,7 +1,7 @@
 extends Node
 
-var height_scale = 3 # meters
-var lowest_ground_frequency = 1.0 / 100.0 # repetitions per meter
+var height_scale = 2.5 # meters
+var lowest_ground_frequency = 1.0 / 180.0 # repetitions per meter
 var texture_size = 20 # repetitions per meter
 var texture_path = "res://assets/sand.png"
 # var texture_path = "res://assets/Grass_01_basecolor.png"
@@ -41,11 +41,8 @@ func _ready():
 
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = array_mesh
-    # mesh_instace.scale = Vector3.ONE * size
-    # mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = -10
-    mesh_instace.position.z = -size + 10
     mesh_instace.material_override = get_material()
 
     # set collider
@@ -134,10 +131,6 @@ func calculate_ground_height(x, z):
         [30, 1],
         [40, 2],
         [2, 8],
-        [8, 1],
-        [5, 1],
-        [8, 1],
-        [1, 8],
         [1, 8],
         [20, 1],
         [2, 18],
@@ -147,8 +140,8 @@ func calculate_ground_height(x, z):
 
     var y = 0
     for i in levels:
-        y = y + sin(x * i * lowest_ground_frequency) * coefficients[i][0]
-        y = y + sin(z * i * lowest_ground_frequency) * coefficients[i][1]
+        y = y + cos(x * i * lowest_ground_frequency) * coefficients[i][0]
+        y = y + cos(z * i * lowest_ground_frequency) * coefficients[i][1]
 
     y = y / len(coefficients)
     y = y * height_scale
