@@ -15,9 +15,12 @@ var state: State = NotFlying.new():
         if state is NotFlying:
             mesh.scale.x = 1
             body.set_flying(false)
+            animation.play('RollUp')
         elif state is Flying:
             mesh.scale.x = 3
             body.set_flying(true)
+            animation.play('RollOut')
+            animation.queue('Glide')
 
 
 class State:
@@ -79,11 +82,8 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_released("toggle_flying"):
         if state is Flying:
             state = NotFlying.new()
-            animation.play('RollUp')
         else:
             state = Flying.new()
-            animation.play('RollOut')
-            animation.queue('Glide')
 
     if event.is_action_pressed("increase_gravity"):
         if state is not NotFlying:
