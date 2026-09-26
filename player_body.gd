@@ -16,6 +16,7 @@ const dive_gain := 45.0 # how fast diving builds speed
 var speed := 0.0
 var flying := false
 var reset = false
+var reset_angular_velocity = false
 
 var lerp_to_forward_rotation := false
 
@@ -24,9 +25,21 @@ func do_reset_pos() -> void:
     reset = true
 
 
+func do_reset_angular_velocity() -> void:
+    reset_angular_velocity = true
+
+
 func _integrate_forces(state: PhysicsDirectBodyState3D):
     if state.get_contact_count() > 0:
         speed *= 0.8
+
+    if reset_angular_velocity:
+        state.angular_velocity = [
+            Vector3.ZERO,
+            Vector3(1, 0, 0),
+            Vector3(0, 1, 0),
+            Vector3(0, 0, 1),
+        ].pick_random()
 
     if reset:
         state.transform.origin = reset_pos

@@ -1,5 +1,7 @@
 extends Node3D
 
+signal level_increased(level)
+
 var input_direction = Vector3.ZERO
 
 @onready var body: RigidBody3D = $body
@@ -15,9 +17,10 @@ var input_direction = Vector3.ZERO
 const not_flying_camera_pivot_angle := -25.0
 
 const ground_speed := 8.0
-const gravity_increase := 10.0
+var gravity_bonus := 5.0
 const trick_threshold_speed = 50
 const trick_threshold_up_speed = 20
+var level = 1
 
 var state: State = NotFlying.new():
     set(val):
@@ -61,16 +64,19 @@ func process_flying(_delta: float) -> void:
 
 
 func random_trick() -> void:
+    body.do_reset_angular_velocity()
     animation.play('RollOut')
     var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
     print('performing ', trick)
     animation.queue(trick)
     animation.queue('RollUp')
+    level += 1
+    level_increased.emit(level)
 
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
     if not_flying.increase_gravity:
-        body.gravity_scale = gravity_increase
+        body.gravity_scale = gravity_bonus + level
     else:
         body.gravity_scale = 1.0
     var movement = input_direction * ground_speed
