@@ -9,6 +9,7 @@ const max_speed := 80.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
 const dive_gain := 55.0 # how fast diving builds speed
 @onready var reset_pos = global_position
+@onready var camera := $"../CameraPivot/SpringArm3D/Camera3D"
 
 var speed := 20.0
 var flying := false
@@ -39,9 +40,15 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
     if lerp_to_forward_rotation:
         state.angular_velocity = Vector3.ZERO
         var current_rotation = global_transform.basis.get_rotation_quaternion()
-        global_transform.basis = Basis(
-            current_rotation.slerp(Quaternion.IDENTITY, state.step * 10.0)
-        )
+        var direction = camera.global_position - global_position
+        direction.y = 0.0
+        direction *= -1
+
+        var rotation_quat = Basis \
+                .looking_at(direction.normalized(), Vector3.UP) \
+                .get_rotation_quaternion()
+
+        global_transform.basis = Basis(current_rotation.slerp(rotation_quat, state.step * 10.0))
         var dot = abs(current_rotation.dot(forward_rotation))
         # 1.0: both quaternions point in the same direction
         if dot > 0.999:
