@@ -12,6 +12,8 @@ var input_direction = Vector3.ZERO
 
 @onready var initial_camera_pivot_rotation = camera_pivot.rotation
 
+const not_flying_camera_pivot_angle := -25.0
+
 const ground_speed := 8.0
 const gravity_increase := 10.0
 
@@ -89,7 +91,7 @@ func _process(delta: float) -> void:
     var speed = body.linear_velocity.length()
     var speed_factor = speed / (body.max_speed / 2)
     camera.fov = lerp(60.0, 110.0, speed_factor)
-    camera_spring_arm.spring_length = lerp(4, 12, speed_factor)
+    camera_spring_arm.spring_length = lerp(6, 12, speed_factor)
 
 
 func look_into_movement_direction(delta):
@@ -100,7 +102,7 @@ func look_into_movement_direction(delta):
     if direction.length_squared() > 0.0:
         var target_quat = Basis \
                 .looking_at(direction, Vector3.UP) \
-                .rotated(direction.rotated(Vector3.UP, PI / 2), -initial_camera_pivot_rotation.x) \
+                .rotated(direction.rotated(Vector3.UP, PI / 2), not_flying_camera_pivot_angle) \
                 .get_rotation_quaternion()
 
         var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
@@ -117,7 +119,6 @@ func look_into_nose_direction(delta):
     if direction.length_squared() > 0.0:
         var target_quat = Basis \
                 .looking_at(direction, Vector3.UP) \
-                .rotated(direction.rotated(Vector3.UP, PI / 2), -initial_camera_pivot_rotation.x) \
                 .get_rotation_quaternion()
 
         var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
