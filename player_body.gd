@@ -108,8 +108,5 @@ func set_flying(new_val: bool):
     else:
         physics_material_override.friction = 0.1
 
-func _process(_delta: float) -> void:
-    frame_speed.emit(max_speed, min_speed, speed)
-    position_signal.emit(position) 
-    # print(position)
+
 
