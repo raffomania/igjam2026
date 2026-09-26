@@ -83,7 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11755848, 0.21662712, 0)
 amount = 16
 mesh = SubResource("QuadMesh_q1og2")
 emission_shape = 2
-emission_sphere_radius = 7.43
+emission_sphere_radius = 4.0
 direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 3.0
@@ -95,7 +95,7 @@ scale_amount_max = 7.0
 scale_amount_curve = SubResource("Curve_grg7b")
 
 [node name="Shelly" type="MeshInstance3D" parent="." unique_id=1041068346]
-transform = Transform3D(2.1779633, 0, 0, 0, 2.1779633, 0, 0, 0, 2.1779633, 0, -4.0879173, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5887122, 0)
 mesh = SubResource("ArrayMesh_d0dn4")
 
 [node name="Area3D" type="Area3D" parent="Shelly" unique_id=1793731638]
