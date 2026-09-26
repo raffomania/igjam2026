@@ -18,8 +18,8 @@ const not_flying_camera_pivot_angle := -25.0
 
 const ground_speed := 8.0
 var gravity_bonus := 5.0
-const trick_threshold_speed = 50
-const trick_threshold_up_speed = 20
+const trick_threshold_speed = 40
+const trick_threshold_up_speed = 30
 var level = 1
 
 var state: State = NotFlying.new():
@@ -174,7 +174,13 @@ func _unhandled_input(event: InputEvent) -> void:
                 random_trick()
             elif (velocity.y < trick_threshold_up_speed):
                 print('Released too early!')
+                level -= 1
+                level = max(0, level)
+                level_increased.emit(level)
                 print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
             else:
                 print('Release too late!')
+                level -= 1
+                level = max(0, level)
+                level_increased.emit(level)
                 print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
