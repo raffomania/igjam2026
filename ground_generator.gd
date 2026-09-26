@@ -55,9 +55,9 @@ func generate_sand():
     # print("position", mesh_instace.position)
 
     # set collider
-    $CollisionShape3D.shape = array_mesh.create_trimesh_shape()
+    $SandCollisionShape.shape = array_mesh.create_trimesh_shape()
     # $CollisionShape3D.scale = mesh_instace.scale
-    $CollisionShape3D.position = mesh_instace.position
+    $SandCollisionShape.position = mesh_instace.position
 
     add_child(mesh_instace)
 
