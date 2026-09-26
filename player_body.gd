@@ -1,7 +1,7 @@
 extends RigidBody3D
 
-const pitch_speed := 1.0
-const roll_speed := 2.0
+const pitch_speed := 1.5
+const roll_speed := 2.5
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
 const alignment_speed := 3.0 # how fast velocity aligns to facing
 const min_speed := 0.0 # base glide speed, even flying level
