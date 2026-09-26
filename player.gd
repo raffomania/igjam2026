@@ -6,12 +6,36 @@ var input_direction = Vector3.ZERO
 @onready var mesh := $"body/mesh"
 var ground_speed = 10
 @onready var camera_pivot := $CameraPivot
-var flying := false
 
-func process_air(_delta: float) -> void:
+var state: State = NotFlying.new():
+    set(val):
+        state = val
+        if state is NotFlying:
+            mesh.scale.x = 1
+            body.set_flying(false)
+        elif state is Flying:
+            mesh.scale.x = 3
+            body.set_flying(true)
+
+class State:
     pass
 
-func process_ground(_delta: float) -> void:
+class Flying:
+    extends State
+
+class NotFlying:
+    extends State
+
+    var increase_gravity := false
+
+func process_air(_delta: float) -> void:
+    body.gravity_scale = 0.5
+
+func process_ground(_delta: float, not_flying: NotFlying) -> void:
+    if not_flying.increase_gravity:
+        body.gravity_scale = 10.0
+    else:
+        body.gravity_scale = 1.0
     var movement = input_direction * ground_speed
     body.apply_central_force(Vector3(movement.x, 0, movement.y))
     return
@@ -26,18 +50,22 @@ func _physics_process(delta: float) -> void:
     get_input_direction()
     camera_pivot.global_position = body.global_position
     mesh.global_position = body.global_position
-    if flying:
+    if state is Flying:
         process_air(delta)
-    else:
-        process_ground(delta)
+    elif state is NotFlying:
+        process_ground(delta, state)
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_released("toggle_flying"):
-        flying = !flying
-        body.set_flying(flying)
-        if flying:
-            body.gravity_scale = 0.5
-            mesh.scale.x = 2
+        if state is  Flying:
+            state = NotFlying.new()
         else:
-            body.gravity_scale = 1.0
-            mesh.scale.x = 1
+            state = Flying.new()
+
+    if event.is_action_pressed("increase_gravity"):
+        if state is not NotFlying:
+            state = NotFlying.new()
+        state.increase_gravity = true
+    elif event.is_action_released("increase_gravity"):
+        if state is NotFlying:
+            state.increase_gravity = false
