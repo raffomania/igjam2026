@@ -7,6 +7,7 @@ var input_direction = Vector3.ZERO
 var ground_speed = 10
 @onready var camera_pivot := $CameraPivot
 @onready var camera := $"CameraPivot/SpringArm3D/Camera3D"
+@onready var animation = mesh.get_node('AnimationPlayer')
 
 var state: State = NotFlying.new():
     set(val):
@@ -31,6 +32,10 @@ class NotFlying:
     extends State
 
     var increase_gravity := false
+
+
+func _ready() -> void:
+    animation.play('RollUp')
 
 
 func process_air(_delta: float) -> void:
@@ -71,14 +76,14 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-    var animation = mesh.get_node('AnimationPlayer')
     if event.is_action_released("toggle_flying"):
         if state is Flying:
             state = NotFlying.new()
             animation.play('RollUp')
         else:
             state = Flying.new()
-            animation.play('Glide')
+            animation.play('RollOut')
+            animation.queue('Glide')
 
     if event.is_action_pressed("increase_gravity"):
         if state is not NotFlying:
