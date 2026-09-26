@@ -7,7 +7,7 @@ const alignment_speed := 3.0 # how fast velocity aligns to facing
 const min_speed := 0.0 # base glide speed, even flying level
 const max_speed := 200.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
-const dive_gain := 55.0 # how fast diving builds speed
+const dive_gain := 45.0 # how fast diving builds speed
 @onready var reset_pos = global_position
 @onready var camera := $"../CameraPivot/SpringArm3D/Camera3D"
 

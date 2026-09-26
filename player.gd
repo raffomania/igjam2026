@@ -4,7 +4,6 @@ var input_direction = Vector3.ZERO
 
 @onready var body: RigidBody3D = $body
 @onready var mesh: Node3D = $"body/mesh"
-var ground_speed := 4.0
 @onready var camera_pivot := $CameraPivot
 @onready var camera: Camera3D = $"CameraPivot/SpringArm3D/Camera3D"
 @onready var camera_spring_arm: SpringArm3D = $"CameraPivot/SpringArm3D"
@@ -13,6 +12,7 @@ var ground_speed := 4.0
 
 @onready var initial_camera_pivot_rotation = camera_pivot.rotation
 
+const ground_speed := 8.0
 const gravity_increase := 10.0
 
 var state: State = NotFlying.new():
@@ -95,11 +95,12 @@ func _process(delta: float) -> void:
 func look_into_movement_direction(delta):
     var direction := body.linear_velocity
     direction.y = 0.0
+    direction = direction.normalized()
 
     if direction.length_squared() > 0.0:
         var target_quat = Basis \
-                .looking_at(direction.normalized(), Vector3.UP) \
-                .rotated(camera_pivot.basis.x, initial_camera_pivot_rotation.x) \
+                .looking_at(direction, Vector3.UP) \
+                .rotated(direction.rotated(Vector3.UP, PI / 2), -initial_camera_pivot_rotation.x) \
                 .get_rotation_quaternion()
 
         var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
@@ -111,11 +112,12 @@ func look_into_movement_direction(delta):
 
 
 func look_into_nose_direction(delta):
-    var direction := -body.global_transform.basis.z
+    var direction := -body.global_transform.basis.z.normalized()
 
     if direction.length_squared() > 0.0:
         var target_quat = Basis \
-                .looking_at(direction.normalized(), Vector3.UP) \
+                .looking_at(direction, Vector3.UP) \
+                .rotated(direction.rotated(Vector3.UP, PI / 2), -initial_camera_pivot_rotation.x) \
                 .get_rotation_quaternion()
 
         var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
