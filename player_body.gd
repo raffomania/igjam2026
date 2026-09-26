@@ -15,7 +15,6 @@ var speed := 20.0
 var flying := false
 var reset = false
 
-var forward_rotation = Quaternion.IDENTITY
 var lerp_to_forward_rotation := false
 
 
@@ -44,12 +43,12 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
         direction.y = 0.0
         direction *= -1
 
-        var rotation_quat = Basis \
+        var target_quat = Basis \
                 .looking_at(direction.normalized(), Vector3.UP) \
                 .get_rotation_quaternion()
 
-        global_transform.basis = Basis(current_rotation.slerp(rotation_quat, state.step * 10.0))
-        var dot = abs(current_rotation.dot(forward_rotation))
+        global_transform.basis = Basis(current_rotation.slerp(target_quat, state.step * 10.0))
+        var dot = abs(current_rotation.dot(target_quat))
         # 1.0: both quaternions point in the same direction
         if dot > 0.999:
             # lerp to forward complete
