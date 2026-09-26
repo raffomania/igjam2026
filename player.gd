@@ -16,6 +16,8 @@ const not_flying_camera_pivot_angle := -25.0
 
 const ground_speed := 8.0
 const gravity_increase := 10.0
+const trick_threshold_speed = 50
+const trick_threshold_up_speed = 20
 
 var state: State = NotFlying.new():
     set(val):
@@ -48,10 +50,21 @@ class NotFlying:
 func _ready() -> void:
     animation.play('RollUp')
     GlobalManager.player_body = $body
+    animation.set_blend_time('RollUp', 'Trick1', 0.3)
+    animation.set_blend_time('RollUp', 'Trick2', 0.3)
+    animation.set_blend_time('RollUp', 'Trick3', 0.3)
 
 
 func process_air(_delta: float) -> void:
     body.gravity_scale = 0.5
+
+
+func random_trick() -> void:
+    animation.play('RollOut')
+    var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
+    print('performing ', trick)
+    animation.queue(trick)
+    animation.queue('RollUp')
 
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
@@ -146,3 +159,15 @@ func _unhandled_input(event: InputEvent) -> void:
     elif event.is_action_released("increase_gravity"):
         if state is NotFlying:
             state.increase_gravity = false
+        var velocity = body.linear_velocity
+        var speed = velocity.length()
+        if speed > trick_threshold_speed:
+            if (abs(velocity.y) < trick_threshold_up_speed):
+                print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
+                random_trick()
+            elif (velocity.y < trick_threshold_up_speed):
+                print('Released too early!')
+                print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+            else:
+                print('Release too late!')
+                print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
