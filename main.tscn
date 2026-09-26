@@ -24,7 +24,9 @@ script = ExtResource("1_ig7tw")
 
 [node name="SandCollisionShape" type="CollisionShape3D" parent="GroundGenerator" unique_id=1226894304]
 
-[node name="WaterCollisionShape" type="CollisionShape3D" parent="GroundGenerator" unique_id=308474188]
+[node name="WaterArea" type="Area3D" parent="GroundGenerator" unique_id=239884370]
+
+[node name="WaterCollisionShape" type="CollisionShape3D" parent="GroundGenerator/WaterArea" unique_id=308474188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 shape = SubResource("WorldBoundaryShape3D_h2yge")
 

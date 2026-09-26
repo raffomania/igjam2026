@@ -16,6 +16,8 @@ var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
 
 var center_point = Vector2.ZERO
 
+signal water_hit
+
 
 func _ready():
     generate_sand()
@@ -69,6 +71,10 @@ func generate_water():
     mesh_instace.material_override = get_water_material()
 
     add_child(mesh_instace)
+    # collider
+    $WaterArea.find_child("WaterCollisionShape").position.y = water_height
+    $WaterArea.connect("on_area_entered",func (): water_hit.emit())
+
 
 func create_grid_vertices():
     var grid_vertices = PackedVector3Array()
