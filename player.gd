@@ -55,9 +55,9 @@ func process_ground(_delta: float, state: NotFlying) -> void:
 
     body.apply_central_force(Vector3(movement.x, 0, movement.y))
 
-    if mesh.global_position != camera.global_position:
-        mesh.look_at(camera.global_position)
-        mesh.rotate_x(PI)
+    # if mesh.global_position != camera.global_position:
+    # mesh.look_at(camera.global_position)
+    # mesh.rotate_x(PI)
 
 
 func get_input_direction() -> void:
