@@ -23,6 +23,9 @@ func do_reset_pos() -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
+    if state.get_contact_count() > 0:
+        speed = 0.0
+
     if reset:
         state.transform.origin = reset_pos
         # Call reset_physics_interpolation() at the end of the frame once the physics engine has been updated
