@@ -4,6 +4,15 @@
 [ext_resource type="Script" uid="uid://bg4t54x0lc0kg" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://5yws7v4055v2" path="res://player_body.gd" id="2_i3pqv"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sweqy"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.05
+metallic_specular = 0.54
+
+[sub_resource type="QuadMesh" id="QuadMesh_hqtel"]
+material = SubResource("StandardMaterial3D_sweqy")
+size = Vector2(0.1, 0.1)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_shbfg"]
 friction = 0.1
 
@@ -22,6 +31,28 @@ spring_length = 8.0
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 current = true
 fov = 69.7
+
+[node name="TrickParticles" type="CPUParticles3D" parent="CameraPivot/SpringArm3D/Camera3D" unique_id=2102302892]
+transform = Transform3D(-0.038380776, -0.99926317, 0, 0.9117032, -0.03501768, -0.40935412, 0.40905246, -0.015711328, 0.91237557, 0, 0.074447274, -1.6018414)
+emitting = false
+amount = 16
+one_shot = true
+mesh = SubResource("QuadMesh_hqtel")
+direction = Vector3(1, 0, -2)
+spread = 180.0
+initial_velocity_max = 16.66
+angular_velocity_min = 18.0
+angular_velocity_max = 66.0
+linear_accel_max = 3.33
+radial_accel_min = 0.83
+radial_accel_max = 10.0
+tangential_accel_min = 4.17
+tangential_accel_max = 10.0
+damping_max = 4.167
+angle_max = 48.0
+scale_amount_min = 0.0
+scale_amount_max = 1.5
+anim_speed_max = 6.4
 
 [node name="body" type="RigidBody3D" parent="." unique_id=349543309 groups=["player"]]
 collision_mask = 3

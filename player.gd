@@ -11,6 +11,7 @@ var input_direction = Vector3.ZERO
 @onready var camera_spring_arm: SpringArm3D = $"CameraPivot/SpringArm3D"
 @onready var ground_generator := get_node("../GroundGenerator")
 @onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
+@onready var trick_particles: CPUParticles3D = $"CameraPivot/SpringArm3D/Camera3D/TrickParticles"
 
 @onready var animation = mesh.get_node('AnimationPlayer')
 
@@ -66,7 +67,6 @@ func _ready() -> void:
 
 
 func _on_trick_timer_timeout() -> void:
-    print('allowing trick')
     trick_allowed = true
 
 
@@ -95,6 +95,7 @@ func random_trick() -> void:
     level_increased.emit(level)
     trick_allowed = false
     trick_cooldown_timer.start()
+    trick_particles.emitting = true
 
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
