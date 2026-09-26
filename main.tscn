@@ -38,9 +38,6 @@ script = ExtResource("1_ig7tw")
 [node name="StaticSpawner" type="Node3D" parent="GroundGenerator" unique_id=1204653210]
 script = ExtResource("8_5vw27")
 
-[node name="StaticSpawner2" type="Node3D" parent="GroundGenerator" unique_id=820406823]
-script = ExtResource("8_5vw27")
-
 [node name="IslandDrownManager" type="Node" parent="GroundGenerator" unique_id=811985194]
 script = ExtResource("3_dg77c")
 
