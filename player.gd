@@ -45,15 +45,15 @@ func process_air(_delta: float) -> void:
     body.gravity_scale = 0.5
 
 
-func process_not_flying(delta: float, state: NotFlying) -> void:
-    if state.increase_gravity:
+func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
+    if not_flying.increase_gravity:
         body.gravity_scale = 10.0
     else:
         body.gravity_scale = 1.0
     var movement = input_direction * ground_speed
 
     # Disable forward/backward movement when in gravity mode
-    if state.increase_gravity:
+    if not_flying.increase_gravity:
         movement.y = 0
 
     body.apply_central_force(camera_pivot.basis.z * movement.y * 2)
