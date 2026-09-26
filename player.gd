@@ -11,6 +11,10 @@ var ground_speed := 4.0
 
 @onready var animation = mesh.get_node('AnimationPlayer')
 
+@onready var initial_camera_pivot_rotation = camera_pivot.rotation
+
+const gravity_increase := 10.0
+
 var state: State = NotFlying.new():
     set(val):
         state = val
@@ -49,7 +53,7 @@ func process_air(_delta: float) -> void:
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
     if not_flying.increase_gravity:
-        body.gravity_scale = 10.0
+        body.gravity_scale = gravity_increase
     else:
         body.gravity_scale = 1.0
     var movement = input_direction * ground_speed
@@ -77,8 +81,37 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+    if state is NotFlying:
+        look_into_movement_direction(delta)
+    elif state is Flying:
+        look_into_nose_direction(delta)
+
+    var speed = body.linear_velocity.length()
+    var speed_factor = speed / (body.max_speed / 2)
+    camera.fov = lerp(60.0, 110.0, speed_factor)
+    camera_spring_arm.spring_length = lerp(4, 12, speed_factor)
+
+
+func look_into_movement_direction(delta):
     var direction := body.linear_velocity
     direction.y = 0.0
+
+    if direction.length_squared() > 0.0:
+        var target_quat = Basis \
+                .looking_at(direction.normalized(), Vector3.UP) \
+                .rotated(camera_pivot.basis.x, initial_camera_pivot_rotation.x) \
+                .get_rotation_quaternion()
+
+        var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
+            target_quat,
+            delta * 5.0,
+        )
+
+        camera_pivot.rotation = slerped_rotation.get_euler()
+
+
+func look_into_nose_direction(delta):
+    var direction := -body.global_transform.basis.z
 
     if direction.length_squared() > 0.0:
         var target_quat = Basis \
@@ -87,15 +120,10 @@ func _process(delta: float) -> void:
 
         var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
             target_quat,
-            delta * 5.0,
+            delta * 2.0,
         )
 
-        camera_pivot.rotation.y = slerped_rotation.get_euler().y
-
-    var speed = body.linear_velocity.length()
-    var speed_factor = speed / (body.max_speed / 2)
-    camera.fov = lerp(60.0, 110.0, speed_factor)
-    camera_spring_arm.spring_length = lerp(4, 12, speed_factor)
+        camera_pivot.rotation = slerped_rotation.get_euler()
 
 
 func _unhandled_input(event: InputEvent) -> void:

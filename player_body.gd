@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 const pitch_speed := 1.5
-const roll_speed := 2.5
+const yaw_speed := 2.5
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
 const alignment_speed := 3.0 # how fast velocity aligns to facing
 const min_speed := 0.0 # base glide speed, even flying level
@@ -67,10 +67,10 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
             return
 
     var pitch_input = Input.get_axis("move_forward", "move_back")
-    var roll_input = Input.get_axis("move_left", "move_right")
+    var yaw_input = Input.get_axis("move_left", "move_right")
 
     var desired_angular = (global_transform.basis.x * pitch_input * pitch_speed) + \
-            (-global_transform.basis.z * roll_input * roll_speed)
+            (Vector3.UP * yaw_input * -yaw_speed)
 
     # Snap toward desired angular velocity
     state.angular_velocity = state.angular_velocity.lerp(
