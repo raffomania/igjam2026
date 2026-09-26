@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cwhck5uparppr"]
+
+[ext_resource type="Script" uid="uid://qvflamb2n7d6" path="res://pop_up_scene.gd" id="1_ljqnm"]
+
+[sub_resource type="Theme" id="Theme_yp1hx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avs5q"]
+bg_color = Color(0.21215928, 0.6120902, 0.99999994, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ok7lh"]
+font_color = Color(0.9411765, 0.25490198, 0.015686275, 1)
+
+[node name="PopUpScene" type="Control" unique_id=892766038]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+script = ExtResource("1_ljqnm")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1842641709]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = SubResource("Theme_yp1hx")
+theme_override_styles/panel = SubResource("StyleBoxFlat_avs5q")
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=1261801557]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ok7lh")
+
+[node name="Timer" type="Timer" parent="PanelContainer" unique_id=93959168]
+unique_name_in_owner = true
