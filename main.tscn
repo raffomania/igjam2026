@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://uhnk3rsnxxiq"]
 
+[ext_resource type="PackedScene" uid="uid://c83sm7oqb8h1r" path="res://menu.tscn" id="1_272bh"]
 [ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://77qve3522u7l" path="res://assets/separated/Moewe.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
-[ext_resource type="PackedScene" uid="uid://uhnk3rsnxxiq" path="res://menu.tscn" id="4_1bvp3"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
@@ -21,6 +21,8 @@ background_mode = 2
 sky = SubResource("Sky_i3pqv")
 
 [node name="Main" type="Node3D" unique_id=1584255760]
+
+[node name="menu" parent="." unique_id=2085074617 instance=ExtResource("1_272bh")]
 
 [node name="GroundGenerator" type="StaticBody3D" parent="." unique_id=1581184700]
 script = ExtResource("1_ig7tw")
@@ -54,4 +56,3 @@ transform = Transform3D(0, 1, 5.9604645e-08, -5.9604645e-08, 0, -1, -1, 5.960464
 
 [node name="ShovelGreen" parent="." unique_id=1905288107 instance=ExtResource("6_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
-[node name="menu" parent="." unique_id=1983626827 instance=ExtResource("4_1bvp3")]
