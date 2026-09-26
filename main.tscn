@@ -39,7 +39,7 @@ shape = SubResource("WorldBoundaryShape3D_h2yge")
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 130, 12.844)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.94427, -9.305033, 222.31789)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=991819736]
 transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.17269033, 0.86455554, -0.16952258, -0.9445552, 0.28120708, -3.4488335, 2.774324, 0)
