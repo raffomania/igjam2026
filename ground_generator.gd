@@ -9,21 +9,16 @@ var sand_texture_path = "res://assets/sand.png"
 var island_center_height = 100
 var island_water_lerp_width = 20
 
-var water_height = -50
-
 var resolution = 0.25 # vertex per meter per directions
 var size = 700 # meters
+var water_height = -50
 var vertices_per_dimension = resolution * size # number of vertices for the whole chunk
 var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
 
 var center_point = Vector2.ZERO
 
-signal water_hit
-
-
 func _ready():
     generate_sand()
-    generate_water()
 
     # water_hit.connect(func():print("heyo"))
 
@@ -67,24 +62,6 @@ func generate_sand():
     $SandCollisionShape.position = mesh_instace.position
 
     add_child(mesh_instace)
-
-
-func generate_water():
-    var mesh_instace = MeshInstance3D.new()
-    mesh_instace.mesh = PlaneMesh.new()
-    mesh_instace.scale = Vector3.ONE * size * 40
-    mesh_instace.position.y = water_height
-    mesh_instace.material_override = get_water_material()
-
-    add_child(mesh_instace)
-    # collider
-    $WaterArea.find_child("WaterCollisionShape").position.y = water_height
-    $WaterArea.connect(
-        "body_entered",
-        func(_b):
-            water_hit.emit(),
-    )
-
 
 func create_grid_vertices():
     var grid_vertices = PackedVector3Array()
@@ -140,17 +117,6 @@ func get_sand_material():
     material.uv1_scale = Vector3.ONE * 1.0 / float(texture_size)
     material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
     return material
-
-
-func get_water_material():
-    var material = StandardMaterial3D.new()
-    material.albedo_color = Color.AQUAMARINE
-    material.uv1_triplanar = true
-    material.uv1_world_triplanar = true
-    material.uv1_scale = Vector3.ONE * 1.0 / float(texture_size)
-    material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
-    return material
-
 
 func is_water(x, z):
     return Vector2(x, z).distance_to(center_point) > (float(size) / 2)

@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dmqw3owlghi1u"]
+
+[ext_resource type="Script" uid="uid://b1ajqnmc425jp" path="res://water.gd" id="1_7wcun"]
+[ext_resource type="Texture2D" uid="uid://p48og3kvq1hg" path="res://assets/water.png" id="1_qi1wl"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3t7m3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p72a"]
+albedo_texture = ExtResource("1_qi1wl")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qi1wl"]
+
+[node name="Water" type="Node3D" unique_id=1776032862]
+script = ExtResource("1_7wcun")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1053512255]
+transform = Transform3D(1400.29, 0, 0, 0, 1400.29, 0, 0, 0, 1400.29, 0, -50, 0)
+mesh = SubResource("PlaneMesh_3t7m3")
+surface_material_override/0 = SubResource("StandardMaterial3D_7p72a")
+
+[node name="WaterArea" type="Area3D" parent="MeshInstance3D" unique_id=691036739]
+transform = Transform3D(0.00071413774, 0, 0, 0, 0.00071413774, 0, 0, 0, 0.00071413774, 0, 0.03570689, 0)
+
+[node name="WaterCollisionShape" type="CollisionShape3D" parent="MeshInstance3D/WaterArea" unique_id=816591403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
+shape = SubResource("WorldBoundaryShape3D_qi1wl")

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://uhnk3rsnxxiq"]
 
 [ext_resource type="PackedScene" uid="uid://c83sm7oqb8h1r" path="res://menu.tscn" id="1_272bh"]
+[ext_resource type="PackedScene" uid="uid://dmqw3owlghi1u" path="res://water.tscn" id="1_efxa6"]
 [ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="3_h2yge"]
@@ -8,11 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://77qve3522u7l" path="res://assets/separated/Moewe.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://d1e0edskkbirj" path="res://scoring/score_goal.tscn" id="7_272bh"]
+[ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
-[ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="8_5vw27"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hqtel"]
 panorama = ExtResource("3_h2yge")
@@ -26,18 +25,14 @@ sky = SubResource("Sky_i3pqv")
 
 [node name="Main" type="Node3D" unique_id=1584255760]
 
+[node name="Water" parent="." unique_id=1776032862 instance=ExtResource("1_efxa6")]
+
 [node name="menu" parent="." unique_id=2085074617 instance=ExtResource("1_272bh")]
 
 [node name="GroundGenerator" type="StaticBody3D" parent="." unique_id=1581184700]
 script = ExtResource("1_ig7tw")
 
 [node name="SandCollisionShape" type="CollisionShape3D" parent="GroundGenerator" unique_id=1226894304]
-
-[node name="WaterArea" type="Area3D" parent="GroundGenerator" unique_id=239884370]
-
-[node name="WaterCollisionShape" type="CollisionShape3D" parent="GroundGenerator/WaterArea" unique_id=308474188]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
-shape = SubResource("WorldBoundaryShape3D_h2yge")
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
 unique_name_in_owner = true
@@ -67,6 +62,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.97401, -7.7035923, 199.71
 [node name="Score" parent="." unique_id=1355555733 instance=ExtResource("9_kek77")]
 
 [node name="LevelUI" parent="." unique_id=367470182 instance=ExtResource("10_4c57u")]
+
 [node name="ScoreUI" type="Control" parent="." unique_id=1469445148]
 layout_mode = 3
 anchors_preset = 15
@@ -74,5 +70,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
 [node name="RandomSpawner" type="Node" parent="." unique_id=737412509]
 script = ExtResource("8_5vw27")
