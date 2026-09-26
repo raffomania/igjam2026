@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://d1e0edskkbirj" path="res://scoring/score_goal.tscn" id="7_272bh"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
@@ -60,6 +61,8 @@ transform = Transform3D(0, 1, 5.9604645e-08, -5.9604645e-08, 0, -1, -1, 5.960464
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
 
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.838709, 36.437206, 260.19385)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.97401, -7.7035923, 199.71103)
 
 [node name="Score" parent="." unique_id=1355555733 instance=ExtResource("9_kek77")]
+
+[node name="LevelUI" parent="." unique_id=367470182 instance=ExtResource("10_4c57u")]
