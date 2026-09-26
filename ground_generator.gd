@@ -1,7 +1,7 @@
 extends Node
 
-var height_scale = 2.5 # meters
-var lowest_ground_frequency = 1.0 / 180.0 # repetitions per meter
+var height_scale = 3 # meters
+var lowest_ground_frequency = 1.0 / 200.0 # repetitions per meter
 var texture_size = 20 # repetitions per meter
 var sand_texture_path = "res://assets/sand.png"
 # var sand_texture_path = "res://assets/Grass_01_basecolor.png"
@@ -9,8 +9,8 @@ var sand_texture_path = "res://assets/sand.png"
 
 var water_height = -50
 
-var resolution = 0.5 # vertex per meter per directions
-var size = 500 # meters
+var resolution = 0.25 # vertex per meter per directions
+var size = 700 # meters
 var vertices_per_dimension = resolution * size # number of vertices for the whole chunk
 var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
 
@@ -157,13 +157,13 @@ func calculate_ground_height(x, z):
     
     var coefficients = [
         [10, 25],
-        [30, 1],
+        [30, 3],
         [2, 80],
         [60, 1],
         [8, 6],
         [1, 5],
         [6, 1],
-        [3, 1],
+        [3, 9],
         [2, 0],
         [8, 1],
         [1, 1],
@@ -179,7 +179,7 @@ func calculate_ground_height(x, z):
         [1, 8],
         [2, 0],
         [30, 1],
-        [40, 2],
+        [20, 2],
         [2, 8],
         [1, 8],
         [20, 1],
