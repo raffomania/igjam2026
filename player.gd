@@ -34,8 +34,8 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_released("toggle_flying"):
         flying = !flying
+        body.set_flying(flying)
         if flying:
-            body.apply_central_force(-body.transform.basis.z * 100)
             body.gravity_scale = 0.5
             mesh.scale.x = 2
         else:
