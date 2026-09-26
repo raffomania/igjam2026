@@ -1,6 +1,6 @@
 extends Node
 
-var height_scale = 5 # meters
+var height_scale = 3 # meters
 var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
 var texture_size = 5 # repetitions per meter
 var texture_path = "res://assets/Sand_02_basecolor.png"
@@ -106,7 +106,7 @@ func calculate_ground_height(x,z):
     var coefficients = [[10,25],[30,1],[2,80],[60,1],[8,6],[1,5],
     [6,1],[3,1],[2,0],[8,1],[1,1],[8,0],[1,8],[1,8],[20,1],[2,22],
     [2,8],[8,1],[8,8],[0,1],[1,8],[2,0],[30,1],[40,2],
-    [2,8],[8,1],[5,1],[8,1],[1,8],[1,8],[20,1],[2,22]]
+    [2,8],[8,1],[5,1],[8,1],[1,8],[1,8],[20,1],[2,18]]
 
     var levels = range(len(coefficients))
 
