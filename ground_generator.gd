@@ -1,9 +1,9 @@
 extends Node
 
 var height_scale = 3 # meters
-var lowest_ground_frequency = 1.0/100.0 # repetitions per meter
-var texture_size = 5 # repetitions per meter
-var texture_path = "res://assets/Sand_02_basecolor.png"
+var lowest_ground_frequency = 1.0 / 100.0 # repetitions per meter
+var texture_size = 20 # repetitions per meter
+var texture_path = "res://assets/sand.png"
 # var texture_path = "res://assets/Grass_01_basecolor.png"
 # TODO: import height and normal map as well?
 
@@ -11,6 +11,7 @@ var resolution = 0.5 # vertex per meter per directions
 var size = 500 # meters
 var vertices_per_dimension = resolution * size # number of vertices for the whole chunk
 var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
+
 
 func _ready():
     var surface_array = []
@@ -23,14 +24,13 @@ func _ready():
 
     verts = create_grid_vertices()
     indices = create_grid_indices()
-    normals =  create_normals()
+    normals = create_normals()
     # uvs = PackedVector2Array([
     #     Vector2(0, 0),
     #     Vector2(1, 0),
     #     Vector2(0, 1),
     #     Vector2(1, 1),
     # ])
-
     surface_array[Mesh.ARRAY_VERTEX] = verts
     # surface_array[Mesh.ARRAY_TEX_UV] = uvs
     surface_array[Mesh.ARRAY_NORMAL] = normals
@@ -41,7 +41,7 @@ func _ready():
 
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = array_mesh
-    # mesh_instace.scale = Vector3.ONE * size 
+    # mesh_instace.scale = Vector3.ONE * size
     # mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = -10
@@ -55,42 +55,46 @@ func _ready():
 
     add_child(mesh_instace)
 
+
 func create_grid_vertices():
     var grid_vertices = PackedVector3Array()
     for x in range(vertices_per_dimension):
         for z in range(vertices_per_dimension):
             #TODO: calculate y based on sin functions
-            var x_pos = x*grid_vertex_distance
-            var z_pos = z*grid_vertex_distance
-            var y = calculate_ground_height(x_pos,z_pos)
-            var vertex_position = Vector3(x_pos,y,z_pos)
+            var x_pos = x * grid_vertex_distance
+            var z_pos = z * grid_vertex_distance
+            var y = calculate_ground_height(x_pos, z_pos)
+            var vertex_position = Vector3(x_pos, y, z_pos)
             grid_vertices.push_back(vertex_position)
     # print("grid_vertices", len(grid_vertices))
-    assert(len(grid_vertices) == (resolution * size)**2)
+    assert(len(grid_vertices) == (resolution * size) ** 2)
     return grid_vertices
+
 
 func create_grid_indices():
     var indices = PackedInt32Array()
     var i = 0
-    for x in range(vertices_per_dimension-1):
-        for z in range(vertices_per_dimension-1):
-            indices.push_back(i+vertices_per_dimension)
-            indices.push_back(i+1)
+    for x in range(vertices_per_dimension - 1):
+        for z in range(vertices_per_dimension - 1):
+            indices.push_back(i + vertices_per_dimension)
+            indices.push_back(i + 1)
             indices.push_back(i)
-            indices.push_back(i+vertices_per_dimension)
-            indices.push_back(i+vertices_per_dimension+1)
-            indices.push_back(i+1)
+            indices.push_back(i + vertices_per_dimension)
+            indices.push_back(i + vertices_per_dimension + 1)
+            indices.push_back(i + 1)
             i += 1
         i += 1
     # print("indices", len(indices))
     return indices
 
+
 func create_normals():
     #TODO: needs to depend on sin functions
     var normals = PackedVector3Array()
-    for n in range((vertices_per_dimension)*(vertices_per_dimension)):
+    for n in range((vertices_per_dimension) * (vertices_per_dimension)):
         normals.push_back(Vector3.UP)
     return normals
+
 
 func get_material():
     var material = StandardMaterial3D.new()
@@ -98,26 +102,55 @@ func get_material():
     material.albedo_texture = texture
     material.uv1_triplanar = true
     material.uv1_world_triplanar = true
-    material.uv1_scale = Vector3.ONE * 1.0/float(texture_size)
+    material.uv1_scale = Vector3.ONE * 1.0 / float(texture_size)
     material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
     return material
 
 
-func calculate_ground_height(x,z):
-    var coefficients = [[10,25],[30,1],[2,80],[60,1],[8,6],[1,5],
-    [6,1],[3,1],[2,0],[8,1],[1,1],[8,0],[1,8],[1,8],[20,1],[2,22],
-    [2,8],[8,1],[8,8],[0,1],[1,8],[2,0],[30,1],[40,2],
-    [2,8],[8,1],[5,1],[8,1],[1,8],[1,8],[20,1],[2,18]]
+func calculate_ground_height(x, z):
+    var coefficients = [
+        [10, 25],
+        [30, 1],
+        [2, 80],
+        [60, 1],
+        [8, 6],
+        [1, 5],
+        [6, 1],
+        [3, 1],
+        [2, 0],
+        [8, 1],
+        [1, 1],
+        [8, 0],
+        [1, 8],
+        [1, 8],
+        [20, 1],
+        [2, 22],
+        [2, 8],
+        [8, 1],
+        [8, 8],
+        [0, 1],
+        [1, 8],
+        [2, 0],
+        [30, 1],
+        [40, 2],
+        [2, 8],
+        [8, 1],
+        [5, 1],
+        [8, 1],
+        [1, 8],
+        [1, 8],
+        [20, 1],
+        [2, 18],
+    ]
 
     var levels = range(len(coefficients))
 
     var y = 0
     for i in levels:
-        y = y + sin(x*i*lowest_ground_frequency) * coefficients[i][0] 
-        y = y + sin(z*i*lowest_ground_frequency) * coefficients[i][1]
+        y = y + sin(x * i * lowest_ground_frequency) * coefficients[i][0]
+        y = y + sin(z * i * lowest_ground_frequency) * coefficients[i][1]
 
-    y = y/len(coefficients)
+    y = y / len(coefficients)
     y = y * height_scale
-        
-    return y
 
+    return y
