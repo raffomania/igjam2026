@@ -13,16 +13,79 @@ const dive_gain := 45.0 # how fast diving builds speed
 @onready var reset_pos = global_position
 @onready var camera := $"../CameraPivot/SpringArm3D/Camera3D"
 
+var max_height : float = 0.0
 var speed := 0.0
 var flying := false
 var reset = false
 var reset_angular_velocity = false
 
 var lerp_to_forward_rotation := false
+var last_contact_point : Vector3
+var first_land : bool = false
+var max_distance = 0.0
+var last_distance : float
 
+func _ready() -> void:
+	self.body_exited.connect(_in_air)
+	self.body_entered.connect(_landed)
+
+func _landed(_body):
+	if first_land:
+		in_air = false
+		last_height = 0.0
+		last_distance = 0.0
+		print("landed")
+	else:
+		print("first land")
+		in_air = false
+		first_land = true
+		max_height = 0.0
+		max_distance = 0.0
+
+
+
+
+
+func _in_air(_body):
+	if first_land:
+		in_air = true 
+		last_contact_point = position
+		print("in_air")
+
+
+func _process(_delta: float) -> void:
+	if in_air:
+		var current_dist = calculate_distance(position)
+		var current_height = calculate_height(position[1])
+		if current_height > last_height:
+			last_height = current_height 
+			falling = false
+		else:
+			falling = true
+			# print(last_height, "maximum   ", max_height)
+			if last_height > max_height:
+				max_height = calculate_height(position[1])
+				print("New maximus height")
+
+		if current_dist > last_distance: 
+			last_distance = current_dist 
+		else:
+			# print(last_distance, "	 max distance ",  max_distance)
+			if last_distance > max_distance:
+				max_distance = last_distance 
+				print("New maximus distance") 
+
+
+func calculate_distance(current_pos : Vector3) -> float: 
+	return current_pos.distance_to(last_contact_point)
+
+func calculate_height(height_of_body : float):
+	var height = height_of_body - last_contact_point[1] 
+	return height
+	
 
 func do_reset_pos() -> void:
-    reset = true
+	reset = true
 
 
 func do_reset_angular_velocity() -> void:
@@ -30,8 +93,8 @@ func do_reset_angular_velocity() -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState3D):
-    if state.get_contact_count() > 0:
-        speed *= 0.8
+	if state.get_contact_count() > 0:
+		speed *= 0.8
 
     if reset_angular_velocity:
         state.angular_velocity = [
@@ -48,74 +111,74 @@ func _integrate_forces(state: PhysicsDirectBodyState3D):
         reset_physics_interpolation.call_deferred()
         reset = false
 
-    if state.linear_velocity.length() > max_speed:
-        var capped_velocity = state.linear_velocity.normalized() * max_speed
-        state.linear_velocity = state.linear_velocity.lerp(capped_velocity, state.step * 20)
+	if state.linear_velocity.length() > max_speed:
+		var capped_velocity = state.linear_velocity.normalized() * max_speed
+		state.linear_velocity = state.linear_velocity.lerp(capped_velocity, state.step * 20)
 
-    if flying:
-        integrate_forces_flying(state)
-    else:
-        integrate_forces_not_flying(state)
+	if flying:
+		integrate_forces_flying(state)
+	else:
+		integrate_forces_not_flying(state)
 
 
 func integrate_forces_not_flying(state: PhysicsDirectBodyState3D):
-    var turn_input = Input.get_axis("move_left", "move_right")
-    var target_velocity = state.linear_velocity.rotated(Vector3.UP, -turn_input * PI / 4)
-    state.linear_velocity = state.linear_velocity.slerp(target_velocity, state.step * 2)
+	var turn_input = Input.get_axis("move_left", "move_right")
+	var target_velocity = state.linear_velocity.rotated(Vector3.UP, -turn_input * PI / 4)
+	state.linear_velocity = state.linear_velocity.slerp(target_velocity, state.step * 2)
 
 
 func integrate_forces_flying(state: PhysicsDirectBodyState3D):
-    if lerp_to_forward_rotation:
-        state.angular_velocity = Vector3.ZERO
-        var current_rotation = global_transform.basis.get_rotation_quaternion()
-        var direction = camera.global_position - global_position
-        direction.y = 0.0
-        direction *= -1
+	if lerp_to_forward_rotation:
+		state.angular_velocity = Vector3.ZERO
+		var current_rotation = global_transform.basis.get_rotation_quaternion()
+		var direction = camera.global_position - global_position
+		direction.y = 0.0
+		direction *= -1
 
-        var target_quat = Basis \
-                .looking_at(direction.normalized(), Vector3.UP) \
-                .get_rotation_quaternion()
+		var target_quat = Basis \
+				.looking_at(direction.normalized(), Vector3.UP) \
+				.get_rotation_quaternion()
 
-        global_transform.basis = Basis(current_rotation.slerp(target_quat, state.step * 10.0))
-        var dot = abs(current_rotation.dot(target_quat))
-        # 1.0: both quaternions point in the same direction
-        if dot > 0.999:
-            # lerp to forward complete
-            lerp_to_forward_rotation = false
-        else:
-            return
+		global_transform.basis = Basis(current_rotation.slerp(target_quat, state.step * 10.0))
+		var dot = abs(current_rotation.dot(target_quat))
+		# 1.0: both quaternions point in the same direction
+		if dot > 0.999:
+			# lerp to forward complete
+			lerp_to_forward_rotation = false
+		else:
+			return
 
-    var pitch_input = Input.get_axis("move_forward", "move_back")
-    var yaw_input = Input.get_axis("move_left", "move_right")
+	var pitch_input = Input.get_axis("move_forward", "move_back")
+	var yaw_input = Input.get_axis("move_left", "move_right")
 
-    var desired_angular = (global_transform.basis.x * pitch_input * pitch_speed) + \
-            (Vector3.UP * yaw_input * -yaw_speed)
+	var desired_angular = (global_transform.basis.x * pitch_input * pitch_speed) + \
+			(Vector3.UP * yaw_input * -yaw_speed)
 
-    # Snap toward desired angular velocity
-    state.angular_velocity = state.angular_velocity.lerp(
-        desired_angular,
-        angular_stop_speed * state.step,
-    )
+	# Snap toward desired angular velocity
+	state.angular_velocity = state.angular_velocity.lerp(
+		desired_angular,
+		angular_stop_speed * state.step,
+	)
 
-    # --- Speed evolves based on pitch relative to gravity ---
-    var forward = -global_transform.basis.z
-    var dive_factor = -forward.y # positive when diving, negative when climbing
-    if state.get_contact_count() > 0:
-        dive_factor = 0.0
-    speed += dive_factor * dive_gain * state.step
-    speed -= drag * state.step # constant bleed, stronger dives needed to keep speed up
-    speed = clampf(speed, min_speed, max_speed)
+	# --- Speed evolves based on pitch relative to gravity ---
+	var forward = -global_transform.basis.z
+	var dive_factor = -forward.y # positive when diving, negative when climbing
+	if state.get_contact_count() > 0:
+		dive_factor = 0.0
+	speed += dive_factor * dive_gain * state.step
+	speed -= drag * state.step # constant bleed, stronger dives needed to keep speed up
+	speed = clampf(speed, min_speed, max_speed)
 
-    # align forward speed with nose direction
-    var aligned_velocity = forward * speed
-    state.linear_velocity = state.linear_velocity.lerp(
-        aligned_velocity,
-        alignment_speed * state.step,
-    )
+	# align forward speed with nose direction
+	var aligned_velocity = forward * speed
+	state.linear_velocity = state.linear_velocity.lerp(
+		aligned_velocity,
+		alignment_speed * state.step,
+	)
 
 
 func set_flying(new_val: bool):
-    flying = new_val
+	flying = new_val
 
     if flying:
         lerp_to_forward_rotation = true
