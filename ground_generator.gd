@@ -61,6 +61,7 @@ func generate_sand():
     # $CollisionShape3D.scale = mesh_instace.scale
     $SandCollisionShape.position = mesh_instace.position
 
+    mesh_instace.name = "SandMesh"
     add_child(mesh_instace)
 
 func create_grid_vertices():

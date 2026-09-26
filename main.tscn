@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmqw3owlghi1u" path="res://water.tscn" id="1_efxa6"]
 [ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://bsn7tn6tcl6xm" path="res://island_drown_manager.gd" id="3_dg77c"]
 [ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
@@ -34,9 +35,12 @@ script = ExtResource("1_ig7tw")
 
 [node name="SandCollisionShape" type="CollisionShape3D" parent="GroundGenerator" unique_id=1226894304]
 
+[node name="IslandDrownManager" type="Node" parent="GroundGenerator" unique_id=811985194]
+script = ExtResource("3_dg77c")
+
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
 unique_name_in_owner = true
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.94427, -9.305033, 222.31789)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 100, 222.318)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=991819736]
 transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.17269033, 0.86455554, -0.16952258, -0.9445552, 0.28120708, -3.4488335, 2.774324, 0)

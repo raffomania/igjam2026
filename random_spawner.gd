@@ -21,7 +21,7 @@ func spawn_shovels(red, green, blue):
     var spawned_shovels = 0
     while spawned_shovels < num_shovels:
         var dice = randi_range(0, 2)
-        print(dice)
+        # print(dice)
         var coords = get_shovel_coords()
         if Vector2(coords.x, coords.z).distance_to(ground_generator.center_point) > ground_generator.size * 0.5 - 20:
             continue
