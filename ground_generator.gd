@@ -20,11 +20,13 @@ var center_point = Vector2.ZERO
 
 signal water_hit
 
+
 func _ready():
     generate_sand()
     generate_water()
 
     # water_hit.connect(func():print("heyo"))
+
 
 func generate_sand():
     var surface_array = []
@@ -66,6 +68,7 @@ func generate_sand():
 
     add_child(mesh_instace)
 
+
 func generate_water():
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = PlaneMesh.new()
@@ -76,7 +79,11 @@ func generate_water():
     add_child(mesh_instace)
     # collider
     $WaterArea.find_child("WaterCollisionShape").position.y = water_height
-    $WaterArea.connect("body_entered",func (_b): water_hit.emit())
+    $WaterArea.connect(
+        "body_entered",
+        func(_b):
+            water_hit.emit(),
+    )
 
 
 func create_grid_vertices():
@@ -134,31 +141,39 @@ func get_sand_material():
     material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
     return material
 
+
 func get_water_material():
     var material = StandardMaterial3D.new()
-    material.albedo_color= Color.AQUAMARINE
+    material.albedo_color = Color.AQUAMARINE
     material.uv1_triplanar = true
     material.uv1_world_triplanar = true
     material.uv1_scale = Vector3.ONE * 1.0 / float(texture_size)
     material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
     return material
 
-func is_water(x,z):
-    return Vector2(x,z).distance_to(center_point)>(float(size)/2)
 
-func is_near_water(x,z):
-    return Vector2(x,z).distance_to(center_point)> (float(size)/2 - island_water_lerp_width)
+func is_water(x, z):
+    return Vector2(x, z).distance_to(center_point) > (float(size) / 2)
 
-func get_lerp_water_param(x,z):
-    return 1 - ((Vector2(x,z).distance_to(center_point) - (float(size)/2 - island_water_lerp_width))/island_water_lerp_width)
+
+func is_near_water(x, z):
+    return Vector2(x, z).distance_to(center_point) > (float(size) / 2 - island_water_lerp_width)
+
+
+func get_lerp_water_param(x, z):
+    return 1 - (
+        (Vector2(x, z).distance_to(center_point) - (float(size) / 2 - island_water_lerp_width))
+        / island_water_lerp_width
+    )
+
 
 func calculate_ground_height(x, z):
-    if (is_water(x,z)):
-        return water_height-1
+    if (is_water(x, z)):
+        return water_height - 1
     var water_param = 1
-    if (is_near_water(x,z)):
-         water_param = get_lerp_water_param(x,z)
-    
+    if (is_near_water(x, z)):
+        water_param = get_lerp_water_param(x, z)
+
     var coefficients = [
         [10, 25],
         [30, 3],
@@ -201,12 +216,12 @@ func calculate_ground_height(x, z):
     y = y * height_scale
 
     #lerp with water
-    y = y * water_param + water_height * (1-water_param)
+    y = y * water_param + water_height * (1 - water_param)
 
-    y = y + _mexican_hat(x,z)
+    y = y + _mexican_hat(x, z)
 
     # extra ring ramp
-    y = y + _ring_ramp(x,z)
+    y = y + _ring_ramp(x, z)
 
     return y
 
@@ -214,12 +229,13 @@ func calculate_ground_height(x, z):
 func _mexican_hat(x, z):
     var sigma = size * 0.25 - 40
     var height = island_center_height
-    
+
     var r2 = x * x + z * z
     var s2 = sigma * sigma
-    
+
     var y = height * (1.0 - r2 / (2.0 * s2)) * exp(-r2 / (2.0 * s2))
     return y
 
-func _ring_ramp(x,z):
+
+func _ring_ramp(x, z):
     return 0
