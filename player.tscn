@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://bg4t54x0lc0kg" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Script" uid="uid://5yws7v4055v2" path="res://player_body.gd" id="2_i3pqv"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_shbfg"]
+friction = 0.1
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
 
 [node name="Node3D" type="Node3D" unique_id=1322808159]
@@ -21,6 +24,7 @@ current = true
 fov = 69.7
 
 [node name="body" type="RigidBody3D" parent="." unique_id=349543309]
+physics_material_override = SubResource("PhysicsMaterial_shbfg")
 continuous_cd = true
 script = ExtResource("2_i3pqv")
 
