@@ -13,10 +13,11 @@ func _post_import(scene):
 
 
 func save_node_and_children(node: Node):
+    var path = FILE_TEMPLATE % node.name
     var packed_scene: PackedScene = PackedScene.new()
     set_owner_for_all_children(node, node)
     packed_scene.pack(node)
-    ResourceSaver.save(packed_scene, FILE_TEMPLATE % node.name)
+    ResourceSaver.save(packed_scene, path)
 
 
 func set_owner_for_all_children(parent, root):
