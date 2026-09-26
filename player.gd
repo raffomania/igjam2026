@@ -36,14 +36,18 @@ func process_air(_delta: float) -> void:
     body.gravity_scale = 0.5
 
 
-func process_ground(_delta: float, not_flying: NotFlying) -> void:
-    if not_flying.increase_gravity:
+func process_ground(_delta: float, state: NotFlying) -> void:
+    if state.increase_gravity:
         body.gravity_scale = 10.0
     else:
         body.gravity_scale = 1.0
     var movement = input_direction * ground_speed
+
+    # Disable forward/backward movement when in gravity mode
+    if state.increase_gravity:
+        movement.y = 0
+
     body.apply_central_force(Vector3(movement.x, 0, movement.y))
-    return
 
 
 func get_input_direction() -> void:
