@@ -9,8 +9,8 @@ func _ready() -> void:
     var preloaded_shovel_blue = preload("res://assets/separated/ShovelBlue.tscn")
     var preloaded_shovel_green = preload("res://assets/separated/ShovelGreen.tscn")
     var preloaded_shovel_red = preload("res://assets/separated/ShovelRed.tscn")
-    var preloaded_sand_castle = preload("res://assets/separated/ShovelBlue.tscn")
-    var preloaded_water_ball = preload("res://assets/separated/ShovelBlue.tscn")
+    var preloaded_sand_castle = preload("res://assets/separated/SandCastle.tscn")
+    var preloaded_water_ball = preload("res://assets/separated/WaterBall.tscn")
 
     spawn_shovels(preloaded_shovel_red, preloaded_shovel_green, preloaded_shovel_blue)
 
@@ -35,9 +35,8 @@ func spawn_shovels(red, green, blue):
 func get_shovel_coords():
     var x = int(randf_range(0, ground_generator.size) - ground_generator.size / 2.0)
     var z = int(randf_range(0, ground_generator.size) - ground_generator.size / 2.0)
-    var coords = Vector3(x, 0, z)
-    coords.y = ground_generator.calculate_ground_height(coords.x, coords.z)
-    # coords.y = 100
+    var y = ground_generator.calculate_ground_height(x, z)
+    var coords = Vector3(x, y, z)
     return coords
 
 
