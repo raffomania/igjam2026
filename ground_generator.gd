@@ -3,17 +3,25 @@ extends Node
 var height_scale = 2.5 # meters
 var lowest_ground_frequency = 1.0 / 180.0 # repetitions per meter
 var texture_size = 20 # repetitions per meter
-var texture_path = "res://assets/sand.png"
-# var texture_path = "res://assets/Grass_01_basecolor.png"
+var sand_texture_path = "res://assets/sand.png"
+# var sand_texture_path = "res://assets/Grass_01_basecolor.png"
 # TODO: import height and normal map as well?
+
+var water_height = -50
 
 var resolution = 0.5 # vertex per meter per directions
 var size = 500 # meters
 var vertices_per_dimension = resolution * size # number of vertices for the whole chunk
 var grid_vertex_distance = float(size) / (vertices_per_dimension - 1) #meters
 
+var center_point = Vector2.ZERO
+
 
 func _ready():
+    generate_sand()
+    generate_water()
+
+func generate_sand():
     var surface_array = []
     surface_array.resize(Mesh.ARRAY_MAX)
 
@@ -43,7 +51,8 @@ func _ready():
     mesh_instace.mesh = array_mesh
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = -10
-    mesh_instace.material_override = get_material()
+    mesh_instace.material_override = get_sand_material()
+    # print("position", mesh_instace.position)
 
     # set collider
     $CollisionShape3D.shape = array_mesh.create_trimesh_shape()
@@ -52,6 +61,14 @@ func _ready():
 
     add_child(mesh_instace)
 
+func generate_water():
+    var mesh_instace = MeshInstance3D.new()
+    mesh_instace.mesh = PlaneMesh.new()
+    mesh_instace.scale = Vector3.ONE * size * 20
+    mesh_instace.position.y = water_height
+    mesh_instace.material_override = get_water_material()
+
+    add_child(mesh_instace)
 
 func create_grid_vertices():
     var grid_vertices = PackedVector3Array()
@@ -93,9 +110,9 @@ func create_normals():
     return normals
 
 
-func get_material():
+func get_sand_material():
     var material = StandardMaterial3D.new()
-    var texture = load(texture_path)
+    var texture = load(sand_texture_path)
     material.albedo_texture = texture
     material.uv1_triplanar = true
     material.uv1_world_triplanar = true
@@ -103,8 +120,34 @@ func get_material():
     material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
     return material
 
+func get_water_material():
+    var material = StandardMaterial3D.new()
+    material.albedo_color= Color.AQUAMARINE
+    material.uv1_triplanar = true
+    material.uv1_world_triplanar = true
+    material.uv1_scale = Vector3.ONE * 1.0 / float(texture_size)
+    material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+    return material
+
+func is_water(x,z):
+    return Vector2(x,z).distance_to(center_point)>(float(size)/2)
+
+func is_near_water(x,z):
+    return Vector2(x,z).distance_to(center_point)> (float(size)/2 - 20)
+
+func get_lerp_water_param(x,z):
+    return 1 - ((Vector2(x,z).distance_to(center_point) - (float(size)/2 - 20))/20)
 
 func calculate_ground_height(x, z):
+    # move coordinates, as the whole mesh is moved as well so player spawns in the middle
+    x = x - 0.5 * size
+    z = z - 0.5 * size
+    if (is_water(x,z)):
+        return water_height-1
+    var water_param = 1
+    if (is_near_water(x,z)):
+         water_param = get_lerp_water_param(x,z)
+    
     var coefficients = [
         [10, 25],
         [30, 1],
@@ -140,10 +183,13 @@ func calculate_ground_height(x, z):
 
     var y = 0
     for i in levels:
-        y = y + cos(x * i * lowest_ground_frequency) * coefficients[i][0]
-        y = y + cos(z * i * lowest_ground_frequency) * coefficients[i][1]
+        y = y + sin(x * i * lowest_ground_frequency) * coefficients[i][0]
+        y = y + sin(z * i * lowest_ground_frequency) * coefficients[i][1]
 
     y = y / len(coefficients)
     y = y * height_scale
+
+    #lerp with water
+    y = y * water_param + water_height * (1-water_param)
 
     return y
