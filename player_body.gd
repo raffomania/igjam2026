@@ -88,3 +88,6 @@ func set_flying(new_val: bool):
 
     if flying:
         lerp_to_forward_rotation = true
+        physics_material_override.friction = 0.5
+    else:
+        physics_material_override.friction = 0.1
