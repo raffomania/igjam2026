@@ -6,9 +6,17 @@ extends Control
 
 func _ready() -> void:
     GlobalManager.player.level_increased.connect(level_increased)
-    label.text = "gravity x%s" % GlobalManager.player.level
+    update_label(GlobalManager.player.level)
 
 
 func level_increased(level: int) -> void:
-    label.text = "gravity x%s" % level
     animation_player.play("increase_score")
+    update_label(level)
+
+
+func update_label(level):
+    if level < 2:
+        label.visible = false
+    else:
+        label.visible = true
+    label.text = "combo x%s" % level
