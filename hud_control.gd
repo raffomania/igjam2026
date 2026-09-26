@@ -12,19 +12,39 @@ signal pause
 
 @onready var popup_button = $PanelContainer/VBoxContainer/ShowPopUp
 
-@onready var level_bar = $PanelContainer/VBoxContainer/LevelBar
+# @onready var level_bar = $PanelContainer/VBoxContainer/LevelBar
 
 @onready var popup_scene = load("res://PopUp_Scene.tscn")
+var max_speed :float = 0
+var last_signal :float = 0
+var signal_falling :bool =false 
 
 
 func _ready():
-    mouse_filter = Control.MOUSE_FILTER_IGNORE
-
+   # mouse_filter = Control.MOUSE_FILTER_IGNORE
+    # if player:
+    print("Ready for hud")
     pause_button.pressed.connect(_on_pause_button_pressed)
     exit_button.pressed.connect(_on_exit_button_pressed)
     popup_button.pressed.connect(_on_popup_button_pressed)
 
 
+func _process(_delta: float) -> void:
+    print(GlobalManager.player_body.linear_velocity)
+    # _speed_tracker()
+
+
+# func _speed_tracker():
+#
+#     print("Speed tracker")
+#     if player.speed > max_speed:
+#         signal_falling = false
+
+
+
+# func _init():
+
+    
 
 func _on_popup_button_pressed():
     var new_popup = popup_scene.instantiate()

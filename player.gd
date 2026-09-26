@@ -47,6 +47,7 @@ class NotFlying:
 
 func _ready() -> void:
     animation.play('RollUp')
+    GlobalManager.player_body = $body
 
 
 func process_air(_delta: float) -> void:

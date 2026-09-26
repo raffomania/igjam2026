@@ -1381,7 +1381,9 @@ border_color = Color(0.836405, 0.8341743, 0.1138792, 1)
 
 [sub_resource type="Theme" id="Theme_avs5q"]
 
-[node name="menu" type="Node3D" unique_id=1584255760]
+[node name="menu" type="Control" unique_id=2085074617]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1736543664]
 layer = 8

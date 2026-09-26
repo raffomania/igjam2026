@@ -11,14 +11,22 @@ config_version=5
 [application]
 
 config/name="igjam2026"
-run/main_scene="uid://uhnk3rsnxxiq"
+run/main_scene="uid://cleaeygppkhhq"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalManager="*uid://b3652wltdo3tw"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[global_group]
+
+BodyGroup=""
 
 [input]
 

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://77qve3522u7l" path="res://assets/separated/Moewe.tscn" id="5_7mycd"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://uhnk3rsnxxiq" path="res://menu.tscn" id="4_1bvp3"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h2yge"]
 
@@ -33,6 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -50, 0)
 shape = SubResource("WorldBoundaryShape3D_h2yge")
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.98961, 12.844038)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=991819736]
@@ -52,3 +54,4 @@ transform = Transform3D(0, 1, 5.9604645e-08, -5.9604645e-08, 0, -1, -1, 5.960464
 
 [node name="ShovelGreen" parent="." unique_id=1905288107 instance=ExtResource("6_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
+[node name="menu" parent="." unique_id=1983626827 instance=ExtResource("4_1bvp3")]
