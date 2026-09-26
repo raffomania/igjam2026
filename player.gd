@@ -45,7 +45,7 @@ func process_air(_delta: float) -> void:
     body.gravity_scale = 0.5
 
 
-func process_ground(_delta: float, state: NotFlying) -> void:
+func process_not_flying(delta: float, state: NotFlying) -> void:
     if state.increase_gravity:
         body.gravity_scale = 10.0
     else:
@@ -56,7 +56,8 @@ func process_ground(_delta: float, state: NotFlying) -> void:
     if state.increase_gravity:
         movement.y = 0
 
-    body.apply_central_force(Vector3(movement.x, 0, movement.y))
+    body.apply_central_force(camera_pivot.basis.z * movement.y * 2)
+    body.apply_central_force(camera_pivot.basis.x * movement.x * 2)
 
     # if mesh.global_position != camera.global_position:
     # mesh.look_at(camera.global_position)
@@ -75,7 +76,11 @@ func _physics_process(delta: float) -> void:
     if state is Flying:
         process_air(delta)
     elif state is NotFlying:
-        process_ground(delta, state)
+        process_not_flying(delta, state)
+
+
+func _process(delta: float) -> void:
+    camera_pivot.rotate(Vector3.UP, -input_direction.x * delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
