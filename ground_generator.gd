@@ -45,6 +45,7 @@ func _ready():
     # mesh_instace.scale.y = 1.0
     mesh_instace.position = Vector3.ONE * -0.5 * size
     mesh_instace.position.y = -10
+    mesh_instace.position.z = -size + 10
     mesh_instace.material_override = get_material()
 
     # set collider
