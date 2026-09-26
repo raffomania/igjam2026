@@ -9,6 +9,7 @@ var input_direction = Vector3.ZERO
 @onready var camera_pivot := $CameraPivot
 @onready var camera: Camera3D = $"CameraPivot/SpringArm3D/Camera3D"
 @onready var camera_spring_arm: SpringArm3D = $"CameraPivot/SpringArm3D"
+@onready var ground_generator := get_node("../GroundGenerator")
 
 @onready var animation = mesh.get_node('AnimationPlayer')
 
@@ -20,6 +21,7 @@ const ground_speed := 8.0
 var gravity_bonus := 7.0
 const trick_threshold_speed = 40
 const trick_threshold_up_speed = 30
+const trick_height_threshold = 1
 var level = 1
 
 var state: State = NotFlying.new():
@@ -57,6 +59,17 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
+
+
+@onready var ground_ray: RayCast3D = $RayCast3D
+
+
+func get_height_above_ground() -> float:
+    var ground_height = ground_generator.calculate_ground_height(
+        body.global_position.x,
+        body.global_position.z,
+    )
+    return body.global_position.y - ground_height
 
 
 func process_flying(_delta: float) -> void:
@@ -168,22 +181,24 @@ func _unhandled_input(event: InputEvent) -> void:
             state.increase_gravity = false
         var velocity = body.linear_velocity
         var speed = velocity.length()
-        if speed > trick_threshold_speed:
-            if (abs(velocity.y) < trick_threshold_up_speed):
-                print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
-                random_trick()
-            elif (velocity.y < trick_threshold_up_speed):
-                print('Released too early!')
-                level -= 1
-                level = max(0, level)
-                level_increased.emit(level)
-                print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
-            else:
-                print('Release too late!')
-                level -= 1
-                level = max(0, level)
-                level_increased.emit(level)
-                print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+        if get_height_above_ground() < trick_height_threshold:
+            print('height ', get_height_above_ground())
+            if speed > trick_threshold_speed:
+                if (abs(velocity.y) < trick_threshold_up_speed):
+                    print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
+                    random_trick()
+                elif (velocity.y < trick_threshold_up_speed):
+                    print('Released too early!')
+                    level -= 1
+                    level = max(0, level)
+                    level_increased.emit(level)
+                    print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+                else:
+                    print('Release too late!')
+                    level -= 1
+                    level = max(0, level)
+                    level_increased.emit(level)
+                    print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
 
     if event.is_action_pressed("cheat_add_gravity_boost"):
         level += 10
