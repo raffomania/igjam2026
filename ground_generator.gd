@@ -18,10 +18,11 @@ var center_point = Vector2.ZERO
 
 signal water_hit
 
-
 func _ready():
     generate_sand()
     generate_water()
+
+    # water_hit.connect(func():print("heyo"))
 
 func generate_sand():
     var surface_array = []
@@ -73,7 +74,7 @@ func generate_water():
     add_child(mesh_instace)
     # collider
     $WaterArea.find_child("WaterCollisionShape").position.y = water_height
-    $WaterArea.connect("on_area_entered",func (): water_hit.emit())
+    $WaterArea.connect("body_entered",func (_b): water_hit.emit())
 
 
 func create_grid_vertices():
