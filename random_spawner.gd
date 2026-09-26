@@ -1,6 +1,6 @@
 extends Node
 
-@onready var ground_generator := get_node("../GroundGenerator")
+@onready var ground_generator := get_parent()
 
 var num_shovels = 50
 
@@ -9,9 +9,7 @@ func _ready() -> void:
     var preloaded_shovel_blue = preload("res://assets/separated/ShovelBlue.tscn")
     var preloaded_shovel_green = preload("res://assets/separated/ShovelGreen.tscn")
     var preloaded_shovel_red = preload("res://assets/separated/ShovelRed.tscn")
-    var preloaded_moewe = preload("res://assets/separated/ShovelBlue.tscn")
     var preloaded_sand_castle = preload("res://assets/separated/ShovelBlue.tscn")
-    var preloaded_dolphin = preload("res://assets/separated/ShovelBlue.tscn")
     var preloaded_water_ball = preload("res://assets/separated/ShovelBlue.tscn")
 
     spawn_shovels(preloaded_shovel_red, preloaded_shovel_green, preloaded_shovel_blue)

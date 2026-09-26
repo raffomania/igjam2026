@@ -1,7 +1,7 @@
 extends Node
 
-var total_game_length_seconds = 40
-var start_drown_time_seconds = 2
+var total_game_length_seconds = 120
+var start_drown_time_seconds = 60
 
 var start_time #time when level started in millisecs
 #TODO: show timer in ui

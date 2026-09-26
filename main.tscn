@@ -35,6 +35,12 @@ script = ExtResource("1_ig7tw")
 
 [node name="SandCollisionShape" type="CollisionShape3D" parent="GroundGenerator" unique_id=1226894304]
 
+[node name="StaticSpawner" type="Node3D" parent="GroundGenerator" unique_id=1204653210]
+script = ExtResource("8_5vw27")
+
+[node name="StaticSpawner2" type="Node3D" parent="GroundGenerator" unique_id=820406823]
+script = ExtResource("8_5vw27")
+
 [node name="IslandDrownManager" type="Node" parent="GroundGenerator" unique_id=811985194]
 script = ExtResource("3_dg77c")
 
@@ -71,9 +77,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="RandomSpawner" type="Node" parent="." unique_id=737412509]
-script = ExtResource("8_5vw27")
 
 [node name="MoewenSpawner" type="Node" parent="." unique_id=2098006524]
 script = ExtResource("12_dg77c")
