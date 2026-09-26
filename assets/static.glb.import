@@ -1,15 +1,15 @@
 [remap]
 
-importer="MeshLibrary"
+importer="scene"
 importer_version=1
-type="MeshLibrary"
+type="PackedScene"
 uid="uid://3e1x4ermpu36"
-path="res://.godot/imported/static.glb-a52191702613cbc025abc342040e84e2.res"
+path="res://.godot/imported/static.glb-a52191702613cbc025abc342040e84e2.scn"
 
 [deps]
 
 source_file="res://assets/static.glb"
-dest_files=["res://.godot/imported/static.glb-a52191702613cbc025abc342040e84e2.res"]
+dest_files=["res://.godot/imported/static.glb-a52191702613cbc025abc342040e84e2.scn"]
 
 [params]
 
@@ -35,7 +35,7 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
-import_script/path=""
+import_script/path="uid://b5t3htosh4dnn"
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""

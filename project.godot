@@ -65,6 +65,7 @@ reset={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+jolt_physics_3d/simulation/speculative_contact_distance=0.08
 3d/solver/solver_iterations=32
 
 [rendering]
