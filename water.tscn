@@ -7,7 +7,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7p72a"]
 albedo_texture = ExtResource("1_qi1wl")
-uv1_scale = Vector3(10, 10, 10)
+uv1_scale = Vector3(2000, 2000, 2000)
+uv1_world_triplanar = true
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_qi1wl"]
 
@@ -15,7 +16,7 @@ uv1_scale = Vector3(10, 10, 10)
 script = ExtResource("1_7wcun")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1053512255]
-transform = Transform3D(1400.29, 0, 0, 0, 1400.29, 0, 0, 0, 1400.29, 0, -50, 0)
+transform = Transform3D(200000, 0, 0, 0, 200000, 0, 0, 0, 200000, 0, -50, 0)
 mesh = SubResource("PlaneMesh_3t7m3")
 surface_material_override/0 = SubResource("StandardMaterial3D_7p72a")
 
