@@ -24,6 +24,10 @@ GlobalManager="*uid://b3652wltdo3tw"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 BodyGroup=""
