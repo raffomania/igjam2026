@@ -61,9 +61,6 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
 
 
-@onready var ground_ray: RayCast3D = $RayCast3D
-
-
 func get_height_above_ground() -> float:
     var ground_height = ground_generator.calculate_ground_height(
         body.global_position.x,
