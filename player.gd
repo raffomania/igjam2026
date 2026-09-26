@@ -8,7 +8,7 @@ var ground_speed = 10
 @onready var camera_pivot := $CameraPivot
 var flying := false
 
-func process_air(delta: float) -> void:
+func process_air(_delta: float) -> void:
     pass
 
 func process_ground(_delta: float) -> void:
