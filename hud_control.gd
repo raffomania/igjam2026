@@ -30,7 +30,8 @@ func _ready():
 
 
 func _process(_delta: float) -> void:
-    print(GlobalManager.player_body.linear_velocity)
+    pass
+    # print(GlobalManager.player_body.linear_velocity)
     # _speed_tracker()
 
 
