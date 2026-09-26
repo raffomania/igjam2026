@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
-[ext_resource type="PackedScene" uid="uid://d1e0edskkbirj" path="res://scoring/score_goal.tscn" id="7_272bh"]
 [ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
@@ -43,7 +42,7 @@ script = ExtResource("3_dg77c")
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
 unique_name_in_owner = true
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 100, 222.318)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 10.884613, 222.318)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=991819736]
 transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.17269033, 0.86455554, -0.16952258, -0.9445552, 0.28120708, -3.4488335, 2.774324, 0)
@@ -59,9 +58,6 @@ transform = Transform3D(0.482303, 0.03161274, 0.12800181, 0.071708, -0.47023904,
 
 [node name="ShovelGreen" parent="." unique_id=1905288107 instance=ExtResource("6_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
-
-[node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("7_272bh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.97401, -7.7035923, 199.71103)
 
 [node name="Score" parent="." unique_id=1355555733 instance=ExtResource("9_kek77")]
 
