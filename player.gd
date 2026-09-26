@@ -56,8 +56,8 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
 
 
-func process_air(_delta: float) -> void:
-    body.gravity_scale = 0.5
+func process_flying(_delta: float) -> void:
+    body.gravity_scale = 1.0
 
 
 func random_trick() -> void:
@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
     camera_pivot.global_position = body.global_position
     mesh.global_position = body.global_position
     if state is Flying:
-        process_air(delta)
+        process_flying(delta)
     elif state is NotFlying:
         process_not_flying(delta, state)
 
