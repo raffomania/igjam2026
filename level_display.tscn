@@ -3,42 +3,41 @@
 [ext_resource type="Script" uid="uid://ibqu87uwwn1x" path="res://level_display.gd" id="1_j8qy6"]
 
 [sub_resource type="Animation" id="Animation_svw4u"]
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("MarginContainer/Label:offset_transform_scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.23333333, 0.96666664),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.6, 1.6), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("MarginContainer/Label:offset_transform_rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.116626814, 0.96666664),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0]
+"values": [0.0, 0.17453292, 0.0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("MarginContainer/Label:modulate")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.56666666, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 0.43, 0.100000024, 1), Color(1, 0.43, 0.100000024, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_bpqdx"]
@@ -81,7 +80,7 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.3, 1, 0.8716666, 1), Color(0.26999998, 0.75666654, 1, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2bn4"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j8qy6"]
 _data = {
 &"RESET": SubResource("Animation_svw4u"),
 &"increase_score": SubResource("Animation_bpqdx")
@@ -116,5 +115,5 @@ offset_transform_enabled = true
 theme_override_font_sizes/font_size = 32
 text = "test"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1405627188]
-libraries/ = SubResource("AnimationLibrary_n2bn4")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=205899135]
+libraries/ = SubResource("AnimationLibrary_j8qy6")
