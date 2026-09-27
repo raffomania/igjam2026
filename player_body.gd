@@ -5,7 +5,7 @@ signal add_score(val: int)
 const yaw_speed := 2.5
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
 const alignment_speed := 3.0 # how fast velocity aligns to facing
-const min_speed := 0.0 # base glide speed, even flying level
+const min_speed := 5.0 # base glide speed, even flying level
 const max_speed := 200.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
 const dive_gain := 70.0 # how fast diving builds speed
