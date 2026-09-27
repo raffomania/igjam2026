@@ -33,6 +33,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qin7x")
 
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=880670805]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 40
+
+[node name="Label" type="Label" parent="MarginContainer2" unique_id=43416209]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Text"
+horizontal_alignment = 2
+
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1736847548]
 layout_mode = 1
 anchors_preset = 4
@@ -143,10 +163,6 @@ stretch_mode = 4
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("9_7o0a1")
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=43416209]
-layout_mode = 2
-text = "Text"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=380412707]
 libraries/ = SubResource("AnimationLibrary_n2bn4")

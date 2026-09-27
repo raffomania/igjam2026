@@ -1,17 +1,18 @@
 extends Control
 
-@onready var label: Label = $MarginContainer/VBoxContainer/Label
+@onready var label: Label = $MarginContainer2/Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var score := 0
 var game_ended := false
 
+
 func _ready() -> void:
     label.text = ""
     GlobalManager.game_end.connect(_on_game_end)
     GlobalManager.game_start.connect(_on_game_start)
-    
-    
+
+
 func _process(delta: float) -> void:
     if !game_ended:
         var player_pos = GlobalManager.player_body.position
@@ -19,10 +20,12 @@ func _process(delta: float) -> void:
         score = max(score, distance)
         GlobalManager.score_changed.emit(score)
         label.text = "distance: %sm" % int(distance)
-        
+
+
 func _on_game_end() -> void:
     game_ended = true
-        
+
+
 func _on_game_start() -> void:
     game_ended = false
     score = 0
