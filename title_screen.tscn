@@ -12,7 +12,7 @@
 [node name="Water" parent="." unique_id=1776032862 instance=ExtResource("1_v6p8y")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1965843114]
-transform = Transform3D(1, 0, 0, 0, 0.9992635, 0.038370848, 0, -0.038370848, 0.9992635, 0, 53.941254, 492.28967)
+transform = Transform3D(1, 0, 0, 0, 0.97242963, 0.23319659, 0, -0.23319659, 0.97242963, 0, 465.51288, 723.7059)
 
 [node name="WorldEnvironment" parent="." unique_id=1718286727 instance=ExtResource("2_ak2if")]
 
