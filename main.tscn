@@ -52,7 +52,7 @@ script = ExtResource("3_dg77c")
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
 unique_name_in_owner = true
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 10.884613, 222.318)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 22, 222.318)
 
 [node name="DayandNight" type="Node3D" parent="." unique_id=1922748305]
 transform = Transform3D(1, 0, 0, 0, 0.6984153, -0.71569276, 0, 0.71569276, 0.6984153, 0, 0, 0)
