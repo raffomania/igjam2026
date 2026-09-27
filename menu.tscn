@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d0ufuhnuvvy52" path="res://assets/tutorial.png" id="2_l48gv"]
 [ext_resource type="Script" uid="uid://bw3m270ssvx14" path="res://pause_control.gd" id="2_mae5d"]
 [ext_resource type="Script" uid="uid://bo80xc4gpjmws" path="res://ui/game_end_screen.gd" id="3_mae5d"]
+[ext_resource type="Texture2D" uid="uid://bwxhsxuteiuv8" path="res://assets/button_backgrounds/menu_buttons/Play Again Button.png" id="4_nrnbx"]
 [ext_resource type="PackedScene" uid="uid://dbcykcl8r400" path="res://exit_button.tscn" id="5_l48gv"]
 [ext_resource type="Texture2D" uid="uid://bfcr1ba8mqp5" path="res://assets/button_backgrounds/menu_buttons/Resume Button.png" id="7_kk3ma"]
 [ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="8_nrnbx"]
@@ -101,9 +102,10 @@ layout_mode = 2
 text = "<Score>"
 horizontal_alignment = 1
 
-[node name="PlayAgain" type="Button" parent="GameEndLayer/Control/VBoxContainer" unique_id=1742291237]
+[node name="PlayAgain" type="TextureButton" parent="GameEndLayer/Control/VBoxContainer" unique_id=973863039]
 layout_mode = 2
-text = "Play again"
+texture_normal = ExtResource("4_nrnbx")
+script = ExtResource("8_nrnbx")
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1736543664]
 layer = 7
@@ -211,5 +213,5 @@ layout_mode = 2
 texture_normal = ExtResource("7_kk3ma")
 script = ExtResource("8_nrnbx")
 
-[node name="Exit" parent="PausationLayer/PauseControl/VBoxContainer" unique_id=973863039 instance=ExtResource("5_l48gv")]
+[node name="Exit" parent="PausationLayer/PauseControl/VBoxContainer" unique_id=307796608 instance=ExtResource("5_l48gv")]
 layout_mode = 2

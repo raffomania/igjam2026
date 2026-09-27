@@ -1,12 +1,13 @@
 extends Control
 
-@onready var play_again: Button = $VBoxContainer/PlayAgain
+@onready var play_again: TextureButton = $VBoxContainer/PlayAgain
 @onready var score_label: Label = $VBoxContainer/Score
 @onready var distance_label: Label = $VBoxContainer/Distance
 @onready var combo_label: Label = $VBoxContainer/Combo
 @onready var highscore_label: Label = $VBoxContainer/HighScore
 
 var curr_score := 0
+
 
 func _ready() -> void:
     GlobalManager.game_end.connect(_on_game_end)
@@ -18,8 +19,10 @@ func _ready() -> void:
 func _on_play_again_pressed() -> void:
     GlobalManager.play_again()
 
+
 func _on_score_changed(score: int):
     curr_score = score
+
 
 func _on_game_end():
     var current_dist_score = curr_score
