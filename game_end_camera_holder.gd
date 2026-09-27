@@ -6,5 +6,6 @@ func _ready() -> void:
     GlobalManager.game_end_camera = self
 
 func _process(delta: float) -> void:
-    if get_node("Camera3D"):
-        $Camera3D.position += (0.2 * $Camera3D.transform.basis.y + $Camera3D.transform.basis.z) * 2.0 * delta
+    var camera = get_node_or_null("Camera3D")
+    if camera:
+        camera.position += (0.2 * camera.transform.basis.y + camera.transform.basis.z) * 2.0 * delta
