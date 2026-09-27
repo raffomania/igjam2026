@@ -21,6 +21,7 @@ var should_print = true
 
 
 func _process(delta):
+    #TODO: sun
     if abs(Time.get_ticks_msec() - start_time) / 1000 > start_drown_time_seconds:
         if should_print:
             print("sinking now")
