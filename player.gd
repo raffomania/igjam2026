@@ -59,7 +59,7 @@ class Flying:
 class NotFlying:
     extends State
 
-    var increase_gravity := false
+    var increase_gravity := Input.is_action_pressed("increase_gravity")
 
 
 func _ready() -> void:
@@ -71,6 +71,13 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
     trick_cooldown_timer.timeout.connect(_on_trick_timer_timeout)
+
+    body.body_entered.connect(_body_entered)
+
+
+func _body_entered(_other: Node3D):
+    if state is Flying:
+        state = NotFlying.new()
 
 
 func _on_trick_timer_timeout() -> void:
