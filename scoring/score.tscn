@@ -131,7 +131,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Shift" unique_id=1234834908]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "DIVE   "
+text = "DIVE  "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shift" unique_id=1891850766]
 custom_maximum_size = Vector2(80, 20)
@@ -152,7 +152,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/space" unique_id=330561967]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "CURL   "
+text = "CURL "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1107628904]
 custom_maximum_size = Vector2(80, 20)
