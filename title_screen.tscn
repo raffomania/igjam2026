@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dfm60yr6hn57"]
 
+[ext_resource type="Script" uid="uid://b7us6n1oauh8k" path="res://title_screen.gd" id="1_jqemp"]
 [ext_resource type="PackedScene" uid="uid://dmqw3owlghi1u" path="res://water.tscn" id="1_v6p8y"]
 [ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="2_ak2if"]
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ig5kc"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b7vj8alb7wkoa" path="res://assets/button_backgrounds/menu_buttons/Exit Game Button.png" id="6_jqemp"]
 
 [node name="TitleScreen" type="Node3D" unique_id=1632361790]
+script = ExtResource("1_jqemp")
 
 [node name="Water" parent="." unique_id=1776032862 instance=ExtResource("1_v6p8y")]
 
