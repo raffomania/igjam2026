@@ -26,6 +26,8 @@ var speed := 0.0
 var flying := false
 var reset = false
 var reset_angular_velocity = false
+var initial_friction = 0.1
+var flying_friction = 0.5
 
 var lerp_to_forward_rotation := false
 
@@ -33,6 +35,7 @@ var lerp_to_forward_rotation := false
 func _ready() -> void:
     self.body_exited.connect(_in_air)
     self.body_entered.connect(_landed)
+    physics_material_override.friction = initial_friction
 
 
 func _landed(_body: Node):
@@ -42,7 +45,7 @@ func _landed(_body: Node):
     if _body.get_parent().get_parent().get_parent() is GameEnder:
         GlobalManager.game_end.emit()
         return
-        
+
     if first_land:
         in_air = false
         last_height = 0.0
@@ -167,7 +170,7 @@ func set_flying(new_val: bool):
 
     if flying:
         lerp_to_forward_rotation = true
-        physics_material_override.friction = 0.5
+        physics_material_override.friction = flying_friction
         speed = linear_velocity.length() * 1.1
     else:
-        physics_material_override.friction = 0.1
+        physics_material_override.friction = initial_friction
