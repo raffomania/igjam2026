@@ -85,6 +85,8 @@ func process_flying(_delta: float) -> void:
 func random_trick() -> void:
     if !trick_allowed:
         return
+    var intensity = (level - 10) / 10.0
+    Juicee.chromatic(self, intensity * 50, 1.0)
     body.do_reset_angular_velocity()
     animation.play('RollOut')
     var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
