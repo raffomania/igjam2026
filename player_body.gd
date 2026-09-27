@@ -52,10 +52,6 @@ func _in_air(_body):
         in_air = true
         last_contact_point = position
 
-    if !falling:
-        var speed_intensity = clampf(linear_velocity.length() / max_speed, 0, 1.0)
-        Juicee.radial_blur(self, 0.1 * speed_intensity, 3.0)
-
 
 func calculate_distance(current_pos: Vector3) -> float:
     return current_pos.distance_to(last_contact_point)

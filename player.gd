@@ -201,7 +201,6 @@ func _unhandled_input(event: InputEvent) -> void:
                 if (abs(velocity.y) < trick_threshold_up_speed):
                     print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
                     random_trick()
-                    Juicee.radial_blur(body, 0.02, 1.0)
 
                 elif (velocity.y < trick_threshold_up_speed):
                     print('Released too early!')
