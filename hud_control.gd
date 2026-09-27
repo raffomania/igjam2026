@@ -54,12 +54,13 @@ func _process(_delta: float) -> void:
             # print(last_distance, "	 max distance ",  max_distance)
             if GlobalManager.player_body.last_distance > GlobalManager.player_body.max_distance:
                 GlobalManager.player_body.max_distance = GlobalManager.player_body.last_distance
-                # print("New maximus distance")
+                print("New maximus distance")
                 text_to_show = "New Maximum Distance!"
                 _popup_distances(text_to_show)
 
 
 func _popup_distances(text: String):
+    print("Pop up entered")
     var new_popup = popup_scene.instantiate()
     new_popup.show_time = display_time
     new_popup.text_to_show = text

@@ -5,10 +5,6 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xm2m"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok7lh"]
-bg_color = Color(0.7075079, 0.5907194, 0.11846662, 1)
-border_color = Color(0.836405, 0.8341743, 0.1138792, 1)
-
 [sub_resource type="Theme" id="Theme_h2yge"]
 
 [sub_resource type="Theme" id="Theme_avs5q"]
@@ -18,7 +14,8 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1736543664]
-layer = 8
+layer = 7
+visible = false
 
 [node name="HudControl" type="Control" parent="HudLayer" unique_id=223186623]
 process_mode = 1
@@ -53,22 +50,6 @@ text = "Pause"
 [node name="ShowPopUp" type="Button" parent="HudLayer/HudControl/PanelContainer/VBoxContainer" unique_id=1852340634]
 layout_mode = 2
 text = "Start PopUp"
-
-[node name="PopupTrick" type="PopupPanel" parent="HudLayer/HudControl" unique_id=227952863]
-unique_name_in_owner = true
-position = Vector2i(3, 3)
-size = Vector2i(149, 100)
-theme_override_styles/panel = SubResource("StyleBoxFlat_ok7lh")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HudLayer/HudControl/PopupTrick" unique_id=1769013714]
-offset_right = 190.0
-offset_bottom = 100.0
-
-[node name="Label" type="Label" parent="HudLayer/HudControl/PopupTrick/VBoxContainer" unique_id=728162125]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.7697927, 0.06525948, 1)
-text = "Trick xyz achieved!!
-"
 
 [node name="PanelContainer2" type="PanelContainer" parent="HudLayer/HudControl" unique_id=620382355]
 layout_mode = 1
