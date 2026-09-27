@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ddvygkpn8cd0m" path="res://sky_scatterer.tscn" id="4_05l2w"]
 [ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/button_backgrounds/menu_buttons/New Game Button.png" id="5_tpml5"]
 [ext_resource type="Texture2D" uid="uid://b7vj8alb7wkoa" path="res://assets/button_backgrounds/menu_buttons/Exit Game Button.png" id="6_jqemp"]
+[ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="7_013yr"]
 
 [node name="TitleScreen" type="Node3D" unique_id=1632361790]
 script = ExtResource("1_jqemp")
@@ -57,7 +58,9 @@ layout_mode = 2
 [node name="New" type="TextureButton" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=268221797]
 layout_mode = 2
 texture_normal = ExtResource("5_tpml5")
+script = ExtResource("7_013yr")
 
 [node name="Exit" type="TextureButton" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=879289279]
 layout_mode = 2
 texture_normal = ExtResource("6_jqemp")
+script = ExtResource("7_013yr")
