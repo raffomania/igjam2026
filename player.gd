@@ -219,8 +219,8 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("cheat_add_gravity_boost"):
         level += 10
         level_increased.emit(level)
-        
-        
+        Juicee.shockwave(self, 0.6, 0.045)
+
+
 func _on_game_end():
     $CameraPivot/SpringArm3D/Camera3D.reparent(GlobalManager.game_end_camera)
-    

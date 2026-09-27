@@ -30,6 +30,9 @@ material = SubResource("StandardMaterial3D_135pd")
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.44604316, 0.82462686), 0.0, 0.0, 0, 0, Vector2(1, 0.5895522), 0.0, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_2rrqk"]
+radius = 2.5
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tu4g"]
 resource_name = "Material"
 cull_mode = 2
@@ -72,35 +75,33 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_m2qs3")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2rrqk"]
-radius = 2.5
-
 [node name="ScoreGoal" type="Node3D" unique_id=1610691153]
 script = ExtResource("1_x5hd7")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=593358424]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11755848, 0.21662712, 0)
-amount = 16
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058422565, -0.1618123, 0)
+lifetime = 0.8
 mesh = SubResource("QuadMesh_q1og2")
 emission_shape = 2
-emission_sphere_radius = 4.0
+emission_sphere_radius = 1.5
 direction = Vector3(0, 1, 0)
+spread = 0.0
 gravity = Vector3(0, 0, 0)
 initial_velocity_min = 3.0
-initial_velocity_max = 6.0
+initial_velocity_max = 4.0
 damping_min = 1.826
 damping_max = 2.74
-scale_amount_min = 3.0
-scale_amount_max = 7.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_grg7b")
 
-[node name="Shelly" type="MeshInstance3D" parent="." unique_id=1041068346]
+[node name="Area3D" type="Area3D" parent="." unique_id=1793731638]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5887122, 0)
-mesh = SubResource("ArrayMesh_d0dn4")
-
-[node name="Area3D" type="Area3D" parent="Shelly" unique_id=1793731638]
 collision_layer = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Shelly/Area3D" unique_id=1192754801]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1192754801]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.6921003, 0)
 shape = SubResource("SphereShape3D_2rrqk")
+
+[node name="Shelly" type="MeshInstance3D" parent="." unique_id=1041068346]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.9041145, 0)
+mesh = SubResource("ArrayMesh_d0dn4")

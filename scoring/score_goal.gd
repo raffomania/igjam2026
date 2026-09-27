@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var area: Area3D = $"Shelly/Area3D"
+@onready var area: Area3D = $"Area3D"
 
 
 func _ready() -> void:
@@ -14,5 +14,6 @@ func _process(delta: float) -> void:
 
 func body_entered(body: Node3D) -> void:
     if body.is_in_group("player"):
+        Juicee.shockwave(body, 0.6, 0.045)
         body.add_score.emit(10)
         queue_free()
