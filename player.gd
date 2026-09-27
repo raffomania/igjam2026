@@ -1,4 +1,4 @@
-extends Node3D
+class_name Player extends Node3D
 
 signal level_increased(level)
 
@@ -58,6 +58,7 @@ func _ready() -> void:
     animation.play('RollUp')
     GlobalManager.player_body = $body
     GlobalManager.player = self
+    GlobalManager.game_end.connect(_on_game_end)
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
@@ -218,3 +219,8 @@ func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("cheat_add_gravity_boost"):
         level += 10
         level_increased.emit(level)
+        
+        
+func _on_game_end():
+    $CameraPivot/SpringArm3D/Camera3D.reparent(GlobalManager.game_end_camera)
+    

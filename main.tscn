@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://w1ufrciqdwxf" path="res://moewen_spawner.gd" id="12_dg77c"]
+[ext_resource type="Script" uid="uid://dusvh7qlaqvsq" path="res://game_end_camera_holder.gd" id="13_ycdy4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hqtel"]
 panorama = ExtResource("3_h2yge")
@@ -26,6 +27,7 @@ sky = SubResource("Sky_i3pqv")
 [node name="Main" type="Node3D" unique_id=1584255760]
 
 [node name="Water" parent="." unique_id=1776032862 instance=ExtResource("1_efxa6")]
+unique_name_in_owner = true
 
 [node name="menu" parent="." unique_id=2085074617 instance=ExtResource("1_272bh")]
 
@@ -73,3 +75,9 @@ grow_vertical = 2
 
 [node name="MoewenSpawner" type="Node" parent="." unique_id=2098006524]
 script = ExtResource("12_dg77c")
+
+[node name="RandomSpawner" type="Node" parent="." unique_id=737412509]
+script = ExtResource("8_5vw27")
+
+[node name="GameEndCameraHolder" type="Node3D" parent="." unique_id=2077583894]
+script = ExtResource("13_ycdy4")
