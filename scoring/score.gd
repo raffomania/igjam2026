@@ -13,5 +13,5 @@ func _ready() -> void:
 
 func add_score(val: int) -> void:
     score += val
-    label.text = "score: %s" % score
+    label.text = "collected: %s" % score
     animation_player.play("increase_score")
