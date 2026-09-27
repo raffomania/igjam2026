@@ -195,35 +195,42 @@ func _unhandled_input(event: InputEvent) -> void:
             state = Flying.new()
 
     if event.is_action_pressed("increase_gravity"):
-        if state is not NotFlying:
-            animation.play('RollUp')
-            state = NotFlying.new()
-
-        state.increase_gravity = true
+        if state is NotFlying:
+            state.increase_gravity = true
     elif event.is_action_released("increase_gravity"):
         if state is NotFlying:
             state.increase_gravity = false
-        var velocity = body.linear_velocity
-        var speed = velocity.length()
-        if get_height_above_ground() < trick_height_threshold:
-            print('height ', get_height_above_ground())
-            if speed > trick_threshold_speed:
-                if (abs(velocity.y) < trick_threshold_up_speed):
-                    print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
-                    random_trick()
+            var velocity = body.linear_velocity
+            var speed = velocity.length()
+            if get_height_above_ground() < trick_height_threshold:
+                print('height ', get_height_above_ground())
+                if speed > trick_threshold_speed:
+                    if (abs(velocity.y) < trick_threshold_up_speed):
+                        print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
+                        random_trick()
 
-                elif (velocity.y < trick_threshold_up_speed):
-                    print('Released too early!')
-                    level -= 1
-                    level = max(1, level)
-                    level_increased.emit(level)
-                    print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
-                else:
-                    print('Release too late!')
-                    level -= 1
-                    level = max(1, level)
-                    level_increased.emit(level)
-                    print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+                    elif (velocity.y < trick_threshold_up_speed):
+                        print('Released too early!')
+                        level -= 1
+                        level = max(1, level)
+                        level_increased.emit(level)
+                        print(
+                            'Trick timing not good enough! Speed: ',
+                            speed,
+                            ' Upspeed: ',
+                            velocity.y,
+                        )
+                    else:
+                        print('Release too late!')
+                        level -= 1
+                        level = max(1, level)
+                        level_increased.emit(level)
+                        print(
+                            'Trick timing not good enough! Speed: ',
+                            speed,
+                            ' Upspeed: ',
+                            velocity.y,
+                        )
 
     if event.is_action_pressed("cheat_add_gravity_boost"):
         level += 10

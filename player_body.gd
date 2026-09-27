@@ -2,14 +2,13 @@ extends RigidBody3D
 
 signal add_score(val: int)
 
-const pitch_speed := 1.5
 const yaw_speed := 2.5
 const angular_stop_speed := 10.0 # how fast rotation stops when no input
 const alignment_speed := 3.0 # how fast velocity aligns to facing
 const min_speed := 0.0 # base glide speed, even flying level
 const max_speed := 200.0 # increasing this can cause clipping through ground
 const drag := 0.0 # bleeds off excess speed over time
-const dive_gain := 45.0 # how fast diving builds speed
+const dive_gain := 70.0 # how fast diving builds speed
 @onready var reset_pos = global_position
 @onready var camera := $"../CameraPivot/SpringArm3D/Camera3D"
 
@@ -120,7 +119,7 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
         state.angular_velocity = Vector3.ZERO
         var current_rotation = global_transform.basis.get_rotation_quaternion()
         var direction = camera.global_position - global_position
-        direction.y = 0.0
+        direction.y = 0.1
         direction *= -1
 
         var target_quat = Basis \
@@ -135,12 +134,20 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
             lerp_to_forward_rotation = false
         else:
             return
+    else:
+        var pitch_input = Input.get_action_strength("increase_gravity") * -1.3
+        var down_speed = 1.6
+        var up_speed = 1.1
+        var lerp_speed = up_speed
+        if pitch_input > 0.0:
+            lerp_speed = down_speed
 
-    var pitch_input = Input.get_axis("move_forward", "move_back")
+        rotation.x = lerp_angle(rotation.x, pitch_input + 0.3, state.step * lerp_speed)
+        rotation.z = lerp_angle(rotation.z, 0, state.step)
+
     var yaw_input = Input.get_axis("move_left", "move_right")
 
-    var desired_angular = (global_transform.basis.x * pitch_input * pitch_speed) + \
-            (Vector3.UP * yaw_input * -yaw_speed)
+    var desired_angular = (Vector3.UP * yaw_input * -yaw_speed)
 
     # Snap toward desired angular velocity
     state.angular_velocity = state.angular_velocity.lerp(
