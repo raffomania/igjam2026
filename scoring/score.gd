@@ -1,6 +1,6 @@
 extends Control
 
-@onready var label: Label = $MarginContainer/Label
+@onready var label: Label = $MarginContainer/VBoxContainer/Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var score := 0

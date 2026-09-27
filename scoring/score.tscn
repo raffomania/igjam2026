@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://bftsype4muav1"]
 
 [ext_resource type="Script" uid="uid://02lecr2xqhnr" path="res://scoring/score.gd" id="1_qin7x"]
+[ext_resource type="Texture2D" uid="uid://dc0sn8vnm2kpl" path="res://assets/button_backgrounds/A Button.png" id="2_bpqdx"]
 
 [sub_resource type="Animation" id="Animation_svw4u"]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Label:offset_transform_scale")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -19,7 +20,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/Label:offset_transform_rotation")
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -31,7 +32,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/Label:modulate")
+tracks/2/path = NodePath("MarginContainer/VBoxContainer/Label:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -47,7 +48,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Label:offset_transform_scale")
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -59,7 +60,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/Label:offset_transform_rotation")
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -71,7 +72,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/Label:modulate")
+tracks/2/path = NodePath("MarginContainer/VBoxContainer/Label:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -106,7 +107,24 @@ grow_vertical = 2
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 40
 
-[node name="Label" type="Label" parent="MarginContainer" unique_id=1737737291]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=563061716]
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=585814108]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1358392051]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Left"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=341797504]
+layout_mode = 2
+texture = ExtResource("2_bpqdx")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1737737291]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
