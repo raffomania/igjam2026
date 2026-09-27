@@ -5,11 +5,6 @@ extends Node3D
 
 func _ready() -> void:
     area.body_entered.connect(body_entered)
-    rotate(Vector3.UP, randf_range(0, PI * 2))
-
-
-func _process(delta: float) -> void:
-    rotate(Vector3.UP, delta * 2)
 
 
 func body_entered(body: Node3D) -> void:

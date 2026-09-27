@@ -148,9 +148,3 @@ transform = Transform3D(5.9604645e-08, 3.5527137e-15, -1, 1, 5.9604645e-08, -3.5
 
 [node name="ScoreGoal5" parent="." unique_id=620186571 instance=ExtResource("1_nx50e")]
 transform = Transform3D(5.9604645e-08, 3.5527137e-15, -1, 1, 5.9604645e-08, -3.5527137e-15, -3.5527137e-15, -1, 5.9604645e-08, 2.442274, 0.33998343, -7.6629124)
-
-[node name="ScoreGoal3" parent="." unique_id=1402084909 instance=ExtResource("1_nx50e")]
-transform = Transform3D(5.9604645e-08, 3.5527137e-15, -1, 1, 5.9604645e-08, -3.5527137e-15, -3.5527137e-15, -1, 5.9604645e-08, 3.5352893, 24.83219, -13.005554)
-
-[node name="ScoreGoal4" parent="." unique_id=2040755287 instance=ExtResource("1_nx50e")]
-transform = Transform3D(5.9604645e-08, 3.5527137e-15, -1, 1, 5.9604645e-08, -3.5527137e-15, -3.5527137e-15, -1, 5.9604645e-08, 3.5352864, -23.547184, -11.151957)
