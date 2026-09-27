@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ddvygkpn8cd0m"]
 
-[ext_resource type="Script" uid="uid://05jtx3fr76t0" path="res://sky_scatterer.gd" id="1_mdebb"]
-[ext_resource type="PackedScene" uid="uid://cw7g5qd630720" path="res://assets/separated/WaterBall.tscn" id="2_5kntg"]
+[ext_resource type="Script" uid="uid://c1wvxt56o6ahv" path="res://sky_scatterer.gd" id="1_mdebb"]
+[ext_resource type="PackedScene" uid="uid://btg5vknekg4fi" path="res://obstacles/scatter/WaterBall.tscn" id="2_mdebb"]
 [ext_resource type="PackedScene" uid="uid://bwhpcjyrw58c8" path="res://obstacles/scatter/ShovelBlue.tscn" id="3_3loe3"]
 [ext_resource type="PackedScene" uid="uid://dfwyjpv2ompc5" path="res://obstacles/scatter/ShovelGreen.tscn" id="4_3pi16"]
 [ext_resource type="PackedScene" uid="uid://pqj2tsp776r" path="res://obstacles/scatter/ShovelRed.tscn" id="5_pet7q"]
@@ -9,4 +9,4 @@
 
 [node name="SkyScatterer" type="Node3D" unique_id=164038919]
 script = ExtResource("1_mdebb")
-object_scenes = Array[PackedScene]([ExtResource("2_5kntg"), ExtResource("2_5kntg"), ExtResource("3_3loe3"), ExtResource("4_3pi16"), ExtResource("5_pet7q"), ExtResource("6_rld5j"), ExtResource("2_5kntg"), ExtResource("2_5kntg")])
+object_scenes = Array[PackedScene]([ExtResource("2_mdebb"), ExtResource("2_mdebb"), ExtResource("3_3loe3"), ExtResource("4_3pi16"), ExtResource("5_pet7q"), ExtResource("6_rld5j"), ExtResource("2_mdebb"), ExtResource("2_mdebb")])

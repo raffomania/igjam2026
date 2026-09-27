@@ -3,33 +3,6 @@
 [ext_resource type="Script" uid="uid://djw36mxmwmvih" path="res://scoring/score_goal.gd" id="1_x5hd7"]
 [ext_resource type="Texture2D" uid="uid://dgi2kn7in3fsj" path="res://assets/static_Untitled.png" id="2_muu00"]
 
-[sub_resource type="Gradient" id="Gradient_nbb3u"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.8830769)
-colors = PackedColorArray(0.18479998, 0.82206655, 0.88, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_h6ql4"]
-gradient = SubResource("Gradient_nbb3u")
-fill = 1
-fill_from = Vector2(0.5100671, 0.5067114)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_135pd"]
-transparency = 2
-alpha_scissor_threshold = 0.566
-alpha_antialiasing_mode = 0
-shading_mode = 0
-albedo_texture = SubResource("GradientTexture2D_h6ql4")
-disable_receive_shadows = true
-billboard_mode = 2
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_q1og2"]
-material = SubResource("StandardMaterial3D_135pd")
-
-[sub_resource type="Curve" id="Curve_grg7b"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.44604316, 0.82462686), 0.0, 0.0, 0, 0, Vector2(1, 0.5895522), 0.0, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_2rrqk"]
 radius = 2.5
 
@@ -77,24 +50,6 @@ shadow_mesh = SubResource("ArrayMesh_m2qs3")
 
 [node name="ScoreGoal" type="Node3D" unique_id=1610691153]
 script = ExtResource("1_x5hd7")
-
-[node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=593358424]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058422565, -0.1618123, 0)
-visibility_range_end = 500.0
-amount = 3
-lifetime = 0.8
-mesh = SubResource("QuadMesh_q1og2")
-emission_shape = 2
-emission_sphere_radius = 1.5
-direction = Vector3(0, 1, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 3.0
-initial_velocity_max = 4.0
-damping_min = 1.826
-damping_max = 2.74
-scale_amount_max = 2.0
-scale_amount_curve = SubResource("Curve_grg7b")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1793731638]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5887122, 0)

@@ -10,8 +10,8 @@ func _ready() -> void:
     var preloaded_shovel_blue = preload("res://obstacles/ShovelBlue.tscn")
     var preloaded_shovel_green = preload("res://obstacles/ShovelGreen.tscn")
     var preloaded_shovel_red = preload("res://obstacles/ShovelRed.tscn")
-    var preloaded_sand_castle = preload("res://assets/separated/SandCastle.tscn")
-    var preloaded_water_ball = preload("res://assets/separated/WaterBall.tscn")
+    var preloaded_sand_castle = preload("res://obstacles/scatter/SandCastle.tscn")
+    var preloaded_water_ball = preload("res://obstacles/scatter/WaterBall.tscn")
 
     spawn_shovels(
         preloaded_shovel_red,

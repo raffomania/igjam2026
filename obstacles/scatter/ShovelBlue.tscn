@@ -107,11 +107,11 @@ shadow_mesh = SubResource("ArrayMesh_rjolh")
 [node name="StaticBody3D" type="StaticBody3D" unique_id=1377595587]
 
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("1_tr8nm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006954193, 39.43226, 0.6004648)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006954193, 53.650047, 0.6004648)
 particles = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422791119]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_cmyh6")
 
 [node name="ShovelBlue" type="MeshInstance3D" parent="CollisionShape3D" unique_id=349312059]
