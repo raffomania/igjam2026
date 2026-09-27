@@ -131,6 +131,10 @@ func _process(delta: float) -> void:
     elif state is Flying:
         look_into_nose_direction(delta)
 
+    process_speed_fx()
+
+
+func process_speed_fx() -> void:
     var speed = body.linear_velocity.length()
     var speed_factor = clamp(speed / (body.max_speed / 2), 0.0, 1.0)
     camera.fov = lerp(60.0, 110.0, speed_factor)
@@ -196,6 +200,8 @@ func _unhandled_input(event: InputEvent) -> void:
                 if (abs(velocity.y) < trick_threshold_up_speed):
                     print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
                     random_trick()
+                    Juicee.radial_blur(body, 0.02, 1.0)
+
                 elif (velocity.y < trick_threshold_up_speed):
                     print('Released too early!')
                     level -= 1
