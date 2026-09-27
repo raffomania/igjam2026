@@ -10,8 +10,16 @@ func _ready() -> void:
 
 
 func _on_mouse_entered() -> void:
-    self_modulate = HOVER_COLOR
+    hover_on()
 
 
 func _on_mouse_exited() -> void:
+    hover_off()
+
+
+func hover_on():
+    self_modulate = HOVER_COLOR
+
+
+func hover_off():
     self_modulate = NORMAL_COLOR
