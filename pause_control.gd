@@ -17,9 +17,6 @@ func _input(event: InputEvent) -> void:
         _on_toggle_button()
     if event.is_action_pressed("ui_down"):
         _on_toggle_button()
-    if event.is_action_pressed("ui_accept"):
-        _press_current_button()
-
     if event.is_action_pressed("Pause"):
         if get_tree().paused and not visible:
             return
