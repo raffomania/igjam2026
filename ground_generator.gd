@@ -8,8 +8,8 @@ var sand_texture_path = "res://assets/sand.png"
 # TODO: import height and normal map as well?
 var island_center_height = 100
 var island_water_lerp_width = 20
-var ramp_width = 30
-var ring_ramp_height = 40
+var ramp_width = 60
+var ring_ramp_height = 50
 
 var resolution = 0.25 # vertex per meter per directions
 var size = 700 # meters
