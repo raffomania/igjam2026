@@ -6,86 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://bqxwpuv4hf5ki" path="res://assets/button_backgrounds/W Button.png" id="4_r8sw7"]
 [ext_resource type="Texture2D" uid="uid://es2eptgms614" path="res://assets/button_backgrounds/S Button.png" id="5_mab1w"]
 [ext_resource type="Texture2D" uid="uid://o5yiogub0url" path="res://assets/button_backgrounds/Shift Button.png" id="6_60ad5"]
+[ext_resource type="Texture2D" uid="uid://biqrdehx2s1kp" path="res://assets/button_backgrounds/xbox_stick_top_l.png" id="6_vjb1o"]
+[ext_resource type="Texture2D" uid="uid://qk5qs1rkkjuv" path="res://assets/button_backgrounds/xbox_rt.png" id="7_hl5yf"]
 [ext_resource type="Texture2D" uid="uid://c1k5547tep3xa" path="res://assets/button_backgrounds/Space Button.png" id="7_ji6bp"]
+[ext_resource type="Texture2D" uid="uid://ds1n1cdjccok1" path="res://assets/button_backgrounds/xbox_button_a.png" id="9_7o0a1"]
 
 [sub_resource type="Animation" id="Animation_svw4u"]
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.116626814, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.6, 1.6), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.116626814, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.17453292, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/VBoxContainer/Label:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.13062203, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.19, 0.9054999, 1, 1), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_bpqdx"]
 resource_name = "increase_score"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.14, 0.46666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.6, 1.6), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/VBoxContainer/Label:offset_transform_rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.36666667),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 0.17453292519943295, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MarginContainer/VBoxContainer/Label:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.26666668, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.3, 1, 0.8716666, 1), Color(0.26999998, 0.75666654, 1, 1), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2bn4"]
 _data = {
@@ -104,11 +35,15 @@ script = ExtResource("1_qin7x")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1736847548]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -119.0
+offset_right = 328.0
+offset_bottom = 119.0
 grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 40
 
@@ -116,61 +51,58 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 alignment = 2
 
-[node name="Left" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=585814108]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=14823159]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Left" unique_id=1358392051]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=673394518]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Left"
+text = "MOVE   "
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Left" unique_id=341797504]
-custom_maximum_size = Vector2(-1, 40)
+[node name="Forward" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=720159545]
 layout_mode = 2
-texture = ExtResource("2_bpqdx")
-stretch_mode = 4
+size_flags_horizontal = 4
 
-[node name="Right" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1700497595]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Forward" unique_id=875399414]
+custom_maximum_size = Vector2(40, 40)
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Right" unique_id=1703684601]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Right"
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Right" unique_id=1289067299]
-custom_maximum_size = Vector2(-1, 40)
-layout_mode = 2
-texture = ExtResource("3_n2bn4")
-stretch_mode = 4
-
-[node name="Forward" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=720159545]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Forward" unique_id=1307928758]
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Front"
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Forward" unique_id=875399414]
-custom_maximum_size = Vector2(-1, 40)
-layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("4_r8sw7")
 stretch_mode = 4
 
-[node name="Backward" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1766566140]
+[node name="Left" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=585814108]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Backward" unique_id=656402167]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Left" unique_id=341797504]
+custom_maximum_size = Vector2(40, 40)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "Back"
+size_flags_vertical = 4
+texture = ExtResource("2_bpqdx")
+stretch_mode = 4
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Backward" unique_id=690495323]
-custom_maximum_size = Vector2(-1, 40)
+[node name="Backward" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1766566140]
 layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Backward" unique_id=690495323]
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("5_mab1w")
 stretch_mode = 4
+
+[node name="Right" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1700497595]
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Right" unique_id=1289067299]
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_n2bn4")
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1456779306]
+layout_mode = 2
+texture = ExtResource("6_vjb1o")
 
 [node name="Shift" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=278379193]
 layout_mode = 2
@@ -178,13 +110,19 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Shift" unique_id=1234834908]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Gravity Pull"
+text = "DIVE   "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shift" unique_id=1891850766]
-custom_maximum_size = Vector2(-1, 40)
+custom_maximum_size = Vector2(160, 40)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("6_60ad5")
 stretch_mode = 4
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/Shift" unique_id=1389434488]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("7_hl5yf")
 
 [node name="space" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1116182024]
 layout_mode = 2
@@ -192,22 +130,23 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/space" unique_id=330561967]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Toggle Flight
-"
+text = "CURL   "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1107628904]
-custom_maximum_size = Vector2(-1, 40)
+custom_maximum_size = Vector2(160, 40)
 layout_mode = 2
+size_flags_vertical = 4
 texture = ExtResource("7_ji6bp")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1737737291]
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1388676301]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-offset_transform_enabled = true
-theme_override_font_sizes/font_size = 32
-text = "test"
+size_flags_vertical = 4
+texture = ExtResource("9_7o0a1")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=43416209]
+layout_mode = 2
+text = "Text"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=380412707]
 libraries/ = SubResource("AnimationLibrary_n2bn4")
