@@ -9,11 +9,17 @@ extends Node3D
 @export var scale_min: float = 1.0 # Minimale Flughöhe Y
 @export var scale_max: float = 3.0 # Maximale Flughöhe Y
 
-@export var redistribute_distance: float = 400
-@export var redistribute_amount: float = 600
+@export var redistribute_distance: float = 100
+@export var redistribute_width: float = 1400
+@export var redistribute_offset: float = 800
+@export var redistribute_amount: float = 300
 var furthest_scatter: float = Vector2(spread_x, spread_z).length() / 2.5
 
 @onready var player: RigidBody3D = GlobalManager.player_body
+
+@export var max_objects: int = 7000
+
+var spawned_objects: Array[Node3D] = []
 
 func _ready() -> void:
     randomize()
@@ -27,7 +33,7 @@ func _process(delta: float) -> void:
         player.global_position.z
     ).length()
     
-    if distance_from_origin > furthest_scatter - redistribute_distance:
+    if distance_from_origin > furthest_scatter - redistribute_offset:
         furthest_scatter += redistribute_distance
         for i in range(redistribute_amount):
             spawn_object_redistribute()
@@ -47,7 +53,7 @@ func spawn_object_redistribute() -> void:
     var far_distance := furthest_scatter + redistribute_distance
 
     # Width of the spawning area.
-    var half_width := redistribute_distance * 3.0
+    var half_width := redistribute_width
 
     var random_forward := randf_range(near_distance, far_distance)
     var random_side := randf_range(-half_width, half_width)
@@ -86,3 +92,10 @@ func spawn_object(pos: Vector3) -> void:
     instance.scale = Vector3.ONE * scale_factor # bzw. instance.scale = Vector3.ONE * scale_factor
     
     add_child(instance)
+    
+    spawned_objects.push_back(instance)
+
+    if spawned_objects.size() > max_objects:
+        var oldest = spawned_objects.pop_front()
+        if is_instance_valid(oldest):
+            oldest.queue_free()
