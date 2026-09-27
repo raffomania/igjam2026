@@ -25,6 +25,11 @@ Juicee="*uid://b36fwfvmmv0xc"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/video_quality=0.5
+movie_writer/movie_file="/home/rafael/workspace/game/igjam2026/packages/recording.ogv"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/juicee/plugin.cfg")
