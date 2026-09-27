@@ -3,7 +3,7 @@ extends Node
 @onready var ground_generator := get_parent()
 
 var num_shovels = 50
-var num_waterballs = 50
+var num_waterballs = 350
 
 
 func _ready() -> void:
