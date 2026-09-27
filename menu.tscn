@@ -107,6 +107,14 @@ layout_mode = 2
 texture_normal = ExtResource("4_nrnbx")
 script = ExtResource("8_nrnbx")
 
+[node name="Credits" type="Label" parent="GameEndLayer/Control/VBoxContainer" unique_id=1230985576]
+layout_mode = 2
+text = "
+Credits: IGJam 2026 Team Shrimps
+Music by Ben Zimmermann
+Controller Icons by Kenny"
+horizontal_alignment = 1
+
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=1736543664]
 layer = 7
 visible = false
