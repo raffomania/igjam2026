@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="2_ak2if"]
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ig5kc"]
 [ext_resource type="PackedScene" uid="uid://ddvygkpn8cd0m" path="res://sky_scatterer.tscn" id="4_05l2w"]
+[ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/button_backgrounds/menu_buttons/New Game Button.png" id="5_tpml5"]
+[ext_resource type="Texture2D" uid="uid://b7vj8alb7wkoa" path="res://assets/button_backgrounds/menu_buttons/Exit Game Button.png" id="6_jqemp"]
 
 [node name="TitleScreen" type="Node3D" unique_id=1632361790]
 
@@ -17,3 +19,42 @@ transform = Transform3D(1, 0, 0, 0, 0.9992635, 0.038370848, 0, -0.038370848, 0.9
 [node name="GroundGenerator" parent="." unique_id=1484173325 instance=ExtResource("3_ig5kc")]
 
 [node name="SkyScatterer" parent="." unique_id=164038919 instance=ExtResource("4_05l2w")]
+
+[node name="TitleScreenUI" type="Control" parent="." unique_id=540075920]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="TitleScreenUI" unique_id=488969130]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="TitleScreenUI/CenterContainer" unique_id=1797695898]
+layout_mode = 2
+
+[node name="New" type="TextureButton" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=268221797]
+layout_mode = 2
+texture_normal = ExtResource("5_tpml5")
+
+[node name="Exit" type="TextureButton" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=879289279]
+layout_mode = 2
+texture_normal = ExtResource("6_jqemp")
