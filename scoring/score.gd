@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
         var distance = Vector2(player_pos.x, player_pos.z).distance_to(Vector2.ZERO)
         score = max(score, distance)
         GlobalManager.score_changed.emit(score)
-        label.text = "maximum distance: %sm" % score
+        label.text = "distance: %sm" % int(distance)
         
 func _on_game_end() -> void:
     game_ended = true

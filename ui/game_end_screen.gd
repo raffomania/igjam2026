@@ -2,6 +2,8 @@ extends Control
 
 @onready var play_again: Button = $VBoxContainer/PlayAgain
 @onready var score_label: Label = $VBoxContainer/Score
+@onready var distance_label: Label = $VBoxContainer/Distance
+@onready var combo_label: Label = $VBoxContainer/Combo
 @onready var highscore_label: Label = $VBoxContainer/HighScore
 
 var curr_score := 0
@@ -29,8 +31,8 @@ func _on_game_end():
         save_highscore(total)
         highscore = total
 
-    score_label.text = "Distance: " + str(current_dist_score) + "m"
-    score_label.text = "Combo Multi: x" + str(current_multi)
+    distance_label.text = "Maximum Distance: " + str(current_dist_score) + "m"
+    combo_label.text = "Combo Multi: x" + str(current_multi)
     score_label.text = "Total Score: " + str(total)
     highscore_label.text = "High Score: " + str(highscore)
     show()
