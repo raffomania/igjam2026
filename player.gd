@@ -88,6 +88,8 @@ func process_flying(_delta: float) -> void:
 func random_trick() -> void:
     if !trick_allowed:
         return
+
+    trick_hint.emit('Perfect!')
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
 
@@ -204,12 +206,11 @@ func _unhandled_input(event: InputEvent) -> void:
             state.increase_gravity = false
             var velocity = body.linear_velocity
             var speed = velocity.length()
-            if get_height_above_ground() < trick_height_threshold:
+            if get_height_above_ground() < trick_height_threshold and trick_allowed:
                 print('height ', get_height_above_ground())
                 if speed > trick_threshold_speed:
                     if (abs(velocity.y) < trick_threshold_up_speed):
                         print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
-                        trick_hint.emit('Perfect!')
                         random_trick()
                     elif (velocity.y < trick_threshold_up_speed):
                         print('Released too early!')
