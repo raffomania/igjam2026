@@ -61,4 +61,5 @@ shape = SubResource("SphereShape3D_2rrqk")
 
 [node name="Shelly" type="MeshInstance3D" parent="." unique_id=1041068346]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.9041145, 0)
+visibility_range_end = 500.0
 mesh = SubResource("ArrayMesh_d0dn4")
