@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dbcykcl8r400"]
+
+[ext_resource type="Texture2D" uid="uid://b7vj8alb7wkoa" path="res://assets/button_backgrounds/menu_buttons/Exit Game Button.png" id="1_e36mi"]
+[ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="2_kkgcw"]
+
+[node name="Exit" type="TextureButton" unique_id=973863039]
+texture_normal = ExtResource("1_e36mi")
+script = ExtResource("2_kkgcw")

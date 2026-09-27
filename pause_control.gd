@@ -1,7 +1,7 @@
 extends Control
 
-@onready var resume_button: Button = $VBoxContainer/Resume
-@onready var exit_button: Button = $VBoxContainer/Exit
+@onready var resume_button: TextureButton = $VBoxContainer/Resume
+@onready var exit_button: TextureButton = $VBoxContainer/Exit
 
 
 func _ready() -> void:

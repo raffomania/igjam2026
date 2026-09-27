@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://d0ufuhnuvvy52" path="res://assets/tutorial.png" id="2_l48gv"]
 [ext_resource type="Script" uid="uid://bw3m270ssvx14" path="res://pause_control.gd" id="2_mae5d"]
 [ext_resource type="Script" uid="uid://bo80xc4gpjmws" path="res://ui/game_end_screen.gd" id="3_mae5d"]
+[ext_resource type="PackedScene" uid="uid://dbcykcl8r400" path="res://exit_button.tscn" id="5_l48gv"]
+[ext_resource type="Texture2D" uid="uid://bfcr1ba8mqp5" path="res://assets/button_backgrounds/menu_buttons/Resume Button.png" id="7_kk3ma"]
+[ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="8_nrnbx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xm2m"]
 
@@ -190,14 +193,23 @@ mouse_filter = 2
 script = ExtResource("2_mae5d")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PausationLayer/PauseControl" unique_id=1145749126]
-layout_mode = 0
-offset_right = 60.0
-offset_bottom = 60.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.5
+offset_top = -86.0
+offset_right = 167.5
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Exit" type="Button" parent="PausationLayer/PauseControl/VBoxContainer" unique_id=491739263]
+[node name="Resume" type="TextureButton" parent="PausationLayer/PauseControl/VBoxContainer" unique_id=1680427845]
 layout_mode = 2
-text = "Exit Game"
+texture_normal = ExtResource("7_kk3ma")
+script = ExtResource("8_nrnbx")
 
-[node name="Resume" type="Button" parent="PausationLayer/PauseControl/VBoxContainer" unique_id=1986601084]
+[node name="Exit" parent="PausationLayer/PauseControl/VBoxContainer" unique_id=973863039 instance=ExtResource("5_l48gv")]
 layout_mode = 2
-text = "Resume"
