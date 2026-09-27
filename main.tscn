@@ -2,38 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://c83sm7oqb8h1r" path="res://menu.tscn" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://dmqw3owlghi1u" path="res://water.tscn" id="1_efxa6"]
-[ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://bsn7tn6tcl6xm" path="res://island_drown_manager.gd" id="3_dg77c"]
+[ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ryguw"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
 [ext_resource type="Script" uid="uid://dj37gfuroib7l" path="res://dayand_night.gd" id="7_dg77c"]
-[ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="8_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://buqwmxmd5hi2r" path="res://scoring/hints.tscn" id="11_d13ii"]
 [ext_resource type="Script" uid="uid://w1ufrciqdwxf" path="res://moewen_spawner.gd" id="12_dg77c"]
+[ext_resource type="PackedScene" uid="uid://ddvygkpn8cd0m" path="res://sky_scatterer.tscn" id="13_yaehf"]
 [ext_resource type="Script" uid="uid://dusvh7qlaqvsq" path="res://game_end_camera_holder.gd" id="13_ycdy4"]
-[ext_resource type="Script" uid="uid://05jtx3fr76t0" path="res://sky_scatterer.gd" id="14_w48qg"]
-[ext_resource type="PackedScene" uid="uid://cbuor0blt8oml" path="res://obstacles/scatter/SandCastle.tscn" id="15_ryguw"]
-[ext_resource type="PackedScene" uid="uid://bwhpcjyrw58c8" path="res://obstacles/scatter/ShovelBlue.tscn" id="17_ryguw"]
-[ext_resource type="PackedScene" uid="uid://cw7g5qd630720" path="res://assets/separated/WaterBall.tscn" id="18_82xsv"]
-[ext_resource type="PackedScene" uid="uid://dfwyjpv2ompc5" path="res://obstacles/scatter/ShovelGreen.tscn" id="18_d13ii"]
-[ext_resource type="PackedScene" uid="uid://pqj2tsp776r" path="res://obstacles/scatter/ShovelRed.tscn" id="19_1u8w0"]
 [ext_resource type="Script" uid="uid://boj5crlri3kko" path="res://attacker_manager.gd" id="19_cegan"]
 [ext_resource type="PackedScene" uid="uid://ceyu2h8wothih" path="res://assets/AttackMoewe.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://dsn40khqqjwhp" path="res://assets/AttackDolphin.tscn" id="21_ryguw"]
 [ext_resource type="AudioStream" uid="uid://yaabfgihukmc" path="res://assets/Shrimpy_Loop.wav" id="23_d13ii"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dg77c"]
-
-[sub_resource type="Sky" id="Sky_i3pqv"]
-sky_material = SubResource("ProceduralSkyMaterial_dg77c")
-
-[sub_resource type="Environment" id="Environment_onrkg"]
-background_mode = 2
-sky = SubResource("Sky_i3pqv")
-sky_rotation = Vector3(0.08552113, 0, 0)
 
 [node name="Main" type="Node3D" unique_id=1584255760]
 process_mode = 1
@@ -43,16 +27,7 @@ unique_name_in_owner = true
 
 [node name="menu" parent="." unique_id=2085074617 instance=ExtResource("1_272bh")]
 
-[node name="GroundGenerator" type="StaticBody3D" parent="." unique_id=1581184700]
-script = ExtResource("1_ig7tw")
-
-[node name="SandCollisionShape" type="CollisionShape3D" parent="GroundGenerator" unique_id=1226894304]
-
-[node name="StaticSpawner" type="Node3D" parent="GroundGenerator" unique_id=1204653210]
-script = ExtResource("8_5vw27")
-
-[node name="IslandDrownManager" type="Node" parent="GroundGenerator" unique_id=811985194]
-script = ExtResource("3_dg77c")
+[node name="GroundGenerator" parent="." unique_id=1484173325 instance=ExtResource("3_ryguw")]
 
 [node name="Player" parent="." unique_id=349543309 instance=ExtResource("2_0xm2m")]
 unique_name_in_owner = true
@@ -75,8 +50,7 @@ light_energy = 0.114
 light_indirect_energy = 0.816
 sky_mode = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=834092271]
-environment = SubResource("Environment_onrkg")
+[node name="WorldEnvironment" parent="." unique_id=1718286727 instance=ExtResource("8_1u8w0")]
 
 [node name="Dolphin" parent="." unique_id=692781486 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(-0.4989294, -0.032702524, 0, 0.032702524, -0.4989294, 0, 0, 0, 0.5, 38.178703, 66.11642, 353.35184)
@@ -112,9 +86,7 @@ grow_vertical = 2
 [node name="GameEndCameraHolder" type="Node3D" parent="." unique_id=2077583894]
 script = ExtResource("13_ycdy4")
 
-[node name="SkyScatterer" type="Node3D" parent="." unique_id=1652074773]
-script = ExtResource("14_w48qg")
-object_scenes = Array[PackedScene]([ExtResource("18_82xsv"), ExtResource("18_82xsv"), ExtResource("17_ryguw"), ExtResource("18_d13ii"), ExtResource("19_1u8w0"), ExtResource("15_ryguw"), ExtResource("18_82xsv"), ExtResource("18_82xsv")])
+[node name="SkyScatterer" parent="." unique_id=164038919 instance=ExtResource("13_yaehf")]
 
 [node name="AttackerManager" type="Node" parent="." unique_id=610162094]
 script = ExtResource("19_cegan")

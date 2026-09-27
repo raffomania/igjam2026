@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://l8bkghlmceli"]
+
+[ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_affms"]
+[ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="2_054ab"]
+[ext_resource type="Script" uid="uid://bsn7tn6tcl6xm" path="res://island_drown_manager.gd" id="3_pall5"]
+
+[node name="GroundGenerator" type="StaticBody3D" unique_id=1484173325]
+script = ExtResource("1_affms")
+
+[node name="SandCollisionShape" type="CollisionShape3D" parent="." unique_id=1229982292]
+
+[node name="StaticSpawner" type="Node3D" parent="." unique_id=1257082364]
+script = ExtResource("2_054ab")
+
+[node name="IslandDrownManager" type="Node" parent="." unique_id=2124316452]
+script = ExtResource("3_pall5")

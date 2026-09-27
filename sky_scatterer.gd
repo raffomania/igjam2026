@@ -32,7 +32,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     if deleted > amount:
         max_objects = amount
-    var distance_from_origin := Vector2(player.global_position.x, player.global_position.z).length()
+    var distance_from_origin
+    # player is null in title screen
+    if player != null:
+        distance_from_origin = Vector2(player.global_position.x, player.global_position.z).length()
+    else:
+        distance_from_origin = 100000
 
     if distance_from_origin > furthest_scatter - redistribute_offset:
         furthest_scatter += redistribute_distance
@@ -41,7 +46,12 @@ func _process(delta: float) -> void:
 
 
 func spawn_object_redistribute() -> void:
-    var forward := Vector3(player.global_position.x, 0.0, player.global_position.z).normalized()
+    var forward: Vector3
+    # player is null in title screen
+    if player != null:
+        forward = Vector3(player.global_position.x, 0.0, player.global_position.z).normalized()
+    else:
+        return
 
     var right := forward.cross(Vector3.UP).normalized()
 
