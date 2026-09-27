@@ -9,7 +9,6 @@ func _ready() -> void:
     rotate(Vector3.UP, randf_range(0, PI * 2))
     if !particles:
         $CPUParticles3D.hide()
-        $Shelly.hide()
 
 
 func _process(delta: float) -> void:
@@ -20,5 +19,5 @@ func _process(delta: float) -> void:
 func body_entered(body: Node3D) -> void:
     if body.is_in_group("player"):
         Juicee.shockwave(body, 0.6, 0.045)
-        body.add_score.emit(10)
+        GlobalManager.player.random_trick(1500)
         queue_free()

@@ -89,7 +89,7 @@ func process_flying(_delta: float) -> void:
     body.gravity_scale = 1.0
 
 
-func random_trick() -> void:
+func random_trick(speed_boost_force := 200) -> void:
     if !trick_allowed:
         return
 
@@ -97,7 +97,7 @@ func random_trick() -> void:
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
 
-    body.linear_velocity *= 1.2
+    body.apply_central_force(body.linear_velocity.normalized() * speed_boost_force)
     level += 1
     level_increased.emit(level)
     trick_allowed = false

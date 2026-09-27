@@ -109,6 +109,12 @@ shadow_mesh = SubResource("ArrayMesh_rjolh")
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("1_t4gek")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006954193, 39.43226, 0.6004648)
 
+[node name="ScoreGoal2" parent="." unique_id=530108385 instance=ExtResource("1_t4gek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.733784, 39.43226, 0.6004648)
+
+[node name="ScoreGoal3" parent="." unique_id=1083496468 instance=ExtResource("1_t4gek")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.843529, 39.43226, 0.6004648)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422791119]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_cmyh6")
