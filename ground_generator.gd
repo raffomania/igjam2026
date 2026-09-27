@@ -8,6 +8,8 @@ var sand_texture_path = "res://assets/sand.png"
 # TODO: import height and normal map as well?
 var island_center_height = 100
 var island_water_lerp_width = 20
+var ramp_width = 30
+var ring_ramp_height = 40
 
 var resolution = 0.25 # vertex per meter per directions
 var size = 700 # meters
@@ -185,13 +187,13 @@ func calculate_ground_height(x, z):
     y = y / len(coefficients)
     y = y * height_scale
 
+    # extra ring ramp
+    y = y + _ring_ramp(x, z) * ring_ramp_height
+
     #lerp with water
     y = y * water_param + water_height * (1 - water_param)
 
     y = y + _mexican_hat(x, z)
-
-    # extra ring ramp
-    y = y + _ring_ramp(x, z)
 
     return y
 
@@ -208,4 +210,12 @@ func _mexican_hat(x, z):
 
 
 func _ring_ramp(x, z):
-    return 0
+    var y = 0
+    var point_distance = Vector2(x, z).distance_to(center_point)
+    var outer_distance = ramp_width
+    var inner_distance = size * 0.5 - outer_distance
+
+    if point_distance > inner_distance:
+        y = (point_distance - inner_distance) / outer_distance
+
+    return y
