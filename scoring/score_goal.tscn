@@ -80,6 +80,7 @@ script = ExtResource("1_x5hd7")
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="." unique_id=593358424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.058422565, -0.1618123, 0)
+amount = 3
 lifetime = 0.8
 mesh = SubResource("QuadMesh_q1og2")
 emission_shape = 2

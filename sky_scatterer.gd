@@ -6,8 +6,8 @@ extends Node3D
 @export var spread_z: float = 1000.0   # Streuung auf der Z-Achse
 @export var min_height: float = -50.0 # Minimale Flughöhe Y
 @export var max_height: float = 200.0 # Maximale Flughöhe Y
-@export var scale_min: float = 1.0 # Minimale Flughöhe Y
-@export var scale_max: float = 3.0 # Maximale Flughöhe Y
+@export var scale_min: float = 2.0 # Minimale Flughöhe Y
+@export var scale_max: float = 4.0 # Maximale Flughöhe Y
 
 func _ready() -> void:
     randomize()

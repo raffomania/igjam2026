@@ -14,10 +14,11 @@
 [ext_resource type="Script" uid="uid://w1ufrciqdwxf" path="res://moewen_spawner.gd" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://dusvh7qlaqvsq" path="res://game_end_camera_holder.gd" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://05jtx3fr76t0" path="res://sky_scatterer.gd" id="14_w48qg"]
-[ext_resource type="PackedScene" uid="uid://blavnnctplhan" path="res://assets/separated/SandCastle.tscn" id="15_074og"]
-[ext_resource type="PackedScene" uid="uid://ggxads7smnwv" path="res://assets/separated/ShovelBlue.tscn" id="15_vivmo"]
-[ext_resource type="PackedScene" uid="uid://bj1rlenr0267t" path="res://assets/separated/ShovelRed.tscn" id="17_cegan"]
+[ext_resource type="PackedScene" uid="uid://cbuor0blt8oml" path="res://obstacles/scatter/SandCastle.tscn" id="15_ryguw"]
+[ext_resource type="PackedScene" uid="uid://bwhpcjyrw58c8" path="res://obstacles/scatter/ShovelBlue.tscn" id="17_ryguw"]
 [ext_resource type="PackedScene" uid="uid://cw7g5qd630720" path="res://assets/separated/WaterBall.tscn" id="18_82xsv"]
+[ext_resource type="PackedScene" uid="uid://dfwyjpv2ompc5" path="res://obstacles/scatter/ShovelGreen.tscn" id="18_d13ii"]
+[ext_resource type="PackedScene" uid="uid://pqj2tsp776r" path="res://obstacles/scatter/ShovelRed.tscn" id="19_1u8w0"]
 [ext_resource type="Script" uid="uid://boj5crlri3kko" path="res://attacker_manager.gd" id="19_cegan"]
 [ext_resource type="PackedScene" uid="uid://ceyu2h8wothih" path="res://assets/AttackMoewe.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://dsn40khqqjwhp" path="res://assets/AttackDolphin.tscn" id="21_ryguw"]
@@ -105,11 +106,11 @@ script = ExtResource("13_ycdy4")
 
 [node name="SkyScatterer" type="Node3D" parent="." unique_id=1652074773]
 script = ExtResource("14_w48qg")
-object_scenes = Array[PackedScene]([ExtResource("15_074og"), ExtResource("15_vivmo"), ExtResource("6_272bh"), ExtResource("17_cegan"), ExtResource("18_82xsv")])
+object_scenes = Array[PackedScene]([ExtResource("18_82xsv"), ExtResource("18_82xsv"), ExtResource("17_ryguw"), ExtResource("18_d13ii"), ExtResource("19_1u8w0"), ExtResource("15_ryguw"), ExtResource("18_82xsv")])
 
 [node name="AttackerManager" type="Node" parent="." unique_id=610162094]
 script = ExtResource("19_cegan")
-attackers = Array[PackedScene]([ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("21_ryguw")])
+attackers = Array[PackedScene]([ExtResource("21_ryguw"), ExtResource("20_getpj")])
 
 [node name="Timer" type="Timer" parent="AttackerManager" unique_id=456642282]
 

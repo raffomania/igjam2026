@@ -1,9 +1,9 @@
-class_name AttackMoewe extends Node3D
+class_name AttackMoewe extends GameEnder
 
 var camera: Camera3D
 var player: RigidBody3D
 
-@export var speed: float = 150.0
+@export var speed: float = 110.0
 @export var depth_percentage: float = 0.4
 
 var close: bool = false
@@ -18,14 +18,14 @@ func _ready() -> void:
     player.global_position.normalized().cross(Vector3.UP) * randf_range(-1.0, 1.0) * 60
     spawn_position.y = player.global_position.y + 30
     self.set_position(spawn_position)
-    self.look_at(player.global_position)
+    self.look_at(player.global_position + Vector3.UP * 10)
 
 func _physics_process(delta: float) -> void:
     if (player.global_position - global_position).length() < 50:
         close = true
         
     if !close:
-        self.look_at(player.global_position)
+        self.look_at(player.global_position + Vector3.UP * 10)
     
     var forward_dir: Vector3 = -global_transform.basis.z
     position += forward_dir * speed * delta

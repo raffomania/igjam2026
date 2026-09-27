@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cbuor0blt8oml"]
+
+[ext_resource type="PackedScene" uid="uid://d1e0edskkbirj" path="res://scoring/score_goal.tscn" id="1_5tlr3"]
+[ext_resource type="PackedScene" uid="uid://blavnnctplhan" path="res://assets/separated/SandCastle.tscn" id="2_jl2gb"]
+
+[node name="SandCastle" type="Node3D" unique_id=519125895]
+
+[node name="ScoreGoal2" parent="." unique_id=1612456051 instance=ExtResource("1_5tlr3")]
+transform = Transform3D(0.745875, 0, 0, 0, 0.745875, 0, 0, 0, 0.745875, 0, 11.718292, 0)
+particles = false
+
+[node name="SandCastle" parent="." unique_id=215252158 instance=ExtResource("2_jl2gb")]
+
+[node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("1_5tlr3")]
+transform = Transform3D(0.975, 0, 0, 0, 0.975, 0, 0, 0, 0.975, 0, 2.9577808, 0)
+particles = false

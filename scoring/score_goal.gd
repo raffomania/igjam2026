@@ -1,15 +1,20 @@
 extends Node3D
 
 @onready var area: Area3D = $"Area3D"
+@export var particles: bool = true
 
 
 func _ready() -> void:
     area.body_entered.connect(body_entered)
     rotate(Vector3.UP, randf_range(0, PI * 2))
+    if !particles:
+        $CPUParticles3D.hide()
+        $Shelly.hide()
 
 
 func _process(delta: float) -> void:
-    rotate(Vector3.UP, delta * 2)
+    if particles:
+        rotate(Vector3.UP, delta * 2)
 
 
 func body_entered(body: Node3D) -> void:

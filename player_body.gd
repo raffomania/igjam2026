@@ -36,7 +36,10 @@ func _ready() -> void:
 
 
 func _landed(_body: Node):
-    if _body.get_parent().get_parent() is AttackMoewe:
+    if _body.get_parent().get_parent() is GameEnder:
+        GlobalManager.game_end.emit()
+        return
+    if _body.get_parent().get_parent().get_parent() is GameEnder:
         GlobalManager.game_end.emit()
         return
         

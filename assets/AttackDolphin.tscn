@@ -1,3 +1,13 @@
 [gd_scene format=3 uid="uid://dsn40khqqjwhp"]
 
+[ext_resource type="Script" uid="uid://dt8smno6wb7vd" path="res://assets/attack_dolphin.gd" id="1_ayhvl"]
+[ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="1_mvij0"]
+
 [node name="AttackDolphin" type="Node3D" unique_id=760520967]
+script = ExtResource("1_ayhvl")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1890514970]
+transform = Transform3D(-4.371139e-08, 0, -0.99999994, 0, 0.99999994, 0, 1, 0, -4.3711385e-08, 0, -125.359055, 0)
+
+[node name="Dolphin" parent="Pivot" unique_id=692781486 instance=ExtResource("1_mvij0")]
+transform = Transform3D(1, 0, 0, 0, -0.033619463, 0.9994348, 0, -0.9994348, -0.033619463, 0, -10.635141, -183.70157)
