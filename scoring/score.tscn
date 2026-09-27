@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://02lecr2xqhnr" path="res://scoring/score.gd" id="1_qin7x"]
 [ext_resource type="Texture2D" uid="uid://dc0sn8vnm2kpl" path="res://assets/button_backgrounds/A Button.png" id="2_bpqdx"]
 [ext_resource type="Texture2D" uid="uid://d3pt00q64tqmv" path="res://assets/button_backgrounds/D Button.png" id="3_n2bn4"]
+[ext_resource type="Texture2D" uid="uid://bqxwpuv4hf5ki" path="res://assets/button_backgrounds/W Button.png" id="4_r8sw7"]
+[ext_resource type="Texture2D" uid="uid://es2eptgms614" path="res://assets/button_backgrounds/S Button.png" id="5_mab1w"]
+[ext_resource type="Texture2D" uid="uid://o5yiogub0url" path="res://assets/button_backgrounds/Shift Button.png" id="6_60ad5"]
+[ext_resource type="Texture2D" uid="uid://c1k5547tep3xa" path="res://assets/button_backgrounds/Space Button.png" id="7_ji6bp"]
 
 [sub_resource type="Animation" id="Animation_svw4u"]
 length = 0.5
@@ -114,7 +118,6 @@ alignment = 2
 
 [node name="Left" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=585814108]
 layout_mode = 2
-alignment = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Left" unique_id=1358392051]
 layout_mode = 2
@@ -122,12 +125,13 @@ theme_override_font_sizes/font_size = 20
 text = "Left"
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Left" unique_id=341797504]
+custom_maximum_size = Vector2(-1, 40)
 layout_mode = 2
 texture = ExtResource("2_bpqdx")
+stretch_mode = 4
 
 [node name="Right" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1700497595]
 layout_mode = 2
-alignment = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Right" unique_id=1703684601]
 layout_mode = 2
@@ -135,8 +139,67 @@ theme_override_font_sizes/font_size = 20
 text = "Right"
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Right" unique_id=1289067299]
+custom_maximum_size = Vector2(-1, 40)
 layout_mode = 2
 texture = ExtResource("3_n2bn4")
+stretch_mode = 4
+
+[node name="Forward" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=720159545]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Forward" unique_id=1307928758]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Front"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Forward" unique_id=875399414]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 2
+texture = ExtResource("4_r8sw7")
+stretch_mode = 4
+
+[node name="Backward" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1766566140]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Backward" unique_id=656402167]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Backward" unique_id=690495323]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 2
+texture = ExtResource("5_mab1w")
+stretch_mode = 4
+
+[node name="Shift" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=278379193]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Shift" unique_id=1234834908]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Gravity Pull"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shift" unique_id=1891850766]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 2
+texture = ExtResource("6_60ad5")
+stretch_mode = 4
+
+[node name="space" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1116182024]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/space" unique_id=330561967]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Toggle Flight
+"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1107628904]
+custom_maximum_size = Vector2(-1, 40)
+layout_mode = 2
+texture = ExtResource("7_ji6bp")
+stretch_mode = 4
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1737737291]
 layout_mode = 2
