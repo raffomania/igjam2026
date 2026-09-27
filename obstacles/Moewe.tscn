@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://b4d5foxrwr8y0"]
 
+[ext_resource type="Script" uid="uid://bxq2cgnahw6by" path="res://obstacles/moewe.gd" id="1_iwb4q"]
 [ext_resource type="PackedScene" uid="uid://d1e0edskkbirj" path="res://scoring/score_goal.tscn" id="1_nx50e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpvtj"]
@@ -132,10 +133,11 @@ data = PackedVector3Array(1.7214394, 4.42146, -4.2477074, -0.7682822, 13.722695,
 [node name="Moewe" type="MeshInstance3D" unique_id=2034032049]
 transform = Transform3D(0, 1, 5.9604645e-08, -5.9604645e-08, 0, -1, -1, 5.9604645e-08, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_610u1")
+script = ExtResource("1_iwb4q")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1824337081]
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1456660120]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=299875190]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=299875190]
 shape = SubResource("ConcavePolygonShape3D_2nspt")
 
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("1_nx50e")]
