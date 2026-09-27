@@ -19,7 +19,7 @@ var input_direction = Vector3.ZERO
 
 const not_flying_camera_pivot_angle := -25.0
 
-const ground_speed := 8.0
+const ground_speed := 16.0
 var gravity_bonus := 7.0
 var gravity_scale_override := 1.0
 const trick_threshold_speed = 15
