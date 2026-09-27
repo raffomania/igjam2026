@@ -9,7 +9,7 @@ var sand_texture_path = "res://assets/sand.png"
 var island_center_height = 100
 var island_water_lerp_width = 20
 var ramp_width = 60
-var ring_ramp_height = 50
+var ring_ramp_height = 25
 
 var resolution = 0.25 # vertex per meter per directions
 var size = 700 # meters
@@ -31,21 +31,13 @@ func generate_sand():
     surface_array.resize(Mesh.ARRAY_MAX)
 
     var verts = PackedVector3Array()
-    # var uvs = PackedVector2Array()
     var normals = PackedVector3Array()
     var indices = PackedInt32Array()
 
     verts = create_grid_vertices()
     indices = create_grid_indices()
     normals = create_normals()
-    # uvs = PackedVector2Array([
-    #	  Vector2(0, 0),
-    #	  Vector2(1, 0),
-    #	  Vector2(0, 1),
-    #	  Vector2(1, 1),
-    # ])
     surface_array[Mesh.ARRAY_VERTEX] = verts
-    # surface_array[Mesh.ARRAY_TEX_UV] = uvs
     surface_array[Mesh.ARRAY_NORMAL] = normals
     surface_array[Mesh.ARRAY_INDEX] = indices
 
