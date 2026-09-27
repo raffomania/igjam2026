@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ceyu2h8wothih"]
+
+[ext_resource type="Script" uid="uid://cayxs4q6xg2q1" path="res://assets/attack_moewe.gd" id="1_sctvw"]
+[ext_resource type="PackedScene" uid="uid://77qve3522u7l" path="res://assets/separated/Moewe.tscn" id="2_etr04"]
+
+[node name="AttackMoewe" type="Node3D" unique_id=835567613]
+script = ExtResource("1_sctvw")
+
+[node name="Moewe" parent="." unique_id=2034032049 instance=ExtResource("2_etr04")]
