@@ -21,6 +21,7 @@ const not_flying_camera_pivot_angle := -25.0
 
 const ground_speed := 8.0
 var gravity_bonus := 7.0
+var gravity_scale_override := 1.0
 const trick_threshold_speed = 15
 const trick_threshold_up_speed = 40
 const trick_height_threshold = 1
@@ -63,9 +64,6 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
-    animation.set_blend_time('Trick1', 'RollUp', 1.0)
-    animation.set_blend_time('Trick2', 'RollUp', 1.0)
-    animation.set_blend_time('Trick3', 'RollUp', 1.0)
     trick_cooldown_timer.timeout.connect(_on_trick_timer_timeout)
 
 
@@ -97,7 +95,9 @@ func random_trick() -> void:
     trick_allowed = false
     trick_cooldown_timer.start()
     trick_particles.emitting = true
+    gravity_scale_override = 0.5
     await get_tree().create_timer(0.7).timeout
+    gravity_scale_override = 1.0
     var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
     print('performing ', trick)
     body.do_reset_angular_velocity()
