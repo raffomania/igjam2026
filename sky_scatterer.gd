@@ -10,8 +10,8 @@ extends Node3D
 @export var scale_max: float = 3.0 # Maximale Flughöhe Y
 
 @export var redistribute_distance: float = 400
-@export var redistribute_amount: float = 400
-var furthest_scatter: float = spread_x
+@export var redistribute_amount: float = 600
+var furthest_scatter: float = Vector2(spread_x, spread_z).length() / 2.5
 
 @onready var player: RigidBody3D = GlobalManager.player_body
 
@@ -21,28 +21,46 @@ func _ready() -> void:
         spawn_object_initial()
         
 func _process(delta: float) -> void:
-    if player.global_position.length() > furthest_scatter - redistribute_distance:
+    
+    var distance_from_origin := Vector2(
+        player.global_position.x,
+        player.global_position.z
+    ).length()
+    
+    if distance_from_origin > furthest_scatter - redistribute_distance:
         furthest_scatter += redistribute_distance
         for i in range(redistribute_amount):
             spawn_object_redistribute()
 
 func spawn_object_redistribute() -> void:
-    
-    var cross = player.global_position.normalized().cross(Vector3.UP)
-    var far = player.global_position + player.global_position.normalized() * 2 * redistribute_distance + cross * 2 * redistribute_distance
-    var close = player.global_position + player.global_position.normalized() * 1 * redistribute_distance - cross * 2 * redistribute_distance
-    
-    var min_x = min(far.x, close.x)
-    var max_x = max(far.x, close.x)
-    var min_z = min(far.z, close.z)
-    var max_z = max(far.z, close.z)
-    
-    # Zufällige Position berechnen
-    var random_x = randf_range(min_x, max_x)
-    var random_y = randf_range(min_height, max_height)
-    var random_z = randf_range(min_z, max_z)
-    
-    spawn_object(Vector3(random_x, random_y, random_z))
+    var forward := Vector3(
+        player.global_position.x,
+        0.0,
+        player.global_position.z
+    ).normalized()
+
+    var right := forward.cross(Vector3.UP).normalized()
+
+    # The new strip starts at the current "edge"
+    # and extends redistribute_distance forward.
+    var near_distance := furthest_scatter
+    var far_distance := furthest_scatter + redistribute_distance
+
+    # Width of the spawning area.
+    var half_width := redistribute_distance * 3.0
+
+    var random_forward := randf_range(near_distance, far_distance)
+    var random_side := randf_range(-half_width, half_width)
+
+    var pos_xz := forward * random_forward + right * random_side
+
+    var random_y := randf_range(min_height, max_height)
+
+    spawn_object(Vector3(
+        pos_xz.x,
+        random_y,
+        pos_xz.z
+    ))
 
 func spawn_object_initial() -> void:
     
