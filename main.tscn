@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://boj5crlri3kko" path="res://attacker_manager.gd" id="19_cegan"]
 [ext_resource type="PackedScene" uid="uid://ceyu2h8wothih" path="res://assets/AttackMoewe.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://dsn40khqqjwhp" path="res://assets/AttackDolphin.tscn" id="21_ryguw"]
+[ext_resource type="AudioStream" uid="uid://yaabfgihukmc" path="res://assets/Shrimpy_Loop.wav" id="23_d13ii"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dg77c"]
 
@@ -117,5 +118,9 @@ script = ExtResource("19_cegan")
 attackers = Array[PackedScene]([ExtResource("21_ryguw"), ExtResource("20_getpj")])
 
 [node name="Timer" type="Timer" parent="AttackerManager" unique_id=456642282]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=745792076]
+stream = ExtResource("23_d13ii")
+autoplay = true
 
 [connection signal="timeout" from="AttackerManager/Timer" to="AttackerManager" method="_on_timer_timeout"]
