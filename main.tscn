@@ -61,11 +61,15 @@ transform = Transform3D(0.482303, 0.03161274, 0.12800181, 0.071708, -0.47023904,
 [node name="ShovelGreen" parent="." unique_id=1905288107 instance=ExtResource("6_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
 
-[node name="Score" parent="." unique_id=1355555733 instance=ExtResource("9_kek77")]
+[node name="MoewenSpawner" type="Node" parent="." unique_id=2098006524]
+script = ExtResource("12_dg77c")
 
-[node name="LevelUI" parent="." unique_id=367470182 instance=ExtResource("10_4c57u")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1978039488]
+layer = 2
 
-[node name="ScoreUI" type="Control" parent="." unique_id=1469445148]
+[node name="LevelUI" parent="CanvasLayer" unique_id=367470182 instance=ExtResource("10_4c57u")]
+
+[node name="ScoreUI" type="Control" parent="CanvasLayer" unique_id=1469445148]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,8 +77,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MoewenSpawner" type="Node" parent="." unique_id=2098006524]
-script = ExtResource("12_dg77c")
+[node name="Score" parent="CanvasLayer" unique_id=1355555733 instance=ExtResource("9_kek77")]
 
 [node name="GameEndCameraHolder" type="Node3D" parent="." unique_id=2077583894]
 script = ExtResource("13_ycdy4")
