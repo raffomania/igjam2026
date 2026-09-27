@@ -14,11 +14,11 @@ func _ready() -> void:
     randomize()
 
     var spawn_position = player.global_position + \
-    player.global_position.normalized() * 250 + \
+    player.global_position.normalized() * 350 + \
     player.global_position.normalized().cross(Vector3.UP) * randf_range(-1.0, 1.0) * 60
     spawn_position.y = player.global_position.y + 30
     self.set_position(spawn_position)
-    self.look_at(player.global_position + Vector3.UP * 10)
+    self.look_at(player.global_position + Vector3.UP * 5)
 
 func _physics_process(delta: float) -> void:
     if (player.global_position - global_position).length() < 50:

@@ -56,16 +56,17 @@ unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 22, 222.318)
 
 [node name="DayandNight" type="Node3D" parent="." unique_id=1922748305]
-transform = Transform3D(1, 0, 0, 0, 0.6984153, -0.71569276, 0, 0.71569276, 0.6984153, 0, 0, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, -0.61103636, 0.7916026, 0, -0.7916026, -0.61103636, 0, 0, 0)
 script = ExtResource("7_dg77c")
 cycle_duration_seconds = 60.0
 
 [node name="Sun" type="DirectionalLight3D" parent="DayandNight" unique_id=991819736]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(-0.8660254, 0.3958012, 0.3055181, -0.39580122, -0.16931596, -0.90259266, -0.30551812, -0.9025926, 0.30329055, 0, 0, 0)
+light_color = Color(1, 0.958, 0.88, 1)
 
 [node name="Moon" type="DirectionalLight3D" parent="DayandNight" unique_id=1408476524]
 transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
+visible = false
 light_color = Color(1, 1, 0.4745098, 1)
 light_energy = 0.114
 light_indirect_energy = 0.816
@@ -76,9 +77,11 @@ environment = SubResource("Environment_onrkg")
 
 [node name="Dolphin" parent="." unique_id=692781486 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(-0.4989294, -0.032702524, 0, 0.032702524, -0.4989294, 0, 0, 0, 0.5, 38.178703, 66.11642, 353.35184)
+visible = false
 
 [node name="Dolphin2" parent="." unique_id=196263863 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(0.482303, 0.03161274, 0.12800181, 0.071708, -0.47023904, -0.15405595, 0.11064261, 0.16696079, -0.45812914, 38.178703, 106.52689, 496.57745)
+visible = false
 
 [node name="ShovelGreen" parent="." unique_id=1905288107 instance=ExtResource("6_272bh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.939907, -11.189056, -66.10864)
@@ -106,7 +109,7 @@ script = ExtResource("13_ycdy4")
 
 [node name="SkyScatterer" type="Node3D" parent="." unique_id=1652074773]
 script = ExtResource("14_w48qg")
-object_scenes = Array[PackedScene]([ExtResource("18_82xsv"), ExtResource("18_82xsv"), ExtResource("17_ryguw"), ExtResource("18_d13ii"), ExtResource("19_1u8w0"), ExtResource("15_ryguw"), ExtResource("18_82xsv")])
+object_scenes = Array[PackedScene]([ExtResource("18_82xsv"), ExtResource("18_82xsv"), ExtResource("17_ryguw"), ExtResource("18_d13ii"), ExtResource("19_1u8w0"), ExtResource("15_ryguw"), ExtResource("18_82xsv"), ExtResource("18_82xsv")])
 
 [node name="AttackerManager" type="Node" parent="." unique_id=610162094]
 script = ExtResource("19_cegan")

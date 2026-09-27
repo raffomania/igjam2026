@@ -8,6 +8,10 @@ extends Node
 
 var start_attacking: bool = false
 
+var stop_attacking: bool = false
+
+func _ready() -> void:
+    GlobalManager.game_end.connect(_on_game_ended)
     
 func _process(delta: float) -> void:
     if !start_attacking:
@@ -25,7 +29,10 @@ func _on_timer_timeout() -> void:
     start_random_timer()
     
 func spawn_attacker():
-    var object_scene = attackers.pick_random()
-    var instance = object_scene.instantiate()
-    self.get_parent().add_child(instance)
+    if !stop_attacking:
+        var object_scene = attackers.pick_random()
+        var instance = object_scene.instantiate()
+        self.get_parent().add_child(instance)
     
+func _on_game_ended():
+    stop_attacking = true

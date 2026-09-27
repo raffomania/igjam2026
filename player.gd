@@ -21,8 +21,8 @@ const not_flying_camera_pivot_angle := -25.0
 
 const ground_speed := 8.0
 var gravity_bonus := 7.0
-const trick_threshold_speed = 40
-const trick_threshold_up_speed = 30
+const trick_threshold_speed = 15
+const trick_threshold_up_speed = 40
 const trick_height_threshold = 1
 var level = 1
 var trick_allowed = true
@@ -63,6 +63,9 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
+    animation.set_blend_time('Trick1', 'RollUp', 1.0)
+    animation.set_blend_time('Trick2', 'RollUp', 1.0)
+    animation.set_blend_time('Trick3', 'RollUp', 1.0)
     trick_cooldown_timer.timeout.connect(_on_trick_timer_timeout)
 
 
@@ -87,17 +90,20 @@ func random_trick() -> void:
         return
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
-    body.do_reset_angular_velocity()
-    animation.play('RollOut')
-    var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
-    print('performing ', trick)
-    animation.queue(trick)
-    animation.queue('RollUp')
+    
+    body.linear_velocity *= 1.2
     level += 1
     level_increased.emit(level)
     trick_allowed = false
     trick_cooldown_timer.start()
     trick_particles.emitting = true
+    await get_tree().create_timer(0.7).timeout
+    var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
+    print('performing ', trick)
+    body.do_reset_angular_velocity()
+    animation.queue(trick)
+    animation.queue('RollUp')
+    
 
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
@@ -191,7 +197,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
     if event.is_action_pressed("increase_gravity"):
         if state is not NotFlying:
+            animation.play('RollUp')
             state = NotFlying.new()
+            
         state.increase_gravity = true
     elif event.is_action_released("increase_gravity"):
         if state is NotFlying:
