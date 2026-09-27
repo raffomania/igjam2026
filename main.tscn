@@ -34,6 +34,7 @@ sky = SubResource("Sky_i3pqv")
 sky_rotation = Vector3(0.08552113, 0, 0)
 
 [node name="Main" type="Node3D" unique_id=1584255760]
+process_mode = 1
 
 [node name="Water" parent="." unique_id=1776032862 instance=ExtResource("1_efxa6")]
 unique_name_in_owner = true

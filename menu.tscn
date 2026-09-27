@@ -18,7 +18,7 @@ anchors_preset = 0
 mouse_filter = 1
 
 [node name="GameStartLayer" type="CanvasLayer" parent="." unique_id=90506946]
-layer = 20
+layer = 6
 
 [node name="Control" type="Control" parent="GameStartLayer" unique_id=1060702386]
 process_mode = 3
@@ -41,7 +41,7 @@ texture = ExtResource("2_l48gv")
 expand_mode = 2
 
 [node name="GameEndLayer" type="CanvasLayer" parent="." unique_id=1192252673]
-layer = 19
+layer = 9
 
 [node name="Control" type="Control" parent="GameEndLayer" unique_id=1384911661]
 layout_mode = 3

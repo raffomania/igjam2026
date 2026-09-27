@@ -7,14 +7,14 @@ extends Node
 
 
 func _ready() -> void:
-	var timer: Timer = Timer.new()
-	timer.wait_time = 0.5
-	timer.timeout.connect(_time_handling)
-	add_child(timer)
+    var timer: Timer = Timer.new()
+    timer.wait_time = 0.
+    timer.timeout.connect(_time_handling)
+    add_child(timer)
 
 
 func _time_handling():
-	sun_light.rotation.x += 5
+    sun_light.rotation.x += 5
 
-	sun.visible = sun.global_transform.basis.z.y < 0
-	moon.visible = moon.global_transform.basis.z.y < 0
+    sun.visible = sun.global_transform.basis.z.y < 0
+    moon.visible = moon.global_transform.basis.z.y < 0

@@ -1,12 +1,18 @@
 extends Control
 
+
 func _ready() -> void:
-    get_tree().paused = true
-    show()
+	get_tree().paused = true
+	show()
+
 
 func _input(event):
-    if get_tree().paused:
-        if event.is_pressed():
-            get_tree().paused = false
-            get_viewport().set_input_as_handled()
-            hide()
+	print("Entered Input tutorial")
+	if not visible:
+		return
+	if get_tree().paused and event.is_pressed() and not event.is_echo():
+		print("Entered Input tutorial")
+
+		get_tree().paused = false
+		hide()
+		get_viewport().set_input_as_handled()
