@@ -1,6 +1,6 @@
 extends Node
 
-var height_scale = 3 # meters
+var height_scale = 4 # meters
 var lowest_ground_frequency = 1.0 / 200.0 # repetitions per meter
 var texture_size = 20 # repetitions per meter
 var sand_texture_path = "res://assets/sand.png"
