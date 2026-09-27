@@ -14,6 +14,7 @@ material = SubResource("StandardMaterial3D_sweqy")
 size = Vector2(0.1, 0.1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_shbfg"]
+resource_local_to_scene = true
 friction = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_sh265"]
