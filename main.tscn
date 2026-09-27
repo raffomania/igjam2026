@@ -76,8 +76,5 @@ grow_vertical = 2
 [node name="MoewenSpawner" type="Node" parent="." unique_id=2098006524]
 script = ExtResource("12_dg77c")
 
-[node name="RandomSpawner" type="Node" parent="." unique_id=737412509]
-script = ExtResource("8_5vw27")
-
 [node name="GameEndCameraHolder" type="Node3D" parent="." unique_id=2077583894]
 script = ExtResource("13_ycdy4")
