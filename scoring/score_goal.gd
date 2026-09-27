@@ -12,8 +12,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-    if particles:
-        rotate(Vector3.UP, delta * 2)
+    rotate(Vector3.UP, delta * 2)
 
 
 func body_entered(body: Node3D) -> void:
