@@ -30,6 +30,10 @@ const trick_height_threshold = 1
 var level = 1
 var trick_allowed = true
 
+# when starting to roll up a hill, disable gravity boost for a short time
+var previous_linear_velocity := Vector3.ZERO
+var disable_active_gravity_boost_secs := 0.0
+
 var state: State = NotFlying.new():
     set(val):
         state = val
@@ -109,8 +113,20 @@ func random_trick() -> void:
     animation.queue('RollUp')
 
 
-func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
-    if not_flying.increase_gravity:
+func process_not_flying(delta: float, not_flying: NotFlying) -> void:
+    # If the player just started rolling up a hill, disable gravity boost
+    # for a short time even if they are still pressing the button.
+    # This forgives short timing mistakes
+    var changed_from_down_to_up_movement = (
+        previous_linear_velocity.y <= 0.0 and body.linear_velocity.y > 0.0
+    )
+    if changed_from_down_to_up_movement:
+        disable_active_gravity_boost_secs = 0.2
+
+    previous_linear_velocity = body.linear_velocity
+    disable_active_gravity_boost_secs -= delta
+
+    if not_flying.increase_gravity and disable_active_gravity_boost_secs <= 0.0:
         body.gravity_scale = gravity_bonus + level
     else:
         body.gravity_scale = 1.0
