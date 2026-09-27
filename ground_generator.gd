@@ -121,6 +121,12 @@ func get_sand_material():
     material.uv1_world_triplanar = true
     material.uv1_scale = Vector3.ONE * 1.0 / float(texture_size)
     material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+    material.roughness = 1
+    material.specular = 0
+    material.metallic = 0
+    material.metallic_specular = 0
+    material.diffuse_mode = BaseMaterial3D.DIFFUSE_LAMBERT
+
     return material
 
 

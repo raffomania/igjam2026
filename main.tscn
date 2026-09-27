@@ -5,24 +5,24 @@
 [ext_resource type="Script" uid="uid://dup20n105v71i" path="res://ground_generator.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ci1luabgo8dgb" path="res://player.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bsn7tn6tcl6xm" path="res://island_drown_manager.gd" id="3_dg77c"]
-[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
+[ext_resource type="Script" uid="uid://dj37gfuroib7l" path="res://dayand_night.gd" id="7_dg77c"]
 [ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://w1ufrciqdwxf" path="res://moewen_spawner.gd" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://dusvh7qlaqvsq" path="res://game_end_camera_holder.gd" id="13_ycdy4"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hqtel"]
-panorama = ExtResource("3_h2yge")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dg77c"]
 
 [sub_resource type="Sky" id="Sky_i3pqv"]
-sky_material = SubResource("PanoramaSkyMaterial_hqtel")
+sky_material = SubResource("ProceduralSkyMaterial_dg77c")
 
 [sub_resource type="Environment" id="Environment_onrkg"]
 background_mode = 2
 sky = SubResource("Sky_i3pqv")
+sky_rotation = Vector3(0.08552113, 0, 0)
 
 [node name="Main" type="Node3D" unique_id=1584255760]
 
@@ -46,8 +46,20 @@ script = ExtResource("3_dg77c")
 unique_name_in_owner = true
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 10.884613, 222.318)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=991819736]
-transform = Transform3D(0.86518234, -0.27927282, -0.41649285, 0.471934, 0.17269033, 0.86455554, -0.16952258, -0.9445552, 0.28120708, -3.4488335, 2.774324, 0)
+[node name="DayandNight" type="Node3D" parent="." unique_id=1922748305]
+transform = Transform3D(1, 0, 0, 0, 0.6984153, -0.71569276, 0, 0.71569276, 0.6984153, 0, 0, 0)
+script = ExtResource("7_dg77c")
+cycle_duration_seconds = 60.0
+
+[node name="Sun" type="DirectionalLight3D" parent="DayandNight" unique_id=991819736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Moon" type="DirectionalLight3D" parent="DayandNight" unique_id=1408476524]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
+light_color = Color(1, 1, 0.4745098, 1)
+light_energy = 0.114
+light_indirect_energy = 0.816
+sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=834092271]
 environment = SubResource("Environment_onrkg")
