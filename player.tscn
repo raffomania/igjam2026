@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://5yws7v4055v2" path="res://player_body.gd" id="2_i3pqv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sweqy"]
-albedo_color = Color(1, 0, 0, 1)
+albedo_color = Color(0.9999998, 0.7361659, 0.19580987, 1)
 metallic = 0.05
 metallic_specular = 0.54
 
