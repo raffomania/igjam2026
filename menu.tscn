@@ -78,7 +78,17 @@ theme_override_font_sizes/font_size = 29
 text = "Game Over!"
 horizontal_alignment = 1
 
-[node name="Score" type="Label" parent="GameEndLayer/Control/VBoxContainer" unique_id=2067202796]
+[node name="Distance" type="Label" parent="GameEndLayer/Control/VBoxContainer" unique_id=2067202796]
+layout_mode = 2
+text = "<Score>"
+horizontal_alignment = 1
+
+[node name="Combo" type="Label" parent="GameEndLayer/Control/VBoxContainer" unique_id=1502453342]
+layout_mode = 2
+text = "<Score>"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="GameEndLayer/Control/VBoxContainer" unique_id=789238050]
 layout_mode = 2
 text = "<Score>"
 horizontal_alignment = 1

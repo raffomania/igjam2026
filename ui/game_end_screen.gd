@@ -4,9 +4,11 @@ extends Control
 @onready var score_label: Label = $VBoxContainer/Score
 @onready var highscore_label: Label = $VBoxContainer/HighScore
 
+var curr_score := 0
 
 func _ready() -> void:
     GlobalManager.game_end.connect(_on_game_end)
+    GlobalManager.score_changed.connect(_on_score_changed)
     play_again.pressed.connect(_on_play_again_pressed)
     hide()
 
@@ -14,24 +16,24 @@ func _ready() -> void:
 func _on_play_again_pressed() -> void:
     GlobalManager.play_again()
 
+func _on_score_changed(score: int):
+    curr_score = score
 
 func _on_game_end():
-    var current_dist_score = int(get_island_distance_score())
+    var current_dist_score = curr_score
+    var current_multi = GlobalManager.player.level
+    var total = current_dist_score * current_multi
     var highscore = load_highscore()
 
-    if current_dist_score > highscore:
-        save_highscore(current_dist_score)
-        highscore = current_dist_score
+    if total > highscore:
+        save_highscore(total)
+        highscore = total
 
-    score_label.text = "Distance Score: " + str(current_dist_score) + "m"
-    highscore_label.text = "High Score: " + str(highscore) + "m"
+    score_label.text = "Distance: " + str(current_dist_score) + "m"
+    score_label.text = "Combo Multi: x" + str(current_multi)
+    score_label.text = "Total Score: " + str(total)
+    highscore_label.text = "High Score: " + str(highscore)
     show()
-
-
-func get_island_distance_score():
-    var player_pos = GlobalManager.player_body.position
-    var distance = Vector2(player_pos.x, player_pos.z).distance_to(Vector2.ZERO)
-    return distance
 
 
 const SAVE_PATH = "user://highscore.bin"

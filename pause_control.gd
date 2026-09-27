@@ -5,37 +5,37 @@ extends Control
 
 
 func _ready() -> void:
-	print("ready to menu")
-	resume_button.pressed.connect(resume_button_pressed)
-	exit_button.pressed.connect(exit_button_pressed)
-	hide()
+    print("ready to menu")
+    resume_button.pressed.connect(resume_button_pressed)
+    exit_button.pressed.connect(exit_button_pressed)
+    hide()
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Pause"):
-		if get_tree().paused and not visible:
-			return
-		pause_menu_change()
+    if event.is_action_pressed("Pause"):
+        if get_tree().paused and not visible:
+            return
+        pause_menu_change()
 
 
 func pause_menu_change():
-	get_tree().paused = not get_tree().paused
+    get_tree().paused = not get_tree().paused
 
-	if get_tree().paused:
-		show()
-		print("Pause Menu open")
+    if get_tree().paused:
+        show()
+        print("Pause Menu open")
 
-	else:
-		hide()
-		print("Pause Menu closed")
+    else:
+        hide()
+        print("Pause Menu closed")
 
 
 func resume_button_pressed() -> void:
-	print("resume")
-	pause_menu_change()
+    print("resume")
+    pause_menu_change()
 
 
 func exit_button_pressed() -> void:
-	pause_menu_change()
-	get_tree().quit()
-	print("Exit")
+    pause_menu_change()
+    get_tree().quit()
+    print("Exit")

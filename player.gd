@@ -17,13 +17,15 @@ var input_direction = Vector3.ZERO
 
 @onready var initial_camera_pivot_rotation = camera_pivot.rotation
 
+signal trick_hint(text: String)
+
 const not_flying_camera_pivot_angle := -25.0
 
 const ground_speed := 16.0
 var gravity_bonus := 7.0
 var gravity_scale_override := 1.0
 const trick_threshold_speed = 15
-const trick_threshold_up_speed = 40
+const trick_threshold_up_speed = 10
 const trick_height_threshold = 1
 var level = 1
 var trick_allowed = true
@@ -208,7 +210,6 @@ func _unhandled_input(event: InputEvent) -> void:
                     if (abs(velocity.y) < trick_threshold_up_speed):
                         print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
                         random_trick()
-
                     elif (velocity.y < trick_threshold_up_speed):
                         print('Released too early!')
                         level -= 1
@@ -220,6 +221,7 @@ func _unhandled_input(event: InputEvent) -> void:
                             ' Upspeed: ',
                             velocity.y,
                         )
+                        trick_hint.emit('Released too early!')
                     else:
                         print('Release too late!')
                         level -= 1
@@ -231,6 +233,10 @@ func _unhandled_input(event: InputEvent) -> void:
                             ' Upspeed: ',
                             velocity.y,
                         )
+                        trick_hint.emit('Released too late!')
+                else:
+                    print('too slow')
+                    trick_hint.emit('Released too late!')
 
     if event.is_action_pressed("cheat_add_gravity_boost"):
         level += 10

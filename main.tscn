@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dn3s8251qfi" path="res://random_spawner.gd" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b4ukajd8e6crb" path="res://level_display.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://buqwmxmd5hi2r" path="res://scoring/hints.tscn" id="11_d13ii"]
 [ext_resource type="Script" uid="uid://w1ufrciqdwxf" path="res://moewen_spawner.gd" id="12_dg77c"]
 [ext_resource type="Script" uid="uid://dusvh7qlaqvsq" path="res://game_end_camera_holder.gd" id="13_ycdy4"]
 [ext_resource type="Script" uid="uid://05jtx3fr76t0" path="res://sky_scatterer.gd" id="14_w48qg"]
@@ -94,6 +95,8 @@ script = ExtResource("12_dg77c")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1978039488]
 layer = 2
 
+[node name="Hints" parent="CanvasLayer" unique_id=1355555733 instance=ExtResource("11_d13ii")]
+
 [node name="LevelUI" parent="CanvasLayer" unique_id=367470182 instance=ExtResource("10_4c57u")]
 
 [node name="ScoreUI" type="Control" parent="CanvasLayer" unique_id=1469445148]
@@ -104,7 +107,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Score" parent="CanvasLayer" unique_id=1355555733 instance=ExtResource("9_kek77")]
+[node name="Score" parent="CanvasLayer" unique_id=450572688 instance=ExtResource("9_kek77")]
 
 [node name="GameEndCameraHolder" type="Node3D" parent="." unique_id=2077583894]
 script = ExtResource("13_ycdy4")
