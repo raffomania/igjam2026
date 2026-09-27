@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://02lecr2xqhnr" path="res://scoring/score.gd" id="1_qin7x"]
 [ext_resource type="Texture2D" uid="uid://dc0sn8vnm2kpl" path="res://assets/button_backgrounds/A Button.png" id="2_bpqdx"]
+[ext_resource type="Texture2D" uid="uid://d3pt00q64tqmv" path="res://assets/button_backgrounds/D Button.png" id="3_n2bn4"]
 
 [sub_resource type="Animation" id="Animation_svw4u"]
 length = 0.5
@@ -111,18 +112,31 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=585814108]
+[node name="Left" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=585814108]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1358392051]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Left" unique_id=1358392051]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Left"
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=341797504]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Left" unique_id=341797504]
 layout_mode = 2
 texture = ExtResource("2_bpqdx")
+
+[node name="Right" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1700497595]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Right" unique_id=1703684601]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Right"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Right" unique_id=1289067299]
+layout_mode = 2
+texture = ExtResource("3_n2bn4")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1737737291]
 layout_mode = 2
