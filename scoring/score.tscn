@@ -83,7 +83,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Forward" unique_id=875399414]
-custom_maximum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("4_r8sw7")
@@ -93,7 +93,7 @@ stretch_mode = 4
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Left" unique_id=341797504]
-custom_maximum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("2_bpqdx")
@@ -103,7 +103,7 @@ stretch_mode = 4
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Backward" unique_id=690495323]
-custom_maximum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("5_mab1w")
@@ -114,13 +114,14 @@ layout_mode = 2
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Right" unique_id=1289067299]
-custom_maximum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("3_n2bn4")
 stretch_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1456779306]
+custom_maximum_size = Vector2(30, 30)
 layout_mode = 2
 texture = ExtResource("6_vjb1o")
 
@@ -133,13 +134,14 @@ theme_override_font_sizes/font_size = 20
 text = "DIVE   "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Shift" unique_id=1891850766]
-custom_maximum_size = Vector2(160, 40)
+custom_maximum_size = Vector2(80, 20)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("6_60ad5")
 stretch_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/Shift" unique_id=1389434488]
+custom_maximum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("7_hl5yf")
@@ -153,13 +155,14 @@ theme_override_font_sizes/font_size = 20
 text = "CURL   "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1107628904]
-custom_maximum_size = Vector2(160, 40)
+custom_maximum_size = Vector2(80, 20)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("7_ji6bp")
 stretch_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1388676301]
+custom_maximum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("9_7o0a1")
