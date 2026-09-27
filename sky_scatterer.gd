@@ -29,7 +29,7 @@ func _ready() -> void:
         spawn_object_initial()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     if deleted > amount:
         max_objects = amount
     var distance_from_origin
