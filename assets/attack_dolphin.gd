@@ -12,7 +12,7 @@ func _ready() -> void:
     camera = GlobalManager.player.camera
 
     var spawn_position = player.global_position + \
-    player.global_position.normalized() * (240 + randf_range(-1.0, 1.0) * 50)
+    player.global_position.normalized() * (240 + randf_range(-1.0, 1.0) * 50) * max(1.0, player.linear_velocity.length() / 65)
     spawn_position.y = -50 + randf_range(-1.0, 0.5) * 80
     global_position = spawn_position
     if randf_range(0.0, 1.0) > 0.5:

@@ -20,6 +20,7 @@ var furthest_scatter: float = Vector2(spread_x, spread_z).length() / 2.5
 @export var max_objects: int = 7000
 
 var spawned_objects: Array[Node3D] = []
+var deleted: int = 0
 
 func _ready() -> void:
     randomize()
@@ -27,7 +28,8 @@ func _ready() -> void:
         spawn_object_initial()
         
 func _process(delta: float) -> void:
-    
+    if deleted > amount:
+        max_objects = amount
     var distance_from_origin := Vector2(
         player.global_position.x,
         player.global_position.z
@@ -89,7 +91,7 @@ func spawn_object(pos: Vector3) -> void:
     # Optional: Zufällige Rotation und Skalierung für mehr Natürlichkeit
     instance.rotation = Vector3(randf_range(0, TAU), randf_range(0, TAU), randf_range(0, TAU))
     var scale_factor = randf_range(scale_min, scale_max)
-    instance.scale = Vector3.ONE * scale_factor # bzw. instance.scale = Vector3.ONE * scale_factor
+    instance.scale *= scale_factor # bzw. instance.scale = Vector3.ONE * scale_factor
     
     add_child(instance)
     
@@ -97,5 +99,6 @@ func spawn_object(pos: Vector3) -> void:
 
     if spawned_objects.size() > max_objects:
         var oldest = spawned_objects.pop_front()
+        deleted += 1
         if is_instance_valid(oldest):
             oldest.queue_free()
