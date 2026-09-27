@@ -88,7 +88,7 @@ func random_trick() -> void:
         return
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
-    
+
     body.linear_velocity *= 1.2
     level += 1
     level_increased.emit(level)
@@ -103,7 +103,6 @@ func random_trick() -> void:
     body.do_reset_angular_velocity()
     animation.queue(trick)
     animation.queue('RollUp')
-    
 
 
 func process_not_flying(_delta: float, not_flying: NotFlying) -> void:
@@ -199,7 +198,7 @@ func _unhandled_input(event: InputEvent) -> void:
         if state is not NotFlying:
             animation.play('RollUp')
             state = NotFlying.new()
-            
+
         state.increase_gravity = true
     elif event.is_action_released("increase_gravity"):
         if state is NotFlying:
@@ -216,13 +215,13 @@ func _unhandled_input(event: InputEvent) -> void:
                 elif (velocity.y < trick_threshold_up_speed):
                     print('Released too early!')
                     level -= 1
-                    level = max(0, level)
+                    level = max(1, level)
                     level_increased.emit(level)
                     print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
                 else:
                     print('Release too late!')
                     level -= 1
-                    level = max(0, level)
+                    level = max(1, level)
                     level_increased.emit(level)
                     print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
 
