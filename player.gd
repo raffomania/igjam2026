@@ -25,7 +25,7 @@ const ground_speed := 16.0
 var gravity_bonus := 7.0
 var gravity_scale_override := 1.0
 const trick_threshold_speed = 15
-const trick_threshold_up_speed = 10
+const trick_threshold_up_speed = 25
 const trick_height_threshold = 1
 var level = 1
 var trick_allowed = true
@@ -209,6 +209,7 @@ func _unhandled_input(event: InputEvent) -> void:
                 if speed > trick_threshold_speed:
                     if (abs(velocity.y) < trick_threshold_up_speed):
                         print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
+                        trick_hint.emit('Perfect!')
                         random_trick()
                     elif (velocity.y < trick_threshold_up_speed):
                         print('Released too early!')
