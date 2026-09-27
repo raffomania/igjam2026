@@ -7,9 +7,9 @@ var num_waterballs = 50
 
 
 func _ready() -> void:
-    var preloaded_shovel_blue = preload("res://assets/separated/ShovelBlue.tscn")
-    var preloaded_shovel_green = preload("res://assets/separated/ShovelGreen.tscn")
-    var preloaded_shovel_red = preload("res://assets/separated/ShovelRed.tscn")
+    var preloaded_shovel_blue = preload("res://obstacles/ShovelBlue.tscn")
+    var preloaded_shovel_green = preload("res://obstacles/ShovelGreen.tscn")
+    var preloaded_shovel_red = preload("res://obstacles/ShovelRed.tscn")
     var preloaded_sand_castle = preload("res://assets/separated/SandCastle.tscn")
     var preloaded_water_ball = preload("res://assets/separated/WaterBall.tscn")
 
