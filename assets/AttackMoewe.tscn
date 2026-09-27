@@ -7,3 +7,4 @@
 script = ExtResource("1_sctvw")
 
 [node name="Moewe" parent="." unique_id=2034032049 instance=ExtResource("2_etr04")]
+transform = Transform3D(8.742278e-08, -1, -5.9604645e-08, -5.9604645e-08, 0, -1, 1, 2.7818132e-08, 5.2108035e-15, 0, 0, 0)

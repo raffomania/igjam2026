@@ -6,11 +6,15 @@ extends Node
 @export var min_delay: float = 1.0
 @export var max_delay: float = 5.0
 
+var start_attacking: bool = false
 
-func _ready() -> void:
-    #spawn_attacker()
-    #start_random_timer()
-    pass
+    
+func _process(delta: float) -> void:
+    if !start_attacking:
+        var position = Vector2(GlobalManager.player_body.global_position.x, GlobalManager.player_body.global_position.z)
+        if position.length() > 350:
+            start_random_timer()
+            start_attacking = true
 
 func start_random_timer() -> void:
     timer.wait_time = randf_range(1.0, 5.0)

@@ -225,4 +225,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_game_end():
-    $CameraPivot/SpringArm3D/Camera3D.reparent(GlobalManager.game_end_camera)
+    var camera = get_node_or_null("CameraPivot/SpringArm3D/Camera3D")
+    if camera:
+        camera.reparent(GlobalManager.game_end_camera)

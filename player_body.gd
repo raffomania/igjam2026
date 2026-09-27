@@ -35,7 +35,11 @@ func _ready() -> void:
     self.body_entered.connect(_landed)
 
 
-func _landed(_body):
+func _landed(_body: Node):
+    if _body.get_parent().get_parent() is AttackMoewe:
+        GlobalManager.game_end.emit()
+        return
+        
     if first_land:
         in_air = false
         last_height = 0.0

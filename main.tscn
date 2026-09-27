@@ -56,6 +56,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -84.944, 10
 
 [node name="DayandNight" type="Node3D" parent="." unique_id=1922748305]
 transform = Transform3D(1, 0, 0, 0, 0.6984153, -0.71569276, 0, 0.71569276, 0.6984153, 0, 0, 0)
+visible = false
 script = ExtResource("7_dg77c")
 cycle_duration_seconds = 60.0
 
@@ -111,8 +112,5 @@ script = ExtResource("19_cegan")
 attackers = Array[PackedScene]([ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("20_getpj"), ExtResource("21_ryguw")])
 
 [node name="Timer" type="Timer" parent="AttackerManager" unique_id=456642282]
-
-[node name="AttackMoewe" parent="." unique_id=835567613 instance=ExtResource("20_getpj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -129.06908, 95.41199, -117.16381)
 
 [connection signal="timeout" from="AttackerManager/Timer" to="AttackerManager" method="_on_timer_timeout"]

@@ -1,26 +1,34 @@
-extends Node3D
+class_name AttackMoewe extends Node3D
 
 var camera: Camera3D
 var player: RigidBody3D
 
-@export var speed: float = 100.0
-@export var rotation_speed: float = 5.0
-@export var depth_percentage: float = 0.2
+@export var speed: float = 150.0
+@export var depth_percentage: float = 0.4
+
+var close: bool = false
 
 func _ready() -> void:
     player = GlobalManager.player_body
     camera = GlobalManager.player.camera
     randomize()
 
-    var spawn_position = get_random_point_in_far_fov()
+    var spawn_position = player.global_position + \
+    player.global_position.normalized() * 250 + \
+    player.global_position.normalized().cross(Vector3.UP) * randf_range(-1.0, 1.0) * 60
+    spawn_position.y = player.global_position.y + 30
     self.set_position(spawn_position)
-    self.look_at(player.get_position())
+    self.look_at(player.global_position)
 
 func _physics_process(delta: float) -> void:
-    self.look_at(player.get_position())
+    if (player.global_position - global_position).length() < 50:
+        close = true
+        
+    if !close:
+        self.look_at(player.global_position)
     
     var forward_dir: Vector3 = -global_transform.basis.z
-    global_position += forward_dir * speed * delta
+    position += forward_dir * speed * delta
 
 func get_random_point_in_far_fov() -> Vector3:
     var target_depth: float = camera.far * depth_percentage
@@ -39,3 +47,6 @@ func get_random_point_in_far_fov() -> Vector3:
     )
     
     return global_point
+    
+func _on_body_entered(body: Node) -> void:
+    print("Hit: ", body)
