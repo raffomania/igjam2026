@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ryguw"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
+[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="7_cegan"]
 [ext_resource type="Script" uid="uid://dj37gfuroib7l" path="res://dayand_night.gd" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="8_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
@@ -18,6 +19,17 @@
 [ext_resource type="PackedScene" uid="uid://ceyu2h8wothih" path="res://assets/AttackMoewe.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://dsn40khqqjwhp" path="res://assets/AttackDolphin.tscn" id="21_ryguw"]
 [ext_resource type="AudioStream" uid="uid://yaabfgihukmc" path="res://assets/Shrimpy_Loop.wav" id="23_d13ii"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_074og"]
+panorama = ExtResource("7_cegan")
+
+[sub_resource type="Sky" id="Sky_82xsv"]
+sky_material = SubResource("PanoramaSkyMaterial_074og")
+
+[sub_resource type="Environment" id="Environment_getpj"]
+background_mode = 2
+sky = SubResource("Sky_82xsv")
+sky_rotation = Vector3(0.08552113, 0, 0)
 
 [node name="Main" type="Node3D" unique_id=1584255760]
 process_mode = 1
@@ -39,9 +51,10 @@ script = ExtResource("7_dg77c")
 cycle_duration_seconds = 60.0
 
 [node name="Sun" type="DirectionalLight3D" parent="DayandNight" unique_id=991819736]
-transform = Transform3D(-0.8660254, 0.3958012, 0.3055181, -0.39580122, -0.16931596, -0.90259266, -0.30551812, -0.9025926, 0.30329055, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.4383711, -0.898794, 0, 0.898794, -0.4383711, 0, 0, 0)
 light_color = Color(1, 0.958, 0.88, 1)
 shadow_enabled = true
+directional_shadow_max_distance = 120.0
 
 [node name="Moon" type="DirectionalLight3D" parent="DayandNight" unique_id=1408476524]
 transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
@@ -52,6 +65,7 @@ light_indirect_energy = 0.816
 sky_mode = 1
 
 [node name="WorldEnvironment" parent="." unique_id=1718286727 instance=ExtResource("8_1u8w0")]
+environment = SubResource("Environment_getpj")
 
 [node name="Dolphin" parent="." unique_id=692781486 instance=ExtResource("4_1bvp3")]
 transform = Transform3D(-0.4989294, -0.032702524, 0, 0.032702524, -0.4989294, 0, 0, 0, 0.5, 38.178703, 66.11642, 353.35184)
