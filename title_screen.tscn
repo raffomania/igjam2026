@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmqw3owlghi1u" path="res://water.tscn" id="1_v6p8y"]
 [ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="2_ak2if"]
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ig5kc"]
-[ext_resource type="Script" path="res://title_camera_rotation.gd" id="3_rhgbh"]
+[ext_resource type="Script" uid="uid://cppmoqmcad375" path="res://title_camera_rotation.gd" id="3_rhgbh"]
 [ext_resource type="PackedScene" uid="uid://ddvygkpn8cd0m" path="res://sky_scatterer.tscn" id="4_05l2w"]
 [ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/button_backgrounds/menu_buttons/New Game Button.png" id="5_tpml5"]
 [ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="7_013yr"]
@@ -88,7 +88,7 @@ cycle_duration_seconds = 60.0
 transform = Transform3D(1, 0, 0, 0, -0.4383711, -0.898794, 0, 0.898794, -0.4383711, 0, 0, 0)
 light_color = Color(1, 0.958, 0.88, 1)
 shadow_enabled = true
-directional_shadow_max_distance = 120.0
+directional_shadow_max_distance = 759.1
 
 [node name="Moon" type="DirectionalLight3D" parent="WorldEnvironment/DayandNight" unique_id=1651202228]
 transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
