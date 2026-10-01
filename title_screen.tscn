@@ -8,6 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/button_backgrounds/menu_buttons/New Game Button.png" id="5_tpml5"]
 [ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="7_013yr"]
 [ext_resource type="PackedScene" uid="uid://dbcykcl8r400" path="res://exit_button.tscn" id="8_013yr"]
+[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="9_8vmu4"]
+[ext_resource type="Script" uid="uid://dj37gfuroib7l" path="res://dayand_night.gd" id="10_xfn3p"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xfn3p"]
+panorama = ExtResource("9_8vmu4")
+
+[sub_resource type="Sky" id="Sky_82xsv"]
+sky_material = SubResource("PanoramaSkyMaterial_xfn3p")
+
+[sub_resource type="Environment" id="Environment_rhgbh"]
+background_mode = 2
+sky = SubResource("Sky_82xsv")
+sky_rotation = Vector3(0.08552113, 0, 0)
 
 [node name="TitleScreen" type="Node3D" unique_id=1632361790]
 script = ExtResource("1_jqemp")
@@ -17,8 +30,6 @@ script = ExtResource("1_jqemp")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1965843114]
 transform = Transform3D(1, 0, 0, 0, 0.97242963, 0.23319659, 0, -0.23319659, 0.97242963, 0, 119.55203, -33.548996)
 fov = 122.6
-
-[node name="WorldEnvironment" parent="." unique_id=1718286727 instance=ExtResource("2_ak2if")]
 
 [node name="GroundGenerator" parent="." unique_id=1484173325 instance=ExtResource("3_ig5kc")]
 
@@ -62,3 +73,25 @@ script = ExtResource("7_013yr")
 
 [node name="Exit" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=973863039 instance=ExtResource("8_013yr")]
 layout_mode = 2
+
+[node name="WorldEnvironment" parent="." unique_id=1718286727 instance=ExtResource("2_ak2if")]
+environment = SubResource("Environment_rhgbh")
+
+[node name="DayandNight" type="Node3D" parent="WorldEnvironment" unique_id=917607333]
+transform = Transform3D(1, 0, 0, 0, -0.61103636, 0.7916026, 0, -0.7916026, -0.61103636, 0, 0, 0)
+script = ExtResource("10_xfn3p")
+cycle_duration_seconds = 60.0
+
+[node name="Sun" type="DirectionalLight3D" parent="WorldEnvironment/DayandNight" unique_id=904535133]
+transform = Transform3D(1, 0, 0, 0, -0.4383711, -0.898794, 0, 0.898794, -0.4383711, 0, 0, 0)
+light_color = Color(1, 0.958, 0.88, 1)
+shadow_enabled = true
+directional_shadow_max_distance = 120.0
+
+[node name="Moon" type="DirectionalLight3D" parent="WorldEnvironment/DayandNight" unique_id=1651202228]
+transform = Transform3D(1, 0, 0, 0, -1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0)
+visible = false
+light_color = Color(1, 1, 0.4745098, 1)
+light_energy = 0.114
+light_indirect_energy = 0.816
+sky_mode = 1
