@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://qk5qs1rkkjuv" path="res://assets/button_backgrounds/xbox_rt.png" id="7_hl5yf"]
 [ext_resource type="Texture2D" uid="uid://c1k5547tep3xa" path="res://assets/button_backgrounds/Space Button.png" id="7_ji6bp"]
 [ext_resource type="Texture2D" uid="uid://ds1n1cdjccok1" path="res://assets/button_backgrounds/xbox_button_a.png" id="9_7o0a1"]
+[ext_resource type="Script" uid="uid://dh4vx04u6k3wm" path="res://show_flight.gd" id="9_dajue"]
 
 [sub_resource type="Animation" id="Animation_svw4u"]
 length = 0.5
@@ -148,11 +149,12 @@ texture = ExtResource("7_hl5yf")
 
 [node name="space" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1116182024]
 layout_mode = 2
+script = ExtResource("9_dajue")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/space" unique_id=330561967]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "CURL "
+text = "FLY "
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/space" unique_id=1107628904]
 custom_maximum_size = Vector2(80, 20)
