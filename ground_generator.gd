@@ -34,9 +34,10 @@ func generate_sand():
     var normals = PackedVector3Array()
     var indices = PackedInt32Array()
 
-    verts = create_grid_vertices()
+    var verts_normals = create_grid_vertices_and_normals()
+    verts = verts_normals[0]
+    normals = verts_normals[1]
     indices = create_grid_indices()
-    normals = create_normals()
     surface_array[Mesh.ARRAY_VERTEX] = verts
     surface_array[Mesh.ARRAY_NORMAL] = normals
     surface_array[Mesh.ARRAY_INDEX] = indices
@@ -60,7 +61,7 @@ func generate_sand():
     add_child(mesh_instace)
 
 
-func create_grid_vertices():
+func create_grid_vertices_and_normals():
     var grid_vertices = PackedVector3Array()
     for x in range(vertices_per_dimension):
         for z in range(vertices_per_dimension):
@@ -77,7 +78,12 @@ func create_grid_vertices():
             grid_vertices.push_back(vertex_position)
     # print("grid_vertices", len(grid_vertices))
     assert(len(grid_vertices) == (resolution * size) ** 2)
-    return grid_vertices
+
+    var normals = PackedVector3Array()
+    for n in range((vertices_per_dimension) * (vertices_per_dimension)):
+        normals.push_back(Vector3.UP)
+
+    return [grid_vertices, normals]
 
 
 func create_grid_indices():
@@ -97,14 +103,6 @@ func create_grid_indices():
     return indices
 
 
-func create_normals():
-    #TODO: needs to depend on sin functions
-    var normals = PackedVector3Array()
-    for n in range((vertices_per_dimension) * (vertices_per_dimension)):
-        normals.push_back(Vector3.UP)
-    return normals
-
-
 func get_sand_material():
     var material = StandardMaterial3D.new()
     var texture = load(sand_texture_path)
@@ -119,7 +117,8 @@ func get_sand_material():
     material.metallic_specular = 0
     material.diffuse_mode = BaseMaterial3D.DIFFUSE_LAMBERT
 
-    return material
+    return StandardMaterial3D.new()
+    # return material
 
 
 func is_water(x, z):
