@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dmqw3owlghi1u" path="res://water.tscn" id="1_v6p8y"]
 [ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="2_ak2if"]
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ig5kc"]
+[ext_resource type="Script" path="res://title_camera_rotation.gd" id="3_rhgbh"]
 [ext_resource type="PackedScene" uid="uid://ddvygkpn8cd0m" path="res://sky_scatterer.tscn" id="4_05l2w"]
 [ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/button_backgrounds/menu_buttons/New Game Button.png" id="5_tpml5"]
 [ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="7_013yr"]
@@ -30,6 +31,7 @@ script = ExtResource("1_jqemp")
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1965843114]
 transform = Transform3D(1, 0, 0, 0, 0.97242963, 0.23319659, 0, -0.23319659, 0.97242963, 0, 119.55203, -33.548996)
 fov = 122.6
+script = ExtResource("3_rhgbh")
 
 [node name="GroundGenerator" parent="." unique_id=1484173325 instance=ExtResource("3_ig5kc")]
 
