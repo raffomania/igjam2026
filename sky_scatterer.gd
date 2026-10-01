@@ -96,6 +96,8 @@ func spawn_object(pos: Vector3) -> void:
     var scale_factor = randf_range(scale_min, scale_max)
     instance.scale *= scale_factor # bzw. instance.scale = Vector3.ONE * scale_factor
 
+    set_cast_shadow(instance, GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
+
     add_child(instance)
 
     spawned_objects.push_back(instance)
@@ -105,3 +107,10 @@ func spawn_object(pos: Vector3) -> void:
         deleted += 1
         if is_instance_valid(oldest):
             oldest.queue_free()
+
+
+func set_cast_shadow(node: Node, mode: GeometryInstance3D.ShadowCastingSetting) -> void:
+    if node is GeometryInstance3D:
+        node.cast_shadow = mode
+    for child in node.get_children():
+        set_cast_shadow(child, mode)
