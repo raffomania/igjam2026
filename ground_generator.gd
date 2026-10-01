@@ -23,28 +23,22 @@ var center_point = Vector2.ZERO
 func _ready():
     generate_sand()
 
-    # water_hit.connect(func():print("heyo"))
-
 
 func generate_sand():
-    var surface_array = []
-    surface_array.resize(Mesh.ARRAY_MAX)
+    var st = SurfaceTool.new()
+    st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-    var verts = PackedVector3Array()
-    var normals = PackedVector3Array()
-    var indices = PackedInt32Array()
+    var verts: PackedVector3Array = create_grid_vertices_and_normals()[0]
+    var indices: PackedInt32Array = create_grid_indices()
 
-    var verts_normals = create_grid_vertices_and_normals()
-    verts = verts_normals[0]
-    normals = verts_normals[1]
-    indices = create_grid_indices()
-    surface_array[Mesh.ARRAY_VERTEX] = verts
-    surface_array[Mesh.ARRAY_NORMAL] = normals
-    surface_array[Mesh.ARRAY_INDEX] = indices
+    for v in verts:
+        st.add_vertex(v)
+    for i in indices:
+        st.add_index(i)
 
-    var array_mesh = ArrayMesh.new()
-    array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, surface_array)
+    st.generate_normals()
 
+    var array_mesh := st.commit()
     var mesh_instace = MeshInstance3D.new()
     mesh_instace.mesh = array_mesh
     mesh_instace.position = Vector3.ONE * -0.5 * size
@@ -54,7 +48,6 @@ func generate_sand():
 
     # set collider
     $SandCollisionShape.shape = array_mesh.create_trimesh_shape()
-    # $CollisionShape3D.scale = mesh_instace.scale
     $SandCollisionShape.position = mesh_instace.position
 
     mesh_instace.name = "SandMesh"
@@ -63,9 +56,10 @@ func generate_sand():
 
 func create_grid_vertices_and_normals():
     var grid_vertices = PackedVector3Array()
+    var normals = PackedVector3Array()
+
     for x in range(vertices_per_dimension):
         for z in range(vertices_per_dimension):
-            #TODO: calculate y based on sin functions
             var x_pos = x * grid_vertex_distance
             var z_pos = z * grid_vertex_distance
 
@@ -76,10 +70,9 @@ func create_grid_vertices_and_normals():
 
             var vertex_position = Vector3(x_pos, y, z_pos)
             grid_vertices.push_back(vertex_position)
-    # print("grid_vertices", len(grid_vertices))
+
     assert(len(grid_vertices) == (resolution * size) ** 2)
 
-    var normals = PackedVector3Array()
     for n in range((vertices_per_dimension) * (vertices_per_dimension)):
         normals.push_back(Vector3.UP)
 
@@ -117,8 +110,7 @@ func get_sand_material():
     material.metallic_specular = 0
     material.diffuse_mode = BaseMaterial3D.DIFFUSE_LAMBERT
 
-    return StandardMaterial3D.new()
-    # return material
+    return material
 
 
 func is_water(x, z):
