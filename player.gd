@@ -213,7 +213,7 @@ func look_into_nose_direction(delta):
 
 
 func is_flight_allowed():
-    return true
+    return level > 5
 
 
 func _unhandled_input(event: InputEvent) -> void:
