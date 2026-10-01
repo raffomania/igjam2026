@@ -97,6 +97,7 @@ attackers = Array[PackedScene]([ExtResource("21_ryguw"), ExtResource("20_getpj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=745792076]
 stream = ExtResource("23_d13ii")
+volume_db = -1.36
 autoplay = true
 
 [connection signal="timeout" from="AttackerManager/Timer" to="AttackerManager" method="_on_timer_timeout"]

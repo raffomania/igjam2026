@@ -2,7 +2,7 @@ extends Node3D
 @onready var sun = $Sun
 @onready var moon = $Moon
 
-@export var cycle_duration_seconds: float = 120.0
+@export var cycle_duration_seconds: float = 240.0
 
 
 func _process(delta: float) -> void:
