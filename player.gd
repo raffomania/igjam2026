@@ -25,10 +25,11 @@ const ground_speed := 16.0
 var gravity_bonus := 7.0
 var gravity_scale_override := 1.0
 const trick_threshold_speed = 25
-const trick_threshold_up_speed = 25
-const trick_height_threshold = 1
+const trick_threshold_up_speed = 40
+const trick_threshold_charge_time = 3.0
+const trick_threshold_y_travel = 10.0
+const trick_threshold_height = 2
 const trick_cooldown_secs = 1.5
-const trick_min_charge_time = 3.0
 var level = 1
 
 # when starting to roll up a hill, disable gravity boost for a short time
@@ -64,6 +65,13 @@ class NotFlying:
     # how long the player has pressed the gravity increase button,
     # they can only do tricks after pressing it for a minimum time
     var trick_charge_time := 0.0
+    var trick_y_start = null
+
+
+    func trick_y_travel(body: PhysicsBody3D) -> float:
+        if trick_y_start == null:
+            return 0.0
+        return body.global_position.y - trick_y_start
 
 
 func _ready() -> void:
@@ -85,6 +93,11 @@ func _body_entered(_other: Node3D):
     if state is Flying:
         state = NotFlying.new()
 
+    # Once the player touches the ground, start measuring how steep the
+    # hill they're rolling down is
+    if state.increase_gravity and state.trick_y_start == null:
+        state.trick_y_start = body.global_position.y
+
 
 func get_height_above_ground() -> float:
     var ground_height = ground_generator.calculate_ground_height(
@@ -98,11 +111,17 @@ func process_flying(_delta: float) -> void:
     body.gravity_scale = 1.0
 
 
-func random_trick(speed_boost_force := 2) -> void:
-    if !trick_allowed():
-        return
-
-    trick_hint.emit('Perfect!', true)
+func random_trick(speed_boost_force := 20) -> void:
+    if state is NotFlying:
+        state.trick_y_start = null
+    var quality = trick_timing_quality()
+    match quality:
+        TrickQuality.OK:
+            trick_hint.emit('OK')
+        TrickQuality.GOOD:
+            trick_hint.emit('Good')
+        TrickQuality.PERFECT:
+            trick_hint.emit('Perfect!', true)
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
 
@@ -247,7 +266,15 @@ func _on_game_end():
 
 
 func handle_trick() -> void:
-    if get_height_above_ground() < trick_height_threshold and trick_allowed():
+    var no_cooldown = trick_cooldown_timer.time_left <= 0.0
+    var dive_long_enough = (
+        state is NotFlying and state.trick_charge_time >= trick_threshold_charge_time
+    )
+    var close_to_ground = get_height_above_ground() < trick_threshold_height
+    var enough_y_travel = (
+        state is NotFlying and abs(state.trick_y_travel(body)) > trick_threshold_y_travel
+    )
+    if close_to_ground and dive_long_enough and no_cooldown and enough_y_travel:
         var velocity = body.linear_velocity
         var speed = velocity.length()
         print('height ', get_height_above_ground())
@@ -255,30 +282,45 @@ func handle_trick() -> void:
             if (abs(velocity.y) < trick_threshold_up_speed):
                 print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
                 random_trick()
-            elif (velocity.y < trick_threshold_up_speed):
+            elif (sign(velocity.y) == -1):
+                # player is moving downwards
                 level -= 1
                 level = max(1, level)
                 level_increased.emit(level)
                 print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
                 trick_hint.emit('Released too early!')
             else:
+                # player is moving upwards
                 level -= 1
                 level = max(1, level)
                 level_increased.emit(level)
                 print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
                 trick_hint.emit('Released too late!')
         else:
-            print('too slow')
+            print('too slow, speed: ', speed)
             trick_hint.emit('Too slow!')
+    elif not dive_long_enough:
+        trick_hint.emit("Dive too short!")
+    elif not no_cooldown:
+        trick_hint.emit("Trick on cooldown!")
+    elif not close_to_ground:
+        trick_hint.emit("Not on ground!")
+    elif not enough_y_travel:
+        trick_hint.emit("Jumped too flat!")
+
+
+enum TrickQuality {
+    OK,
+    GOOD,
+    PERFECT,
+}
+
+
+func trick_timing_quality() -> TrickQuality:
+    var up_velocity = abs(body.linear_velocity.y)
+    if up_velocity < (trick_threshold_up_speed * .3):
+        return TrickQuality.PERFECT
+    elif up_velocity < (trick_threshold_up_speed * .6):
+        return TrickQuality.GOOD
     else:
-        if state is NotFlying and state.trick_charge_time < trick_min_charge_time:
-            trick_hint.emit("Dive too short!")
-        elif trick_cooldown_timer.time_left > 0.0:
-            trick_hint.emit("trick on cooldown")
-
-
-func trick_allowed() -> bool:
-    return (
-        trick_cooldown_timer.time_left <= 0.0 and state is NotFlying
-        and state.trick_charge_time >= trick_min_charge_time
-    )
+        return TrickQuality.OK

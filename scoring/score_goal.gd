@@ -10,5 +10,5 @@ func _ready() -> void:
 func body_entered(body: Node3D) -> void:
     if body.is_in_group("player"):
         Juicee.shockwave(body, 0.6, 0.045)
-        GlobalManager.player.random_trick(1500)
+        GlobalManager.player.random_trick(150)
         queue_free()
