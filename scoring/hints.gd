@@ -3,13 +3,15 @@ extends Control
 @onready var label: Label = $VBoxContainer/Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+
 func _ready() -> void:
     label.text = ""
     GlobalManager.player.trick_hint.connect(_on_trick)
-        
-func _on_trick(text: String) -> void:
+
+
+func _on_trick(text: String, extra_dazzle := false) -> void:
     show()
-    if text == 'Perfect!':
+    if extra_dazzle:
         animation_player.play("increase_score")
     label.text = text
     var tween = create_tween()

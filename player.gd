@@ -102,7 +102,7 @@ func random_trick(speed_boost_force := 2) -> void:
     if !trick_allowed():
         return
 
-    trick_hint.emit('Perfect!')
+    trick_hint.emit('Perfect!', true)
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
 
