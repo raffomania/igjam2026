@@ -10,7 +10,7 @@ var input_direction = Vector3.ZERO
 @onready var camera: Camera3D = $"CameraPivot/SpringArm3D/Camera3D"
 @onready var camera_spring_arm: SpringArm3D = $"CameraPivot/SpringArm3D"
 @onready var ground_generator := get_node("../GroundGenerator")
-@onready var trick_cooldown_timer: Timer = $TrickCooldownTimer
+@onready var trick_cooldown_timer: Timer = Timer.new()
 @onready var trick_particles: CPUParticles3D = $"CameraPivot/SpringArm3D/Camera3D/TrickParticles"
 
 @onready var animation = mesh.get_node('AnimationPlayer')
@@ -24,11 +24,12 @@ const not_flying_camera_pivot_angle := -25.0
 const ground_speed := 16.0
 var gravity_bonus := 7.0
 var gravity_scale_override := 1.0
-const trick_threshold_speed = 15
+const trick_threshold_speed = 25
 const trick_threshold_up_speed = 25
 const trick_height_threshold = 1
+const trick_cooldown_secs = 1.5
+const trick_min_charge_time = 3.0
 var level = 1
-var trick_allowed = true
 
 # when starting to roll up a hill, disable gravity boost for a short time
 var previous_linear_velocity := Vector3.ZERO
@@ -60,6 +61,9 @@ class NotFlying:
     extends State
 
     var increase_gravity := Input.is_action_pressed("increase_gravity")
+    # how long the player has pressed the gravity increase button,
+    # they can only do tricks after pressing it for a minimum time
+    var trick_charge_time := 0.0
 
 
 func _ready() -> void:
@@ -70,7 +74,9 @@ func _ready() -> void:
     animation.set_blend_time('RollUp', 'Trick1', 0.3)
     animation.set_blend_time('RollUp', 'Trick2', 0.3)
     animation.set_blend_time('RollUp', 'Trick3', 0.3)
-    trick_cooldown_timer.timeout.connect(_on_trick_timer_timeout)
+    trick_cooldown_timer.wait_time = trick_cooldown_secs
+    trick_cooldown_timer.one_shot = true
+    add_child(trick_cooldown_timer)
 
     body.body_entered.connect(_body_entered)
 
@@ -78,10 +84,6 @@ func _ready() -> void:
 func _body_entered(_other: Node3D):
     if state is Flying:
         state = NotFlying.new()
-
-
-func _on_trick_timer_timeout() -> void:
-    trick_allowed = true
 
 
 func get_height_above_ground() -> float:
@@ -96,18 +98,17 @@ func process_flying(_delta: float) -> void:
     body.gravity_scale = 1.0
 
 
-func random_trick(speed_boost_force := 200) -> void:
-    if !trick_allowed:
+func random_trick(speed_boost_force := 2) -> void:
+    if !trick_allowed():
         return
 
     trick_hint.emit('Perfect!')
     var intensity = (level - 10) / 10.0
     Juicee.chromatic(self, intensity * 50, 1.0)
 
-    body.apply_central_force(body.linear_velocity.normalized() * speed_boost_force)
+    body.apply_central_impulse(body.linear_velocity.normalized() * speed_boost_force)
     level += 1
     level_increased.emit(level)
-    trick_allowed = false
     trick_cooldown_timer.start()
     trick_particles.emitting = true
     gravity_scale_override = 0.5
@@ -164,6 +165,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
     if state is NotFlying:
         look_into_movement_direction(delta)
+        state.trick_charge_time += delta
     elif state is Flying:
         look_into_nose_direction(delta)
 
@@ -245,7 +247,7 @@ func _on_game_end():
 
 
 func handle_trick() -> void:
-    if get_height_above_ground() < trick_height_threshold and trick_allowed:
+    if get_height_above_ground() < trick_height_threshold and trick_allowed():
         var velocity = body.linear_velocity
         var speed = velocity.length()
         print('height ', get_height_above_ground())
@@ -254,14 +256,12 @@ func handle_trick() -> void:
                 print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
                 random_trick()
             elif (velocity.y < trick_threshold_up_speed):
-                print('Released too early!')
                 level -= 1
                 level = max(1, level)
                 level_increased.emit(level)
                 print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
                 trick_hint.emit('Released too early!')
             else:
-                print('Release too late!')
                 level -= 1
                 level = max(1, level)
                 level_increased.emit(level)
@@ -269,4 +269,16 @@ func handle_trick() -> void:
                 trick_hint.emit('Released too late!')
         else:
             print('too slow')
-            trick_hint.emit('Released too late!')
+            trick_hint.emit('Too slow!')
+    else:
+        if state is NotFlying and state.trick_charge_time < trick_min_charge_time:
+            trick_hint.emit("Dive too short!")
+        elif trick_cooldown_timer.time_left > 0.0:
+            trick_hint.emit("trick on cooldown")
+
+
+func trick_allowed() -> bool:
+    return (
+        trick_cooldown_timer.time_left <= 0.0 and state is NotFlying
+        and state.trick_charge_time >= trick_min_charge_time
+    )
