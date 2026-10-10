@@ -88,14 +88,6 @@ layer = 2
 
 [node name="LevelUI" parent="CanvasLayer" unique_id=367470182 instance=ExtResource("10_4c57u")]
 
-[node name="ScoreUI" type="Control" parent="CanvasLayer" unique_id=1469445148]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Score" parent="CanvasLayer" unique_id=450572688 instance=ExtResource("9_kek77")]
 
 [node name="GameEndCameraHolder" type="Node3D" parent="." unique_id=2077583894]
