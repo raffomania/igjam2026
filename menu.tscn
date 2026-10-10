@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://wntxntel0bib" path="res://hud_control.gd" id="1_ouk20"]
 [ext_resource type="Script" uid="uid://ceap3gd3a4860" path="res://tutorial.gd" id="1_ytr4m"]
-[ext_resource type="Texture2D" uid="uid://d0ufuhnuvvy52" path="res://assets/tutorial.png" id="2_l48gv"]
+[ext_resource type="Texture2D" uid="uid://d0ufuhnuvvy52" path="res://assets/ui/tutorial.png" id="2_l48gv"]
 [ext_resource type="Script" uid="uid://bw3m270ssvx14" path="res://pause_control.gd" id="2_mae5d"]
 [ext_resource type="Script" uid="uid://bo80xc4gpjmws" path="res://ui/game_end_screen.gd" id="3_mae5d"]
 [ext_resource type="Texture2D" uid="uid://bwxhsxuteiuv8" path="res://assets/ui/menu_buttons/Play Again Button.png" id="4_nrnbx"]
