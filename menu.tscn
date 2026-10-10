@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://d0ufuhnuvvy52" path="res://assets/tutorial.png" id="2_l48gv"]
 [ext_resource type="Script" uid="uid://bw3m270ssvx14" path="res://pause_control.gd" id="2_mae5d"]
 [ext_resource type="Script" uid="uid://bo80xc4gpjmws" path="res://ui/game_end_screen.gd" id="3_mae5d"]
-[ext_resource type="Texture2D" uid="uid://bwxhsxuteiuv8" path="res://assets/button_backgrounds/menu_buttons/Play Again Button.png" id="4_nrnbx"]
+[ext_resource type="Texture2D" uid="uid://bwxhsxuteiuv8" path="res://assets/ui/menu_buttons/Play Again Button.png" id="4_nrnbx"]
 [ext_resource type="PackedScene" uid="uid://dbcykcl8r400" path="res://exit_button.tscn" id="5_l48gv"]
-[ext_resource type="Texture2D" uid="uid://bfcr1ba8mqp5" path="res://assets/button_backgrounds/menu_buttons/Resume Button.png" id="7_kk3ma"]
+[ext_resource type="Texture2D" uid="uid://bfcr1ba8mqp5" path="res://assets/ui/menu_buttons/Resume Button.png" id="7_kk3ma"]
 [ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="8_nrnbx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0xm2m"]

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ryguw"]
 [ext_resource type="PackedScene" uid="uid://bm5w68b1u8b76" path="res://assets/separated/Dolphin.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dti8p3tdm6lri" path="res://assets/separated/ShovelGreen.tscn" id="6_272bh"]
-[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="7_cegan"]
+[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/textures/SkyBox.png" id="7_cegan"]
 [ext_resource type="Script" uid="uid://dj37gfuroib7l" path="res://dayand_night.gd" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://717qcbuka0km" path="res://world_environment.tscn" id="8_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://bftsype4muav1" path="res://scoring/score.tscn" id="9_kek77"]
@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://boj5crlri3kko" path="res://attacker_manager.gd" id="19_cegan"]
 [ext_resource type="PackedScene" uid="uid://ceyu2h8wothih" path="res://assets/AttackMoewe.tscn" id="20_getpj"]
 [ext_resource type="PackedScene" uid="uid://dsn40khqqjwhp" path="res://assets/AttackDolphin.tscn" id="21_ryguw"]
-[ext_resource type="AudioStream" uid="uid://yaabfgihukmc" path="res://assets/Shrimpy_Loop.wav" id="23_d13ii"]
+[ext_resource type="AudioStream" uid="uid://yaabfgihukmc" path="res://assets/audio/Shrimpy_Loop.wav" id="23_d13ii"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_074og"]
 panorama = ExtResource("7_cegan")
@@ -103,7 +103,6 @@ attackers = Array[PackedScene]([ExtResource("21_ryguw"), ExtResource("20_getpj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=745792076]
 stream = ExtResource("23_d13ii")
-volume_db = -53.36
 autoplay = true
 
 [connection signal="timeout" from="AttackerManager/Timer" to="AttackerManager" method="_on_timer_timeout"]

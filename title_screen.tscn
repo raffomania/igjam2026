@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://l8bkghlmceli" path="res://ground_generator.tscn" id="3_ig5kc"]
 [ext_resource type="Script" uid="uid://cppmoqmcad375" path="res://title_camera_rotation.gd" id="3_rhgbh"]
 [ext_resource type="PackedScene" uid="uid://ddvygkpn8cd0m" path="res://sky_scatterer.tscn" id="4_05l2w"]
-[ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/button_backgrounds/menu_buttons/New Game Button.png" id="5_tpml5"]
+[ext_resource type="Texture2D" uid="uid://ce4ueq3mdrd3h" path="res://assets/ui/menu_buttons/New Game Button.png" id="5_tpml5"]
 [ext_resource type="Script" uid="uid://daqnwwylmmbkq" path="res://texture_button.gd" id="7_013yr"]
 [ext_resource type="PackedScene" uid="uid://dbcykcl8r400" path="res://exit_button.tscn" id="8_013yr"]
-[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/Epic_GloriousPink_EquiRect.png" id="9_8vmu4"]
+[ext_resource type="Texture2D" uid="uid://7bk5kn0t6rin" path="res://assets/textures/SkyBox.png" id="9_8vmu4"]
 [ext_resource type="Script" uid="uid://dj37gfuroib7l" path="res://dayand_night.gd" id="10_xfn3p"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_xfn3p"]

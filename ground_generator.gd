@@ -3,7 +3,7 @@ extends Node
 var height_scale = 4 # meters
 var lowest_ground_frequency = 1.0 / 200.0 # repetitions per meter
 var texture_size = 20 # repetitions per meter
-var sand_texture_path = "res://assets/sand.png"
+var sand_texture_path = "res://assets/textures/SandTexture.png"
 # var sand_texture_path = "res://assets/Grass_01_basecolor.png"
 # TODO: import height and normal map as well?
 var island_center_height = 100
