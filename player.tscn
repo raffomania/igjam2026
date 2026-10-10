@@ -65,6 +65,8 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("2_i3pqv")
 
+[node name="AudioListener3D" type="AudioListener3D" parent="body" unique_id=622353130]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="body" unique_id=1745340869]
 shape = SubResource("SphereShape3D_sh265")
 

@@ -2,9 +2,15 @@
 
 [ext_resource type="Script" uid="uid://cayxs4q6xg2q1" path="res://assets/attack_moewe.gd" id="1_sctvw"]
 [ext_resource type="PackedScene" uid="uid://77qve3522u7l" path="res://assets/separated/Moewe.tscn" id="2_etr04"]
+[ext_resource type="AudioStream" uid="uid://11j7sj51fcw1" path="res://assets/audio/samples/ejah_music-seagull-call-455299.mp3" id="3_etr04"]
 
 [node name="AttackMoewe" type="Node3D" unique_id=835567613]
 script = ExtResource("1_sctvw")
 
 [node name="Moewe" parent="." unique_id=2034032049 instance=ExtResource("2_etr04")]
 transform = Transform3D(8.742278e-08, -1, -5.9604645e-08, -5.9604645e-08, 0, -1, 1, 2.7818132e-08, 5.2108035e-15, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=952819509]
+stream = ExtResource("3_etr04")
+unit_size = 100.0
+autoplay = true
