@@ -231,41 +231,7 @@ func _unhandled_input(event: InputEvent) -> void:
     elif event.is_action_released("increase_gravity"):
         if state is NotFlying:
             state.increase_gravity = false
-            var velocity = body.linear_velocity
-            var speed = velocity.length()
-            if get_height_above_ground() < trick_height_threshold and trick_allowed:
-                print('height ', get_height_above_ground())
-                if speed > trick_threshold_speed:
-                    if (abs(velocity.y) < trick_threshold_up_speed):
-                        print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
-                        random_trick()
-                    elif (velocity.y < trick_threshold_up_speed):
-                        print('Released too early!')
-                        level -= 1
-                        level = max(1, level)
-                        level_increased.emit(level)
-                        print(
-                            'Trick timing not good enough! Speed: ',
-                            speed,
-                            ' Upspeed: ',
-                            velocity.y,
-                        )
-                        trick_hint.emit('Released too early!')
-                    else:
-                        print('Release too late!')
-                        level -= 1
-                        level = max(1, level)
-                        level_increased.emit(level)
-                        print(
-                            'Trick timing not good enough! Speed: ',
-                            speed,
-                            ' Upspeed: ',
-                            velocity.y,
-                        )
-                        trick_hint.emit('Released too late!')
-                else:
-                    print('too slow')
-                    trick_hint.emit('Released too late!')
+            handle_trick()
 
     if event.is_action_pressed("cheat_add_gravity_boost"):
         level += 10
@@ -274,6 +240,33 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_game_end():
-    var camera = get_node_or_null("CameraPivot/SpringArm3D/Camera3D")
-    if camera:
+    if is_instance_valid(camera):
         camera.reparent(GlobalManager.game_end_camera)
+
+
+func handle_trick() -> void:
+    if get_height_above_ground() < trick_height_threshold and trick_allowed:
+        var velocity = body.linear_velocity
+        var speed = velocity.length()
+        print('height ', get_height_above_ground())
+        if speed > trick_threshold_speed:
+            if (abs(velocity.y) < trick_threshold_up_speed):
+                print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
+                random_trick()
+            elif (velocity.y < trick_threshold_up_speed):
+                print('Released too early!')
+                level -= 1
+                level = max(1, level)
+                level_increased.emit(level)
+                print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+                trick_hint.emit('Released too early!')
+            else:
+                print('Release too late!')
+                level -= 1
+                level = max(1, level)
+                level_increased.emit(level)
+                print('Trick timing not good enough! Speed: ', speed, ' Upspeed: ', velocity.y)
+                trick_hint.emit('Released too late!')
+        else:
+            print('too slow')
+            trick_hint.emit('Released too late!')
