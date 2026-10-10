@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7rbxwpfva1d7"]
+
+[ext_resource type="AudioStream" uid="uid://yaabfgihukmc" path="res://assets/audio/Shrimpy_Loop.wav" id="1_q45hi"]
+[ext_resource type="Script" uid="uid://bwsed1qfhf5bn" path="res://audio.gd" id="2_ybffx"]
+
+[node name="Audio" type="Node" unique_id=2009666695]
+script = ExtResource("2_ybffx")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=434124145]
+process_mode = 3
+stream = ExtResource("1_q45hi")
+volume_db = -10.0

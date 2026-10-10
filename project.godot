@@ -15,11 +15,15 @@ run/main_scene="uid://dfm60yr6hn57"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://assets/icon/icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://dqru2f4jfhr2k"
+
 [autoload]
 
 GlobalManager="*uid://b3652wltdo3tw"
 Juicee="*uid://b36fwfvmmv0xc"
-Music="*uid://7rbxwpfva1d7"
+Audio="*uid://7rbxwpfva1d7"
 
 [debug]
 

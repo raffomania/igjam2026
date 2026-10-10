@@ -13,12 +13,14 @@ func _ready() -> void:
     new_game_button.hover_on()
 
     volume_slider.min_value = 0.0
-    volume_slider.max_value = 0.8
+    volume_slider.max_value = 1.0
     volume_slider.step = 0.01
-    volume_slider.value = Music.load_volume()
-    volume_slider.value_changed.connect(Music.apply_volume)
-
-    Music.play()
+    volume_slider.value = Audio.volume
+    Audio.volume_loaded.connect(
+        func(volume):
+            self.volume_slider.value = volume,
+    )
+    volume_slider.value_changed.connect(Audio.apply_volume)
 
 
 func _on_new_game_button_pressed():
