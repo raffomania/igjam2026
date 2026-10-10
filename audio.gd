@@ -14,11 +14,11 @@ signal volume_loaded(volume: int)
 
 
 func _ready() -> void:
-    pause_filter = _find_pause_filter()
-
     master_bus_idx = AudioServer.get_bus_index("Master")
     if master_bus_idx < 0:
         push_warning("Music: bus 'Master' not found, pause filter disabled")
+
+    pause_filter = _find_pause_filter()
 
     load_volume()
     # only play after volume has been loaded
@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
         return
     # process_mode is ALWAYS, so this runs while the tree is paused as well.
     var target := LPF_CUTOFF_PAUSED_HZ if get_tree().paused else LPF_CUTOFF_PLAYING_HZ
+    print(pause_filter.cutoff_hz)
     pause_filter.cutoff_hz = lerpf(
         pause_filter.cutoff_hz,
         target,
