@@ -137,7 +137,7 @@ script = ExtResource("1_iwb4q")
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1456660120]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=299875190]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=299875190 groups=["BodyGroup"]]
 shape = SubResource("ConcavePolygonShape3D_2nspt")
 
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("1_nx50e")]

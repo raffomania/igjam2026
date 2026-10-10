@@ -104,7 +104,7 @@ shadow_mesh = SubResource("ArrayMesh_rjolh")
 
 [node name="StaticBody3D" type="StaticBody3D" unique_id=1377595587]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422791119]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=422791119 groups=["BodyGroup"]]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_cmyh6")
 

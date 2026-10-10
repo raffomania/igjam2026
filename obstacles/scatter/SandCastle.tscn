@@ -5,7 +5,7 @@
 
 [node name="SandCastle" type="Node3D" unique_id=519125895]
 
-[node name="SandCastle" parent="." unique_id=215252158 instance=ExtResource("2_jl2gb")]
+[node name="SandCastle" parent="." unique_id=215252158 groups=["BodyGroup"] instance=ExtResource("2_jl2gb")]
 
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("2_5tlr3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4887314, 26.766796, -0.74671173)

@@ -188,7 +188,7 @@ mesh = SubResource("ArrayMesh_c5oei")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=931928939]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=54524457]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=54524457 groups=["BodyGroup"]]
 shape = SubResource("ConcavePolygonShape3D_5tiou")
 
 [node name="ScoreGoal" parent="." unique_id=1610691153 instance=ExtResource("1_os4m6")]
