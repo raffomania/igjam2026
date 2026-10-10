@@ -1,7 +1,8 @@
 extends Node3D
 
-@onready var new_game_button = $TitleScreenUI/CenterContainer/HBoxContainer/New
-@onready var exit_button = $TitleScreenUI/CenterContainer/HBoxContainer/Exit
+@export var new_game_button: TextureButton
+@export var exit_button: TextureButton
+@export var volume_slider: Slider
 
 var currently_selected_button = "new_game_button"
 
@@ -10,6 +11,14 @@ func _ready() -> void:
     new_game_button.pressed.connect(_on_new_game_button_pressed)
     exit_button.pressed.connect(_on_exit_button_pressed)
     new_game_button.hover_on()
+
+    volume_slider.min_value = 0.0
+    volume_slider.max_value = 0.8
+    volume_slider.step = 0.01
+    volume_slider.value = Music.load_volume()
+    volume_slider.value_changed.connect(Music.apply_volume)
+
+    Music.play()
 
 
 func _on_new_game_button_pressed():

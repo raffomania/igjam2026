@@ -19,6 +19,7 @@ config/icon="res://assets/icon/icon.svg"
 
 GlobalManager="*uid://b3652wltdo3tw"
 Juicee="*uid://b36fwfvmmv0xc"
+Music="*uid://7rbxwpfva1d7"
 
 [debug]
 

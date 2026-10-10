@@ -23,8 +23,11 @@ background_mode = 2
 sky = SubResource("Sky_82xsv")
 sky_rotation = Vector3(0.08552113, 0, 0)
 
-[node name="TitleScreen" type="Node3D" unique_id=1632361790]
+[node name="TitleScreen" type="Node3D" unique_id=1632361790 node_paths=PackedStringArray("new_game_button", "exit_button", "volume_slider")]
 script = ExtResource("1_jqemp")
+new_game_button = NodePath("UI/VBox/Center/HBox/New")
+exit_button = NodePath("UI/VBox/Center/HBox/Exit")
+volume_slider = NodePath("UI/VBox/HBox/Volume")
 
 [node name="Water" parent="." unique_id=1776032862 instance=ExtResource("1_v6p8y")]
 
@@ -37,44 +40,50 @@ script = ExtResource("3_rhgbh")
 
 [node name="SkyScatterer" parent="." unique_id=164038919 instance=ExtResource("4_05l2w")]
 
-[node name="TitleScreenUI" type="Control" parent="." unique_id=540075920]
+[node name="UI" type="Control" parent="." unique_id=540075920]
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="TitleScreenUI" unique_id=488969130]
+[node name="VBox" type="VBoxContainer" parent="UI" unique_id=1484998555]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="TitleScreenUI/CenterContainer" unique_id=1797695898]
+[node name="Center" type="CenterContainer" parent="UI/VBox" unique_id=488969130]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBox" type="VBoxContainer" parent="UI/VBox/Center" unique_id=1797695898]
 layout_mode = 2
 
-[node name="New" type="TextureButton" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=268221797]
+[node name="New" type="TextureButton" parent="UI/VBox/Center/HBox" unique_id=268221797]
 layout_mode = 2
 texture_normal = ExtResource("5_tpml5")
 script = ExtResource("7_013yr")
 
-[node name="Exit" parent="TitleScreenUI/CenterContainer/HBoxContainer" unique_id=973863039 instance=ExtResource("8_013yr")]
+[node name="Exit" parent="UI/VBox/Center/HBox" unique_id=973863039 instance=ExtResource("8_013yr")]
 layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="UI/VBox" unique_id=2042874908]
+layout_mode = 2
+tooltip_text = "Volume"
+accessibility_name = "Volume"
+
+[node name="Label" type="Label" parent="UI/VBox/HBox" unique_id=323629099]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="UI/VBox/HBox" unique_id=1730160980]
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="WorldEnvironment" parent="." unique_id=1718286727 instance=ExtResource("2_ak2if")]
 environment = SubResource("Environment_rhgbh")
