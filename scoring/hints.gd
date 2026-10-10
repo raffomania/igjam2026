@@ -3,6 +3,8 @@ extends Control
 @onready var label: Label = $VBoxContainer/Label
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var tween: Tween
+
 
 func _ready() -> void:
     label.text = ""
@@ -10,12 +12,15 @@ func _ready() -> void:
 
 
 func _on_trick(text: String, extra_dazzle := false) -> void:
+    if tween:
+        tween.stop()
+
+    self.modulate.a = 1.0
     show()
+
     if extra_dazzle:
         animation_player.play("increase_score")
+
     label.text = text
-    var tween = create_tween()
+    tween = create_tween()
     tween.tween_property(self, "modulate:a", 0.0, 1.0)
-    await tween.finished
-    hide()
-    self.modulate.a = 1.0
