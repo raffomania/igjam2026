@@ -13,7 +13,7 @@ func _ready() -> void:
     GlobalManager.game_start.connect(_on_game_start)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     if !game_ended:
         var player_pos = GlobalManager.player_body.position
         var distance = Vector2(player_pos.x, player_pos.z).distance_to(Vector2.ZERO)

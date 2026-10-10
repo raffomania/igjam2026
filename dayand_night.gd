@@ -5,7 +5,7 @@ extends Node3D
 @export var cycle_duration_seconds: float = 240.0
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
     pass
 # var rotation_per_second = TAU / cycle_duration_seconds
 # rotate_x(rotation_per_second * delta)

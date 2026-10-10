@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 
-func _process(delta):
+func _process(_delta):
     visible = (
         GlobalManager.player.is_flight_allowed() or GlobalManager.player.state is Player.Flying
     )
