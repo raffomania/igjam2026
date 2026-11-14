@@ -227,7 +227,7 @@ func look_into_nose_direction(delta):
 
         var slerped_rotation = camera_pivot.basis.get_rotation_quaternion().slerp(
             target_quat,
-            delta * 2.0,
+            delta,
         )
 
         camera_pivot.rotation = slerped_rotation.get_euler()
@@ -240,10 +240,11 @@ func is_flight_allowed():
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("reset"):
         body.do_reset_pos()
-    if event.is_action_released("toggle_flying"): #block if not enough momentum
+    if event.is_action_pressed("toggle_flying"): #block if not enough momentum
         if state is not Flying and is_flight_allowed():
             state = Flying.new()
-        else:
+    if event.is_action_released("toggle_flying"):
+        if state is Flying:
             state = NotFlying.new()
 
     if event.is_action_pressed("increase_gravity"):

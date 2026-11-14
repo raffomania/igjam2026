@@ -118,15 +118,12 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
     if lerp_to_forward_rotation:
         state.angular_velocity = Vector3.ZERO
         var current_rotation = global_transform.basis.get_rotation_quaternion()
-        var direction = camera.global_position - global_position
-        direction.y = 0.1
-        direction *= -1
-
+        var direction = state.linear_velocity
         var target_quat = Basis \
                 .looking_at(direction.normalized(), Vector3.UP) \
                 .get_rotation_quaternion()
 
-        global_transform.basis = Basis(current_rotation.slerp(target_quat, state.step * 10.0))
+        global_transform.basis = Basis(current_rotation.slerp(target_quat, state.step * 5.0))
         var dot = abs(current_rotation.dot(target_quat))
         # 1.0: both quaternions point in the same direction
         if dot > 0.999:
@@ -135,14 +132,13 @@ func integrate_forces_flying(state: PhysicsDirectBodyState3D):
         else:
             return
     else:
-        var pitch_input = Input.get_action_strength("increase_gravity") * -1.3
-        var down_speed = 1.6
-        var up_speed = 1.1
-        var lerp_speed = up_speed
-        if pitch_input > 0.0:
-            lerp_speed = down_speed
+        var lerp_speed = 0.5
 
-        rotation.x = lerp_angle(rotation.x, pitch_input + 0.3, state.step * lerp_speed)
+        # when flying, always slowly swing upwards until almost completely
+        # vertical.
+        var almost_upwards = (PI / 2) - 0.1
+
+        rotation.x = lerp_angle(rotation.x, almost_upwards, state.step * lerp_speed)
         rotation.z = lerp_angle(rotation.z, 0, state.step)
 
     var yaw_input = Input.get_axis("move_left", "move_right")
