@@ -30,7 +30,6 @@ func _process(delta: float) -> void:
         return
     # process_mode is ALWAYS, so this runs while the tree is paused as well.
     var target := LPF_CUTOFF_PAUSED_HZ if get_tree().paused else LPF_CUTOFF_PLAYING_HZ
-    print(pause_filter.cutoff_hz)
     pause_filter.cutoff_hz = lerpf(
         pause_filter.cutoff_hz,
         target,
