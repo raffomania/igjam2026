@@ -1,37 +1,36 @@
 extends Node3D
 
 @export var object_scenes: Array[PackedScene] # Das zu spawnende Objekt
-@export var amount: int = 1000 # Anzahl der Objekte
+@export var initial_amount: int = 1000
 @export var spread_x: float = 1000.0 # Streuung auf der X-Achse
 @export var spread_z: float = 1000.0 # Streuung auf der Z-Achse
 @export var min_height: float = -50.0 # Minimale Flughöhe Y
-@export var max_height: float = 200.0 # Maximale Flughöhe Y
-@export var scale_min: float = 1.0 # Minimale Flughöhe Y
-@export var scale_max: float = 3.0 # Maximale Flughöhe Y
+@export var max_height: float = 300.0 # Maximale Flughöhe Y
+@export var scale_min: float = 1.0
+@export var scale_max: float = 3.0
 
 @export var redistribute_distance: float = 100
-@export var redistribute_width: float = 1400
+# average distance between spawned objects
+@export var redistribute_object_gap: float = 80
+# start redistributing at this distance from the island.
 @export var redistribute_offset: float = 800
-@export var redistribute_amount: float = 300
-var furthest_scatter: float = Vector2(spread_x, spread_z).length() / 2.5
+@export var redistribute_amount: float = 100
+var furthest_scatter: float = 400 + redistribute_distance
 
 @onready var player: RigidBody3D = GlobalManager.player_body
 
-@export var max_objects: int = 7000
+@export var max_objects: int = 3000
 
 var spawned_objects: Array[Node3D] = []
-var deleted: int = 0
 
 
 func _ready() -> void:
     randomize()
-    for i in range(amount):
+    for i in range(initial_amount):
         spawn_object_initial()
 
 
 func _process(_delta: float) -> void:
-    if deleted > amount:
-        max_objects = amount
     var distance_from_origin
     # player is null in title screen
     if player != null:
@@ -40,9 +39,9 @@ func _process(_delta: float) -> void:
         distance_from_origin = 100000
 
     if distance_from_origin > furthest_scatter - redistribute_offset:
-        furthest_scatter += redistribute_distance
         for i in range(redistribute_amount):
             spawn_object_redistribute()
+        furthest_scatter += redistribute_distance
 
 
 func spawn_object_redistribute() -> void:
@@ -53,20 +52,25 @@ func spawn_object_redistribute() -> void:
     else:
         return
 
-    var right := forward.cross(Vector3.UP).normalized()
-
     # The new strip starts at the current "edge"
     # and extends redistribute_distance forward.
     var near_distance := furthest_scatter
     var far_distance := furthest_scatter + redistribute_distance
-
-    # Width of the spawning area.
-    var half_width := redistribute_width
-
     var random_forward := randf_range(near_distance, far_distance)
-    var random_side := randf_range(-half_width, half_width)
 
-    var pos_xz := forward * random_forward + right * random_side
+    # calculate the angle we need to reach the object density we want
+    # start by calculating how much area we'd have if we spawned around the whole circle
+    var height_range = (max_height - min_height)
+    var area_of_whole_strip = (PI * (far_distance ** 2)) - (PI * (near_distance ** 2))
+    area_of_whole_strip *= height_range
+    # then calc how much of that area we can cover with the objects we're spawning and the density we want
+    var area_per_object = redistribute_object_gap ** 3
+    var area_to_cover = redistribute_amount * area_per_object
+    # translate that to an angle
+    var available_angle = PI * 2 * (area_to_cover / area_of_whole_strip)
+    var random_angle = randf_range(-available_angle / 2, available_angle / 2)
+
+    var pos_xz := (forward * random_forward).rotated(Vector3.UP, random_angle)
 
     var random_y := randf_range(min_height, max_height)
 
@@ -75,14 +79,14 @@ func spawn_object_redistribute() -> void:
 
 func spawn_object_initial() -> void:
     # Zufällige Position berechnen
-    var random_x = randf_range(-spread_x, spread_x)
     var random_y = randf_range(min_height, max_height)
-    var random_z = randf_range(-spread_z, spread_z)
+    var random_distance = randf_range(400, redistribute_offset)
+    var random_angle = randf_range(0, PI * 2)
 
-    if abs(random_x) ** 2 + abs(random_z) ** 2 < 400 ** 2:
-        return
+    var spawn_position = Vector3.FORWARD.rotated(Vector3.UP, random_angle) * random_distance
+    spawn_position.y = random_y
 
-    spawn_object(Vector3(random_x, random_y, random_z))
+    spawn_object(spawn_position)
 
 
 func spawn_object(pos: Vector3) -> void:
@@ -104,7 +108,6 @@ func spawn_object(pos: Vector3) -> void:
 
     if spawned_objects.size() > max_objects:
         var oldest = spawned_objects.pop_front()
-        deleted += 1
         if is_instance_valid(oldest):
             oldest.queue_free()
 

@@ -134,7 +134,6 @@ func random_trick(speed_boost_force := 20) -> void:
     await get_tree().create_timer(0.7).timeout
     gravity_scale_override = 1.0
     var trick = ['Trick1', 'Trick2', 'Trick3'].pick_random()
-    print('performing ', trick)
     body.do_reset_angular_velocity()
     animation.queue(trick)
     animation.queue('RollUp')
@@ -278,7 +277,6 @@ func handle_trick() -> void:
     if close_to_ground and dive_long_enough and no_cooldown and enough_y_travel:
         var velocity = body.linear_velocity
         var speed = velocity.length()
-        print('height ', get_height_above_ground())
         if speed > trick_threshold_speed:
             if (abs(velocity.y) < trick_threshold_up_speed):
                 print('Doing trick! Speed: ', speed, ' Upspeed: ', velocity.y)
