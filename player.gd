@@ -27,7 +27,7 @@ var gravity_scale_override := 1.0
 const trick_threshold_speed = 25
 const trick_threshold_up_speed = 40
 const trick_threshold_charge_time = 3.0
-const trick_threshold_y_travel = 10.0
+const trick_threshold_y_travel = 5.0
 const trick_threshold_height = 2
 const trick_cooldown_secs = 1.5
 var level = 1
@@ -298,13 +298,17 @@ func handle_trick() -> void:
         else:
             print('too slow, speed: ', speed)
             trick_hint.emit('Too slow!')
+    elif not close_to_ground:
+        pass
+        # this message is too annoying
+        # trick_hint.emit("Not on ground!")
     elif not dive_long_enough:
         trick_hint.emit("Dive too short!")
     elif not no_cooldown:
-        trick_hint.emit("Trick on cooldown!")
-    elif not close_to_ground:
-        trick_hint.emit("Not on ground!")
+        pass
     elif not enough_y_travel:
+        pass
+        # this message is too annoying
         trick_hint.emit("Jumped too flat!")
 
 
