@@ -19,8 +19,9 @@ func _input(event: InputEvent) -> void:
         _on_toggle_button()
     if event.is_action_pressed("ui_accept") and get_tree().paused and is_visible_in_tree(): # bit verbose but makes sure that the menu is actually there when this fires
         _press_current_button()
+
     if event.is_action_pressed("Pause"):
-        if get_tree().paused and not visible: #TODO: prevent menu to be opened from game over screen
+        if get_tree().paused and not visible or GlobalManager.game_has_ended:
             return
         pause_menu_change()
 
