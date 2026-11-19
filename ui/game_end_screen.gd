@@ -13,6 +13,7 @@ func _ready() -> void:
     GlobalManager.game_end.connect(_on_game_end)
     GlobalManager.score_changed.connect(_on_score_changed)
     play_again.pressed.connect(_on_play_again_pressed)
+    play_again.hover_on()
     hide()
 
 
@@ -59,3 +60,12 @@ func load_highscore() -> int:
     else:
         push_warning("Couldn't load highscore file: ", error_string(FileAccess.get_open_error()))
         return -1
+
+
+func _input(event: InputEvent) -> void:
+    if event.is_action_pressed("ui_accept") and is_visible_in_tree():
+        _press_current_button()
+
+func _press_current_button():
+    #TODO: extend if new buttons are added here later, inspire on pause_control or title screen
+    play_again.pressed.emit()
