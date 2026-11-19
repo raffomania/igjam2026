@@ -20,7 +20,7 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("ui_accept") and get_tree().paused and is_visible_in_tree(): # bit verbose but makes sure that the menu is actually there when this fires
         _press_current_button()
     if event.is_action_pressed("Pause"):
-        if get_tree().paused and not visible:
+        if get_tree().paused and not visible: #TODO: prevent menu to be opened from game over screen
             return
         pause_menu_change()
 
