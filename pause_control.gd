@@ -17,6 +17,8 @@ func _input(event: InputEvent) -> void:
         _on_toggle_button()
     if event.is_action_pressed("ui_down"):
         _on_toggle_button()
+    if event.is_action_pressed("ui_accept") and get_tree().paused and is_visible_in_tree():
+        _press_current_button()
     if event.is_action_pressed("Pause"):
         if get_tree().paused and not visible:
             return
@@ -57,15 +59,16 @@ func _on_exit_button_pressed():
 
 func _on_toggle_button():
     if currently_selected_button == "resume_button":
+        resume_button.hover_off()
         currently_selected_button = "exit_button"
         exit_button.hover_on()
-        resume_button.hover_off()
         return
 
     if currently_selected_button == "exit_button":
-        currently_selected_button = "resume_button_pressed"
         exit_button.hover_off()
-        exit_button.hover_on()
+        currently_selected_button = "resume_button"
+        resume_button.hover_on()
+        return
 
 
 func _press_current_button():
